@@ -26,6 +26,19 @@ export default function VideoSection() {
     return () => observer.disconnect();
   }, []);
 
+  // Seamless loop — seek back before the end to avoid the white-flash on native loop
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 0.25) {
+        video.currentTime = 0;
+      }
+    };
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    return () => video.removeEventListener("timeupdate", handleTimeUpdate);
+  }, []);
+
   return (
     <section
       ref={sectionRef}
@@ -86,7 +99,6 @@ export default function VideoSection() {
           <video
             ref={videoRef}
             autoPlay
-            loop
             muted
             playsInline
             style={{

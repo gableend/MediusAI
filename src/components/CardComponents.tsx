@@ -481,7 +481,7 @@ export function APSupplierCard({ active, exit, variant = "compact" }: CardProps)
       <CardHeader title="Supplier conversations" badge="Auto-handled" />
 
       {/* Email thread with connector line */}
-      <div style={{ display: "flex", marginBottom: "12px" }}>
+      <div style={{ display: "flex", marginBottom: variant === "compact" ? "0" : "12px" }}>
         {/* Left: connector line + icons */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginRight: "12px", paddingTop: "2px" }}>
           <div style={{
@@ -512,7 +512,7 @@ export function APSupplierCard({ active, exit, variant = "compact" }: CardProps)
           {emails.map(({ from, sender, subject, preview, delay }) => (
             <div key={subject + from} style={{
               background: from === "ai" ? DARK : "#f8f9fa",
-              borderRadius: "10px", padding: "11px 13px",
+              borderRadius: "10px", padding: variant === "compact" ? "8px 11px" : "11px 13px",
               opacity: active ? 1 : 0, transition: `opacity 0.3s ease ${delay}s`,
             }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
@@ -534,13 +534,15 @@ export function APSupplierCard({ active, exit, variant = "compact" }: CardProps)
         </div>
       </div>
 
-      <div style={{
-        background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px",
-        padding: "8px 12px", fontSize: "11px", fontWeight: 600, color: "#16a34a",
-        opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.8s",
-      }}>
-        ✓ Resolved automatically · no AP team involvement
-      </div>
+      {variant !== "compact" && (
+        <div style={{
+          background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px",
+          padding: "8px 12px", fontSize: "11px", fontWeight: 600, color: "#16a34a",
+          opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.8s",
+        }}>
+          ✓ Resolved automatically · no AP team involvement
+        </div>
+      )}
     </div>
   );
 }
@@ -676,7 +678,7 @@ export function PMCard1({ active, exit, variant = "compact" }: CardProps) {
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <CardHeader title="Payment Methods" badge="50+ supported" />
-      <div style={{ display: "flex", flexDirection: "column", gap: "9px", marginBottom: "14px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "6px" : "9px", marginBottom: variant === "compact" ? "10px" : "14px" }}>
         {methods.map(({ name, desc, delay }) => (
           <div key={name} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div style={{
@@ -693,7 +695,7 @@ export function PMCard1({ active, exit, variant = "compact" }: CardProps) {
           </div>
         ))}
       </div>
-      <div style={{ borderTop: "1px solid #f0f0f0", paddingTop: "10px", display: "flex" }}>
+      <div style={{ borderTop: "1px solid #f0f0f0", paddingTop: variant === "compact" ? "8px" : "10px", display: "flex" }}>
         {[
           { value: "50+",  label: "Payment rails" },
           { value: "180+", label: "Countries" },
@@ -822,14 +824,14 @@ export function SMCard1({ active, exit, variant = "compact" }: CardProps) {
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <CardHeader title="Expense Policy Control" />
-      <div style={{ background: "#fff5f5", border: "1px solid #fecaca", borderRadius: "8px", padding: "10px 12px", marginBottom: "11px" }}>
+      <div style={{ background: "#fff5f5", border: "1px solid #fecaca", borderRadius: "8px", padding: variant === "compact" ? "7px 12px" : "10px 12px", marginBottom: variant === "compact" ? "8px" : "11px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "7px", marginBottom: "3px" }}>
           <span style={{ color: RED }}>⚠</span>
           <span style={{ fontSize: "12px", fontWeight: 600, color: RED }}>Policy Violation Detected</span>
         </div>
         <div style={{ fontSize: "11px", color: "#888" }}>Business dinner · $1,240 · exceeds $150 per-person limit</div>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "11px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "6px" : "8px", marginBottom: variant === "compact" ? "8px" : "11px" }}>
         {rows.map(({ label, value }) => (
           <div key={label} style={{ display: "flex", justifyContent: "space-between" }}>
             <span style={{ fontSize: "11px", color: "#888" }}>{label}</span>
@@ -838,10 +840,10 @@ export function SMCard1({ active, exit, variant = "compact" }: CardProps) {
         ))}
       </div>
       <div style={{ display: "flex", gap: "8px" }}>
-        <div style={{ flex: 1, padding: "7px", background: "#f0f0f0", borderRadius: "7px", textAlign: "center", fontSize: "11px", fontWeight: 600, color: "#555" }}>
+        <div style={{ flex: 1, padding: variant === "compact" ? "5px" : "7px", background: "#f0f0f0", borderRadius: "7px", textAlign: "center", fontSize: "11px", fontWeight: 600, color: "#555" }}>
           Return to submitter
         </div>
-        <div style={{ flex: 1.5, padding: "7px", background: DARK, borderRadius: "7px", textAlign: "center", fontSize: "11px", fontWeight: 600, color: "white" }}>
+        <div style={{ flex: 1.5, padding: variant === "compact" ? "5px" : "7px", background: DARK, borderRadius: "7px", textAlign: "center", fontSize: "11px", fontWeight: 600, color: "white" }}>
           Require justification
         </div>
       </div>
@@ -912,9 +914,9 @@ export function EXCard0({ active, exit, variant = "compact" }: CardProps) {
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <CardHeader title="Receipt Capture" badge="AI-powered" />
-      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "6px" : "8px", marginBottom: variant === "compact" ? "8px" : "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "5px" : "8px", marginBottom: variant === "compact" ? "6px" : "10px" }}>
         {receipts.map(({ merchant, amount, category, delay }) => (
-          <div key={merchant} style={{ display: "flex", alignItems: "center", gap: "10px", padding: variant === "compact" ? "5px 10px" : "7px 10px", background: "#f8f9fa", borderRadius: "8px" }}>
+          <div key={merchant} style={{ display: "flex", alignItems: "center", gap: "10px", padding: variant === "compact" ? "3px 10px" : "7px 10px", background: "#f8f9fa", borderRadius: "8px" }}>
             <div style={{
               width: variant === "compact" ? "28px" : "32px",
               height: variant === "compact" ? "28px" : "32px",
@@ -934,7 +936,7 @@ export function EXCard0({ active, exit, variant = "compact" }: CardProps) {
           </div>
         ))}
       </div>
-      <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px", padding: variant === "compact" ? "6px 12px" : "8px 12px", display: "flex", justifyContent: "space-between" }}>
+      <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px", padding: variant === "compact" ? "4px 12px" : "8px 12px", display: "flex", justifyContent: "space-between" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#16a34a" }}>
           {variant === "compact" ? "3 receipts" : "4 receipts"} auto-categorised
         </span>
@@ -1184,8 +1186,8 @@ export function APSupplierOnboardingCard({ active, exit, variant = "compact" }: 
       <div style={{
         display: "flex", alignItems: "center", gap: "10px",
         background: "#f8f9fa", borderRadius: "8px",
-        padding: variant === "compact" ? "6px 12px" : "10px 12px",
-        marginBottom: variant === "compact" ? "8px" : "12px",
+        padding: variant === "compact" ? "5px 12px" : "10px 12px",
+        marginBottom: variant === "compact" ? "6px" : "12px",
       }}>
         <div style={{
           width: "30px", height: "30px", borderRadius: "8px", flexShrink: 0,
@@ -1240,7 +1242,7 @@ export function APSupplierOnboardingCard({ active, exit, variant = "compact" }: 
       )}
 
       {/* Validation checks */}
-      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "5px" : "7px", marginBottom: variant === "full" ? "12px" : 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "4px" : "7px", marginBottom: variant === "full" ? "12px" : 0 }}>
         {checks.map(({ label, detail, ok, delay }) => (
           <div key={label} style={{
             display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -1249,7 +1251,7 @@ export function APSupplierOnboardingCard({ active, exit, variant = "compact" }: 
           }}>
             <div>
               <div style={{ fontSize: "11px", fontWeight: 600, color: "#111" }}>{label}</div>
-              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{detail}</div>
+              {variant !== "compact" && <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{detail}</div>}
             </div>
             <span style={{
               fontSize: "10px", fontWeight: 700, color: ok ? "#16a34a" : RED,
@@ -1441,11 +1443,11 @@ export function SMContractCard({ active, exit, variant = "compact" }: CardProps)
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <CardHeader title="Contract Management" badge="47 Active" />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "5px" : "6px", marginBottom: variant === "compact" ? "8px" : "10px" }}>
         {contracts.map(({ name, value, status, color, delay }) => (
           <div key={name} style={{
             display: "flex", alignItems: "center", justifyContent: "space-between",
-            padding: "7px 10px", background: "#f8f9fa", borderRadius: "7px",
+            padding: variant === "compact" ? "5px 10px" : "7px 10px", background: "#f8f9fa", borderRadius: "7px",
           }}>
             <div>
               <div style={{ fontSize: "11px", fontWeight: 600, color: "#111" }}>{name}</div>
@@ -1464,7 +1466,7 @@ export function SMContractCard({ active, exit, variant = "compact" }: CardProps)
       {/* Renewal alert */}
       <div style={{
         background: "#fffbeb", border: "1px solid #fde68a", borderRadius: "7px",
-        padding: "7px 10px", fontSize: "11px", fontWeight: 600, color: "#92400e",
+        padding: variant === "compact" ? "4px 10px" : "7px 10px", fontSize: "11px", fontWeight: 600, color: "#92400e",
         opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.45s",
         marginBottom: variant === "full" ? "10px" : 0,
       }}>
@@ -1508,7 +1510,9 @@ export function SMProcurementCard({ active, exit, variant = "compact" }: CardPro
       {/* Requisition tile */}
       <div style={{
         display: "flex", alignItems: "center", gap: "10px",
-        background: "#f8f9fa", borderRadius: "8px", padding: "8px 12px", marginBottom: "10px",
+        background: "#f8f9fa", borderRadius: "8px",
+        padding: variant === "compact" ? "5px 12px" : "8px 12px",
+        marginBottom: variant === "compact" ? "6px" : "10px",
       }}>
         <div style={{
           width: "30px", height: "30px", borderRadius: "7px", flexShrink: 0,
@@ -1526,15 +1530,15 @@ export function SMProcurementCard({ active, exit, variant = "compact" }: CardPro
       </div>
 
       {/* Approval steps */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: variant === "full" ? "10px" : 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "4px" : "6px", marginBottom: variant === "full" ? "10px" : 0 }}>
         {steps.map(({ label, detail, ok, delay }) => (
           <div key={label} style={{
             display: "flex", alignItems: "center", justifyContent: "space-between",
-            padding: "6px 10px", background: "#f8f9fa", borderRadius: "7px",
+            padding: variant === "compact" ? "5px 10px" : "6px 10px", background: "#f8f9fa", borderRadius: "7px",
           }}>
             <div>
               <div style={{ fontSize: "11px", fontWeight: 600, color: "#111" }}>{label}</div>
-              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{detail}</div>
+              {variant !== "compact" && <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{detail}</div>}
             </div>
             <span style={{
               fontSize: "10px", fontWeight: 700, color: ok ? "#16a34a" : RED,
