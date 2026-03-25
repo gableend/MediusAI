@@ -255,7 +255,7 @@ export default function PaymentMaturityPage() {
       <div style={{
         backgroundImage: "url(/images/medius-light-sand-background-6.jpg)",
         backgroundSize: "cover", backgroundPosition: "center",
-        padding: "80px 32px 72px",
+        padding: "80px 32px 160px",
       }}>
         <div style={{ maxWidth: "860px", margin: "0 auto" }}>
           <div style={{
