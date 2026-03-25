@@ -26,31 +26,6 @@ export default function VideoSection() {
     return () => observer.disconnect();
   }, []);
 
-  // Seamless loop: seek back 0.5 s before end (timeupdate fires ~4× per second)
-  // plus an `ended` fallback in case a frame slips through.
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleTimeUpdate = () => {
-      if (video.duration && video.currentTime >= video.duration - 0.5) {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-      }
-    };
-
-    const handleEnded = () => {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    };
-
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    video.addEventListener("ended", handleEnded);
-    return () => {
-      video.removeEventListener("timeupdate", handleTimeUpdate);
-      video.removeEventListener("ended", handleEnded);
-    };
-  }, []);
 
   return (
     <section
