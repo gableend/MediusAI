@@ -292,6 +292,13 @@ export default function PaymentMaturityPage() {
       </div>
 
       {/* ── Body ── */}
+      <div style={{ position: "relative" }}>
+        {/* Wave blend from hero */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, width: "100%", overflow: "hidden", lineHeight: 0, transform: "translateY(-99%) scaleX(-1)", pointerEvents: "none" }}>
+          <svg style={{ display: "block", width: "100%" }} viewBox="0 0 1512 160" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-0.00012207 160V26.2023C118.348 14.5718 260.76 8.19165 429.194 2.59521C823.48 -10.5054 1218.72 25.6423 1512 118.946L1512 160L-0.00012207 160Z" fill="#f8f9fa"/>
+          </svg>
+        </div>
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "48px 32px 80px", display: "flex", gap: "40px", alignItems: "flex-start" }}>
 
         {/* ── Left: questions ── */}
@@ -448,6 +455,7 @@ export default function PaymentMaturityPage() {
           </div>
         </div>
       </div>
+      </div>{/* end position:relative body wrapper */}
 
       {/* ── Results panel ── */}
       {allDone && profile && (
@@ -578,6 +586,51 @@ export default function PaymentMaturityPage() {
           </div>
         </div>
       )}
+
+      {/* ── Report CTA ── */}
+      <div style={{ background: DARK, padding: "72px 32px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", gap: "64px", alignItems: "center" }}>
+          {/* Stat */}
+          <div style={{ flexShrink: 0, textAlign: "center", minWidth: "200px" }}>
+            <div style={{ fontSize: "clamp(52px, 6vw, 80px)", fontWeight: 800, color: RED, lineHeight: 1, letterSpacing: "-2px" }}>34%</div>
+            <div style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", lineHeight: 1.5, marginTop: "10px", maxWidth: "180px" }}>
+              of AP departments reported a B2B payment fraud attack last year
+            </div>
+          </div>
+          {/* Divider */}
+          <div style={{ width: "1px", alignSelf: "stretch", background: "rgba(255,255,255,0.12)", flexShrink: 0 }} />
+          {/* Copy + CTA */}
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", color: SAND, marginBottom: "14px" }}>
+              Ardent Partners · Industry Report
+            </div>
+            <h2 style={{ fontSize: "clamp(20px, 2.5vw, 30px)", fontWeight: 800, color: "white", lineHeight: 1.2, margin: "0 0 14px", letterSpacing: "-0.3px" }}>
+              Are inefficient vendor payments costing you more than money?
+            </h2>
+            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.62)", lineHeight: 1.7, margin: "0 0 28px", maxWidth: "520px" }}>
+              The Ardent Partners <em>Pulse of B2B Payments</em> report reveals the state of enterprise payment operations — and how to turn efficiency into real bottom-line impact.
+            </p>
+            <a
+              href="https://www.medius.com/resources/guides-reports/ardent-partners-pulse-on-b2b-payments-in-2024/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "8px",
+                background: RED, color: "white",
+                padding: "13px 24px", borderRadius: "8px",
+                fontSize: "14px", fontWeight: 700,
+                textDecoration: "none",
+                boxShadow: "0 4px 16px rgba(218,32,40,0.3)",
+              }}
+            >
+              Get the report
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
 
       <style>{`
         * { box-sizing: border-box; }
