@@ -327,7 +327,7 @@ export default function ProductTabsSection() {
                 }}>
                   <div
                     key={activeCapability}
-                    style={{ width: "360px", display: "flex", flexDirection: "column", animation: "capFadeIn 0.2s ease" }}
+                    style={{ width: "100%", display: "flex", flexDirection: "column", animation: "capFadeIn 0.2s ease" }}
                   >
                     <span style={{
                       fontSize: "11px", fontWeight: 700, letterSpacing: "1px",
@@ -469,7 +469,7 @@ export default function ProductTabsSection() {
                     }}>
                       <div
                         key={activeSmCapability}
-                        style={{ width: "360px", display: "flex", flexDirection: "column", animation: "capFadeIn 0.2s ease" }}
+                        style={{ width: "100%", display: "flex", flexDirection: "column", animation: "capFadeIn 0.2s ease" }}
                       >
                         <span style={{
                           fontSize: "11px", fontWeight: 700, letterSpacing: "1px",
