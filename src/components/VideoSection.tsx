@@ -87,6 +87,7 @@ export default function VideoSection() {
           <video
             ref={videoRef}
             autoPlay
+            loop
             muted
             playsInline
             preload="auto"
@@ -94,12 +95,11 @@ export default function VideoSection() {
               width: "100%",
               height: "auto",
               display: "block",
-              // Prevent subpixel blurring from layout compositing
               transform: "translateZ(0)",
               backfaceVisibility: "hidden",
             }}
           >
-            <source src="/video/Product_Vision  -  VIDEO.mp4" type="video/mp4" />
+            <source src="/video/medius-spend-management.mp4" type="video/mp4" />
           </video>
         </div>
 
