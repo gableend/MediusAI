@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 const RED  = "#da2028";
 const DARK = "#2f4344";
 const SAND = "#ab9c6d";
+const MOSS = "#84985c";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -168,8 +169,8 @@ function getProfile(score: number) {
 }
 
 function scoreColor(score: number) {
-  if (score >= 2.4) return "#16a34a";
-  if (score >= 1.7) return "#f59e0b";
+  if (score >= 2.4) return MOSS;
+  if (score >= 1.7) return SAND;
   return RED;
 }
 
@@ -427,9 +428,9 @@ export default function PaymentMaturityPage() {
             {/* Level legend */}
             <div style={{ padding: "14px 20px", borderTop: "1px solid #f0f0f0", display: "flex", flexDirection: "column", gap: "6px" }}>
               {[
-                { label: "Fragmented", range: "1.0 – 1.6", color: RED },
-                { label: "Developing",  range: "1.7 – 2.3", color: "#f59e0b" },
-                { label: "Optimised",   range: "2.4 – 3.0", color: "#16a34a" },
+                { label: "Fragmented", range: "1.0 – 1.6", color: RED  },
+                { label: "Developing",  range: "1.7 – 2.3", color: SAND },
+                { label: "Optimised",   range: "2.4 – 3.0", color: MOSS },
               ].map(({ label, range, color }) => (
                 <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
