@@ -27,7 +27,7 @@ const DIMENSIONS = [
         q: "How do you track your live cash and payment position?",
         options: [
           { level: 1, text: "We check multiple bank portals manually — no single view exists" },
-          { level: 2, text: "We have centralised reporting, but data can lag by a day or more" },
+          { level: 2, text: "We have centralized reporting, but data can lag by a day or more" },
           { level: 3, text: "Real-time dashboard shows all payment and cash positions in one place" },
         ],
       },
@@ -81,7 +81,7 @@ const DIMENSIONS = [
         options: [
           { level: 1, text: "We miss most discounts because our process is too slow to act in time" },
           { level: 2, text: "We capture some discounts but inconsistently" },
-          { level: 3, text: "We systematically optimise payment timing to capture discounts and improve DPO" },
+          { level: 3, text: "We systematically optimize payment timing to capture discounts and improve DPO" },
         ],
       },
     ],
@@ -90,7 +90,7 @@ const DIMENSIONS = [
     id: "risk",
     label: "Risk & Fraud",
     shortLabel: "Risk & Fraud",
-    description: "How protected is your organisation against payment fraud, and how proactively do you manage payment risk?",
+    description: "How protected is your organization against payment fraud, and how proactively do you manage payment risk?",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
         <path d="M12 2l7 4v6c0 4.5-3 8.7-7 10-4-1.3-7-5.5-7-10V6l7-4z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
@@ -131,9 +131,9 @@ const PROFILES: { min: number; max: number; label: string; tagline: string; desc
     min: 1.0, max: 1.6,
     label: "Fragmented",
     tagline: "Manual execution, limited visibility, high exposure.",
-    description: "Payment execution is largely manual and decentralised. Bank portals are accessed directly, approvals are informal, and fraud detection is reactive. This creates high operational risk and leaves significant efficiency gains on the table.",
+    description: "Payment execution is largely manual and decentralized. Bank portals are accessed directly, approvals are informal, and fraud detection is reactive. This creates high operational risk and leaves significant efficiency gains on the table.",
     actions: [
-      "Centralise payment execution into a single platform",
+      "Centralize payment execution into a single platform",
       "Introduce system-enforced approval workflows",
       "Implement basic duplicate and fraud detection controls",
     ],
@@ -151,8 +151,8 @@ const PROFILES: { min: number; max: number; label: string; tagline: string; desc
   },
   {
     min: 2.4, max: 3.0,
-    label: "Optimised",
-    tagline: "Centralised, automated, and in continuous control.",
+    label: "Optimized",
+    tagline: "Centralized, automated, and in continuous control.",
     description: "Your payment operations are highly automated, with real-time visibility and proactive controls. Fraud is stopped before it executes, reconciliation happens automatically, and cash decisions are driven by live intelligence.",
     actions: [
       "Continuously refine anomaly detection with AI insights",
@@ -255,7 +255,7 @@ export default function PaymentMaturityPage() {
       <div style={{
         backgroundImage: "url(/images/medius-light-sand-background-6.jpg)",
         backgroundSize: "cover", backgroundPosition: "center",
-        padding: "80px 32px 160px",
+        padding: "80px 32px 120px",
       }}>
         <div style={{ maxWidth: "860px", margin: "0 auto" }}>
           <div style={{
@@ -295,7 +295,7 @@ export default function PaymentMaturityPage() {
       <div style={{ position: "relative" }}>
         {/* Wave blend from hero */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, width: "100%", overflow: "hidden", lineHeight: 0, transform: "translateY(-99%) scaleX(-1)", pointerEvents: "none" }}>
-          <svg style={{ display: "block", width: "100%" }} viewBox="0 0 1512 160" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg style={{ display: "block", width: "100%", height: "64px" }} viewBox="0 0 1512 160" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M-0.00012207 160V26.2023C118.348 14.5718 260.76 8.19165 429.194 2.59521C823.48 -10.5054 1218.72 25.6423 1512 118.946L1512 160L-0.00012207 160Z" fill="#f8f9fa"/>
           </svg>
         </div>
@@ -410,7 +410,7 @@ export default function PaymentMaturityPage() {
               </div>
               <div style={{ fontSize: "13px", fontWeight: 600, color: DARK, marginBottom: "2px" }}>
                 {overallScore === 0 ? "Complete the assessment" :
-                  overallScore >= 2.4 ? "Optimised" :
+                  overallScore >= 2.4 ? "Optimized" :
                   overallScore >= 1.7 ? "Developing" : "Fragmented"}
               </div>
               <div style={{ fontSize: "11px", color: "#9ca3af" }}>
@@ -441,7 +441,7 @@ export default function PaymentMaturityPage() {
               {[
                 { label: "Fragmented", range: "1.0 – 1.6", color: RED  },
                 { label: "Developing",  range: "1.7 – 2.3", color: SAND },
-                { label: "Optimised",   range: "2.4 – 3.0", color: MOSS },
+                { label: "Optimized",   range: "2.4 – 3.0", color: MOSS },
               ].map(({ label, range, color }) => (
                 <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import SideNav from "@/components/SideNav";
+import Footer from "@/components/Footer";
 
 export default function ClientBody({
   children,
@@ -16,6 +17,7 @@ export default function ClientBody({
   return (
     <div className="antialiased">
       {children}
+      <Footer />
       <SideNav />
     </div>
   );

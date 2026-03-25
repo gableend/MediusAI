@@ -24,6 +24,11 @@ const nextConfig = {
         hostname: "ugc.same-assets.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.medius.com",
+        pathname: "/**",
+      },
     ],
   },
 };
