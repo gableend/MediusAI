@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import SideNav from "@/components/SideNav";
 
 export default function ClientBody({
   children,
@@ -9,9 +10,13 @@ export default function ClientBody({
 }) {
   // Remove any extension-added classes during hydration
   useEffect(() => {
-    // This runs only on the client after hydration
     document.body.className = "antialiased";
   }, []);
 
-  return <div className="antialiased">{children}</div>;
+  return (
+    <div className="antialiased">
+      {children}
+      <SideNav />
+    </div>
+  );
 }
