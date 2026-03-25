@@ -55,7 +55,7 @@ export default function VideoSection() {
               lineHeight: 1.15,
               letterSpacing: "-0.5px",
               margin: "0 auto 16px",
-              maxWidth: "780px",
+              maxWidth: "960px",
             }}
           >
             With Medius{" "}
