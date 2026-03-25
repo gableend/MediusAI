@@ -588,20 +588,20 @@ export default function PaymentMaturityPage() {
       )}
 
       {/* ── Report CTA ── */}
-      <div style={{ background: SAND, padding: "72px 32px" }}>
+      <div style={{ background: "white", padding: "72px 32px", borderTop: "1px solid #e8ecec" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", gap: "64px", alignItems: "center" }}>
           {/* Stat */}
           <div style={{ flexShrink: 0, textAlign: "center", minWidth: "200px" }}>
-            <div style={{ fontSize: "clamp(52px, 6vw, 80px)", fontWeight: 800, color: DARK, lineHeight: 1, letterSpacing: "-2px" }}>34%</div>
-            <div style={{ fontSize: "14px", color: "rgba(47,67,68,0.7)", lineHeight: 1.5, marginTop: "10px", maxWidth: "180px" }}>
+            <div style={{ fontSize: "clamp(52px, 6vw, 80px)", fontWeight: 800, color: RED, lineHeight: 1, letterSpacing: "-2px" }}>34%</div>
+            <div style={{ fontSize: "14px", color: "#6b7e80", lineHeight: 1.5, marginTop: "10px", maxWidth: "180px" }}>
               of AP departments reported a B2B payment fraud attack last year
             </div>
           </div>
           {/* Divider */}
-          <div style={{ width: "1px", alignSelf: "stretch", background: "rgba(47,67,68,0.2)", flexShrink: 0 }} />
+          <div style={{ width: "1px", alignSelf: "stretch", background: "#e8ecec", flexShrink: 0 }} />
           {/* Copy + CTA */}
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", color: "rgba(47,67,68,0.6)", marginBottom: "14px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", color: SAND, marginBottom: "14px" }}>
               Ardent Partners · Industry Report
             </div>
             <h2 style={{ fontSize: "clamp(20px, 2.5vw, 30px)", fontWeight: 800, color: DARK, lineHeight: 1.2, margin: "0 0 14px", letterSpacing: "-0.3px" }}>
@@ -616,10 +616,11 @@ export default function PaymentMaturityPage() {
               rel="noopener noreferrer"
               style={{
                 display: "inline-flex", alignItems: "center", gap: "8px",
-                background: DARK, color: "white",
+                background: RED, color: "white",
                 padding: "13px 24px", borderRadius: "8px",
                 fontSize: "14px", fontWeight: 700,
                 textDecoration: "none",
+                boxShadow: "0 4px 16px rgba(218,32,40,0.25)",
               }}
             >
               Get the report
