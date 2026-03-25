@@ -252,7 +252,11 @@ export default function PaymentMaturityPage() {
       <Header />
 
       {/* ── Hero ── */}
-      <div style={{ background: DARK, padding: "60px 32px 56px" }}>
+      <div style={{
+        backgroundImage: "url(/images/medius-light-sand-background-6.jpg)",
+        backgroundSize: "cover", backgroundPosition: "center",
+        padding: "80px 32px 72px",
+      }}>
         <div style={{ maxWidth: "860px", margin: "0 auto" }}>
           <div style={{
             display: "inline-block", fontSize: "11px", fontWeight: 700,
@@ -262,25 +266,25 @@ export default function PaymentMaturityPage() {
             Payment Execution · Maturity Assessment
           </div>
           <h1 style={{
-            fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: "white",
+            fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, color: DARK,
             lineHeight: 1.1, letterSpacing: "-0.5px", margin: "0 0 18px",
           }}>
             Where does your payment<br />control really stand?
           </h1>
-          <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.65)", lineHeight: 1.7, margin: "0 0 32px", maxWidth: "580px" }}>
+          <p style={{ fontSize: "16px", color: "rgba(47,67,68,0.72)", lineHeight: 1.7, margin: "0 0 32px", maxWidth: "580px" }}>
             Answer 9 questions across three dimensions to benchmark your payment maturity and see where to focus next.
           </p>
 
           {/* Progress bar */}
           <div style={{ display: "flex", alignItems: "center", gap: "14px", maxWidth: "480px" }}>
-            <div style={{ flex: 1, height: "6px", background: "rgba(255,255,255,0.15)", borderRadius: "3px", overflow: "hidden" }}>
+            <div style={{ flex: 1, height: "6px", background: "rgba(47,67,68,0.15)", borderRadius: "3px", overflow: "hidden" }}>
               <div style={{
                 height: "100%", background: RED, borderRadius: "3px",
                 width: `${(totalAnswered / totalQuestions) * 100}%`,
                 transition: "width 0.4s ease",
               }} />
             </div>
-            <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.55)", whiteSpace: "nowrap" }}>
+            <span style={{ fontSize: "13px", color: "rgba(47,67,68,0.55)", whiteSpace: "nowrap" }}>
               {totalAnswered} / {totalQuestions} answered
             </span>
           </div>
@@ -447,28 +451,28 @@ export default function PaymentMaturityPage() {
 
       {/* ── Results panel ── */}
       {allDone && profile && (
-        <div ref={resultsRef} style={{ background: DARK, padding: "64px 32px 72px" }}>
+        <div ref={resultsRef} style={{ background: "#f0f3f2", padding: "64px 32px 72px" }}>
           <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
             {/* Overall result */}
             <div style={{ textAlign: "center", marginBottom: "56px" }}>
               <div style={{
                 display: "inline-flex", alignItems: "center", gap: "10px",
-                background: "rgba(255,255,255,0.08)", borderRadius: "100px",
+                background: "rgba(47,67,68,0.08)", borderRadius: "100px",
                 padding: "6px 18px 6px 10px", marginBottom: "20px",
               }}>
                 <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: scoreColor(overallScore), display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <span style={{ fontSize: "14px", fontWeight: 800, color: "white" }}>{overallScore.toFixed(1)}</span>
                 </div>
-                <span style={{ fontSize: "13px", fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>
+                <span style={{ fontSize: "13px", fontWeight: 600, color: DARK }}>
                   Overall maturity score
                 </span>
               </div>
-              <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 800, color: "white", lineHeight: 1.1, margin: "0 0 14px", letterSpacing: "-0.5px" }}>
+              <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 800, color: DARK, lineHeight: 1.1, margin: "0 0 14px", letterSpacing: "-0.5px" }}>
                 Your payment execution is{" "}
                 <span style={{ color: scoreColor(overallScore) }}>{profile.label}</span>
               </h2>
-              <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: "620px", margin: "0 auto" }}>
+              <p style={{ fontSize: "16px", color: "#5a6e6f", lineHeight: 1.7, maxWidth: "620px", margin: "0 auto" }}>
                 {profile.description}
               </p>
             </div>
@@ -481,28 +485,26 @@ export default function PaymentMaturityPage() {
                 const color = scoreColor(score);
                 return (
                   <div key={dim.id} style={{
-                    background: "rgba(255,255,255,0.06)", borderRadius: "14px",
-                    padding: "24px", border: "1px solid rgba(255,255,255,0.1)",
+                    background: "white", borderRadius: "14px",
+                    padding: "24px", border: "1px solid #dde3e3",
+                    boxShadow: "0 2px 8px rgba(47,67,68,0.06)",
                   }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
-                      <div style={{ color: "rgba(255,255,255,0.5)" }}>{dim.icon}</div>
-                      <div style={{
-                        fontSize: "22px", fontWeight: 800, color,
-                        lineHeight: 1,
-                      }}>
+                      <div style={{ color: "#9aacad" }}>{dim.icon}</div>
+                      <div style={{ fontSize: "22px", fontWeight: 800, color, lineHeight: 1 }}>
                         {score.toFixed(1)}
                       </div>
                     </div>
-                    <div style={{ fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px", color: "rgba(255,255,255,0.4)", marginBottom: "4px" }}>
+                    <div style={{ fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.8px", color: "#8a9ea0", marginBottom: "4px" }}>
                       {dim.label}
                     </div>
                     <div style={{ fontSize: "15px", fontWeight: 700, color, marginBottom: "8px" }}>
                       {dimProfile.label}
                     </div>
-                    <div style={{ height: "4px", background: "rgba(255,255,255,0.12)", borderRadius: "2px", overflow: "hidden", marginBottom: "12px" }}>
+                    <div style={{ height: "4px", background: "#e4eaea", borderRadius: "2px", overflow: "hidden", marginBottom: "12px" }}>
                       <div style={{ height: "100%", background: color, width: `${((score - 1) / 2) * 100}%`, borderRadius: "2px", transition: "width 0.6s ease" }} />
                     </div>
-                    <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 1.5, margin: 0 }}>
+                    <p style={{ fontSize: "12px", color: "#6b7e80", lineHeight: 1.5, margin: 0 }}>
                       {dimProfile.tagline}
                     </p>
                   </div>
@@ -512,8 +514,9 @@ export default function PaymentMaturityPage() {
 
             {/* Recommended actions */}
             <div style={{
-              background: "rgba(255,255,255,0.06)", borderRadius: "16px",
-              padding: "32px 36px", border: "1px solid rgba(255,255,255,0.1)",
+              background: "white", borderRadius: "16px",
+              padding: "32px 36px", border: "1px solid #dde3e3",
+              boxShadow: "0 2px 8px rgba(47,67,68,0.06)",
               display: "flex", gap: "40px", alignItems: "flex-start",
             }}>
               <div style={{ flex: 1 }}>
@@ -529,7 +532,7 @@ export default function PaymentMaturityPage() {
                       }}>
                         <span style={{ fontSize: "11px", fontWeight: 700, color: "white" }}>{i + 1}</span>
                       </div>
-                      <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", lineHeight: 1.5 }}>{action}</span>
+                      <span style={{ fontSize: "14px", color: DARK, lineHeight: 1.5 }}>{action}</span>
                     </div>
                   ))}
                 </div>
@@ -545,7 +548,7 @@ export default function PaymentMaturityPage() {
                     padding: "13px 24px", borderRadius: "8px",
                     fontSize: "14px", fontWeight: 700,
                     textDecoration: "none",
-                    boxShadow: "0 4px 16px rgba(218,32,40,0.35)",
+                    boxShadow: "0 4px 16px rgba(218,32,40,0.25)",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -561,10 +564,10 @@ export default function PaymentMaturityPage() {
                   }}
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
-                    background: "transparent", color: "rgba(255,255,255,0.5)",
+                    background: "transparent", color: "#6b7e80",
                     padding: "13px 24px", borderRadius: "8px",
                     fontSize: "13px", fontWeight: 600,
-                    border: "1px solid rgba(255,255,255,0.15)",
+                    border: "1px solid #dde3e3",
                     cursor: "pointer", whiteSpace: "nowrap",
                   }}
                 >
