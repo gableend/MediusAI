@@ -3,7 +3,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
   RED, DARK,
-  AP_CAPABILITIES, AP_CAPABILITY_CARDS, TAB_CARDS,
+  AP_CAPABILITIES, AP_CAPABILITY_CARDS,
+  SM_CAPABILITIES, SM_CAPABILITY_CARDS,
+  TAB_CARDS,
 } from "./CardComponents";
 
 const HOLD = 4400; // ms each card is shown
@@ -125,6 +127,7 @@ function CardStage({ tabIndex }: { tabIndex: number }) {
 export default function ProductTabsSection() {
   const [active, setActive] = useState(0);
   const [activeCapability, setActiveCapability] = useState(0);
+  const [activeSmCapability, setActiveSmCapability] = useState(0);
   const [flowVisible, setFlowVisible] = useState(false);
   const flowRef = useRef<HTMLDivElement>(null);
   const tab     = TABS[active];
@@ -356,8 +359,152 @@ export default function ProductTabsSection() {
 
               </div>
             </div>
+          ) : active === 1 ? (
+            /* ── Spend Management: same two-row layout as AP Automation ── */
+            (() => {
+              const smCap  = SM_CAPABILITIES[activeSmCapability];
+              const SmCard = SM_CAPABILITY_CARDS[activeSmCapability];
+              return (
+                <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+
+                  {/* Row 1 — headline + description */}
+                  <div style={{ padding: "44px 48px 32px", borderBottom: "1px solid #f0f0f0" }}>
+                    <span style={{
+                      display: "block", marginBottom: "14px",
+                      fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px",
+                      textTransform: "uppercase", color: RED,
+                    }}>
+                      Spend Management
+                    </span>
+                    <h3 style={{
+                      fontSize: "clamp(20px, 2.2vw, 28px)", fontWeight: 700, color: DARK,
+                      lineHeight: 1.2, margin: "0 0 12px",
+                    }}>
+                      {tab.headline}
+                    </h3>
+                    <p style={{ fontSize: "15px", color: "#6b7280", lineHeight: 1.7, margin: "0 0 28px" }}>
+                      {tab.description}
+                    </p>
+
+                    {/* SM flow bar */}
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "4px" }}>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        {[
+                          { label: "Source",   icon: <path d="M11 3H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h6m4-8-4-4m4 4H9m4 0v6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/> },
+                          { label: "Contract", icon: <><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.8" fill="none"/><path d="M6 6h4M6 9h4M6 12h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></> },
+                          { label: "Onboard",  icon: <><circle cx="8" cy="7" r="3" stroke="currentColor" strokeWidth="1.8" fill="none"/><path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none"/></> },
+                          { label: "Purchase", icon: <><path d="M2 3h2l2 8h7l1-5H5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/><circle cx="9" cy="14" r="1" fill="currentColor"/><circle cx="13" cy="14" r="1" fill="currentColor"/></> },
+                        ].map(({ label, icon }, i) => (
+                          <div key={label} style={{ display: "flex", alignItems: "center" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
+                              <svg width="16" height="16" viewBox="0 0 16 16" style={{ color: DARK, flexShrink: 0 }}>{icon}</svg>
+                              <span style={{ fontSize: "13px", fontWeight: 700, color: DARK, whiteSpace: "nowrap" }}>{label}</span>
+                            </div>
+                            {i < 3 && (
+                              <div style={{ padding: "0 12px" }}>
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                                  <path d="M4 8h8M9 5l3 3-3 3" stroke={RED} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <a
+                        href="https://www.medius.com/solutions/spend-management/"
+                        target="_blank" rel="noopener noreferrer"
+                        className="ap-cap-link" style={{ flexShrink: 0, marginLeft: "20px" }}
+                      >
+                        Explore Spend Management
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                          <path d="M3 8h10M9 4l4 4-4 4" stroke={RED} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Row 2 — capability nav (left) + detail card (right) */}
+                  <div style={{ display: "flex", flex: 1 }}>
+
+                    {/* Left — capability list */}
+                    <div style={{
+                      flex: "0 0 38%", padding: "24px 0 32px 48px",
+                      borderRight: "1px solid #f0f0f0",
+                      display: "flex", flexDirection: "column",
+                    }}>
+                      {SM_CAPABILITIES.map((c, i) => (
+                        <div
+                          key={c.id}
+                          onMouseEnter={() => setActiveSmCapability(i)}
+                          style={{
+                            display: "flex", alignItems: "center", justifyContent: "space-between",
+                            padding: "9px 14px 9px 12px", cursor: "pointer",
+                            borderLeft: activeSmCapability === i ? `3px solid ${RED}` : "3px solid transparent",
+                            background: activeSmCapability === i ? "#fff5f5" : "transparent",
+                            borderRadius: "0 8px 8px 0",
+                            transition: "background 0.15s ease, border-color 0.15s ease",
+                            marginRight: "16px",
+                          }}
+                        >
+                          <span style={{
+                            fontSize: "13px", fontWeight: 600,
+                            color: activeSmCapability === i ? RED : "#374151",
+                            transition: "color 0.15s ease",
+                          }}>
+                            {c.label}
+                          </span>
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"
+                            style={{ opacity: activeSmCapability === i ? 1 : 0.3, transition: "opacity 0.15s ease", flexShrink: 0 }}>
+                            <path d="M6 4l4 4-4 4" stroke={activeSmCapability === i ? RED : "#374151"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Right — detail panel */}
+                    <div style={{
+                      flex: 1, padding: "32px 48px 40px",
+                      display: "flex", flexDirection: "column",
+                      justifyContent: "center", alignItems: "flex-start",
+                    }}>
+                      <div
+                        key={activeSmCapability}
+                        style={{ width: "360px", display: "flex", flexDirection: "column", animation: "capFadeIn 0.2s ease" }}
+                      >
+                        <span style={{
+                          fontSize: "11px", fontWeight: 700, letterSpacing: "1px",
+                          textTransform: "uppercase", color: RED,
+                          marginBottom: "8px", display: "block",
+                        }}>
+                          {smCap.label}
+                        </span>
+                        <h4 style={{
+                          fontSize: "clamp(18px, 1.8vw, 22px)", fontWeight: 700, color: DARK,
+                          lineHeight: 1.2, margin: "0 0 10px",
+                        }}>
+                          {smCap.title}
+                        </h4>
+                        <p style={{ fontSize: "14px", color: "#4b5563", lineHeight: 1.7, margin: "0 0 20px" }}>
+                          {smCap.shortDescription}
+                        </p>
+                        <div className="ap-cap-detail" style={{ marginBottom: "16px" }}>
+                          <SmCard active={true} exit={false} variant="full" />
+                        </div>
+                        <a href={smCap.url} target="_blank" rel="noopener noreferrer" className="ap-cap-link">
+                          Explore {smCap.label}
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke={RED} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              );
+            })()
           ) : (
-            /* ── Other tabs: headline + card stage ── */
+            /* ── Expenses: headline + card stage ── */
             <>
               <div style={{
                 flex: "0 0 55%", padding: "52px 52px 52px 56px",

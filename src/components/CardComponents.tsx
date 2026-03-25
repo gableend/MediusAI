@@ -1346,6 +1346,217 @@ export function APAnalyticsCard({ active, exit, variant = "compact" }: CardProps
   );
 }
 
+// ─── SM Sourcing ──────────────────────────────────────────────────────────────
+// Compact: RFX event header + 3 scored supplier rows
+// Full:    same + savings callout
+export function SMSourcingCard({ active, exit, variant = "compact" }: CardProps) {
+  const suppliers = [
+    { name: "Dell Technologies", score: 94, rank: 1, delay: 0.1  },
+    { name: "Insight Direct",    score: 81, rank: 2, delay: 0.25 },
+    { name: "CDW Corporation",   score: 67, rank: 3, delay: 0.4  },
+  ];
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <CardHeader title="Medius Sourcing" badge="RFX Active" />
+
+      {/* Event row */}
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        background: "#f8f9fa", borderRadius: "8px", padding: "8px 12px", marginBottom: "10px",
+      }}>
+        <div>
+          <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>Q3 IT Equipment — Round 2 of 2</div>
+          <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>3 suppliers · Responses scored</div>
+        </div>
+        <span style={{ fontSize: "10px", fontWeight: 600, color: "#2563eb", background: "#e3eef8", borderRadius: "100px", padding: "2px 8px" }}>
+          Scoring
+        </span>
+      </div>
+
+      {/* Supplier score rows */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "7px", marginBottom: variant === "full" ? "10px" : 0 }}>
+        {suppliers.map(({ name, score, rank, delay }) => (
+          <div key={name} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div style={{
+              width: "18px", height: "18px", borderRadius: "50%", flexShrink: 0,
+              background: rank === 1 ? DARK : "#e5e7eb",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "9px", fontWeight: 700, color: rank === 1 ? "white" : "#888",
+              transition: `background 0.3s ease ${delay}s`,
+            }}>
+              {rank}
+            </div>
+            <span style={{ fontSize: "11px", fontWeight: 600, color: "#111", flex: 1 }}>{name}</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <div style={{ width: "60px", height: "5px", background: "#f0f0f0", borderRadius: "3px", overflow: "hidden" }}>
+                <div style={{
+                  height: "100%", borderRadius: "3px",
+                  background: rank === 1 ? DARK : rank === 2 ? "#6b8c8c" : "#aaa",
+                  width: active ? `${score}%` : "0%",
+                  transition: `width 0.7s ease ${delay}s`,
+                }} />
+              </div>
+              <span style={{ fontSize: "10px", fontWeight: 700, color: rank === 1 ? DARK : "#888", width: "28px" }}>{score}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Savings callout — full only */}
+      {variant === "full" && (
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "8px", padding: "8px 12px",
+          opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.6s",
+        }}>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#16a34a" }}>Est. savings vs. current contract</span>
+          <span style={{ fontSize: "14px", fontWeight: 700, color: "#16a34a" }}>$84k</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── SM Contract Management ───────────────────────────────────────────────────
+// Compact: 3 contract rows + expiry alert
+// Full:    4 contract rows + expiry alert + stat tiles
+export function SMContractCard({ active, exit, variant = "compact" }: CardProps) {
+  const allContracts = [
+    { name: "Microsoft EA",     value: "$240k/yr", status: "Renews in 14d", color: "#f59e0b", ok: false, delay: 0.05 },
+    { name: "Dell Hardware",    value: "$84k/yr",  status: "Active",        color: "#16a34a", ok: true,  delay: 0.15 },
+    { name: "AWS Services",     value: "$136k/yr", status: "Active",        color: "#16a34a", ok: true,  delay: 0.25 },
+    { name: "IBM Support",      value: "$52k/yr",  status: "Expired",       color: RED,       ok: false, delay: 0.35 },
+  ];
+  const contracts = variant === "compact" ? allContracts.slice(0, 3) : allContracts;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <CardHeader title="Contract Management" badge="47 Active" />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+        {contracts.map(({ name, value, status, color, delay }) => (
+          <div key={name} style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "7px 10px", background: "#f8f9fa", borderRadius: "7px",
+          }}>
+            <div>
+              <div style={{ fontSize: "11px", fontWeight: 600, color: "#111" }}>{name}</div>
+              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{value}</div>
+            </div>
+            <span style={{
+              fontSize: "10px", fontWeight: 600, color,
+              opacity: active ? 1 : 0, transition: `opacity 0.3s ease ${delay}s`,
+            }}>
+              {status}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Renewal alert */}
+      <div style={{
+        background: "#fffbeb", border: "1px solid #fde68a", borderRadius: "7px",
+        padding: "7px 10px", fontSize: "11px", fontWeight: 600, color: "#92400e",
+        opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.45s",
+        marginBottom: variant === "full" ? "10px" : 0,
+      }}>
+        ⏰ Microsoft EA renewal in 14 days — action required
+      </div>
+
+      {/* Stat tiles — full only */}
+      {variant === "full" && (
+        <div style={{ display: "flex", gap: "8px" }}>
+          {[
+            { value: "52%", label: "Less search time" },
+            { value: "39%", label: "Fewer lapsed" },
+          ].map(({ value, label }) => (
+            <div key={label} style={{ flex: 1, textAlign: "center", background: "#f8f9fa", borderRadius: "8px", padding: "8px 4px" }}>
+              <div style={{ fontSize: "15px", fontWeight: 700, color: DARK }}>{value}</div>
+              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "2px" }}>{label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── SM Procurement ───────────────────────────────────────────────────────────
+// Compact: requisition tile + 3 approval steps
+// Full:    requisition tile + 4 steps + spend tiles
+export function SMProcurementCard({ active, exit, variant = "compact" }: CardProps) {
+  const allSteps = [
+    { label: "Budget check",       detail: "IT Equipment · $12,450",  ok: true,  delay: 0.1  },
+    { label: "Policy check",       detail: "Approved supplier · ✓",   ok: true,  delay: 0.25 },
+    { label: "Manager approval",   detail: "J. Chen · Approved",      ok: true,  delay: 0.4  },
+    { label: "PO raised",          detail: "PO-8821 sent to Dell",    ok: true,  delay: 0.55 },
+  ];
+  const steps = variant === "compact" ? allSteps.slice(0, 3) : allSteps;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <CardHeader title="Procurement" badge="PO Raised" />
+
+      {/* Requisition tile */}
+      <div style={{
+        display: "flex", alignItems: "center", gap: "10px",
+        background: "#f8f9fa", borderRadius: "8px", padding: "8px 12px", marginBottom: "10px",
+      }}>
+        <div style={{
+          width: "30px", height: "30px", borderRadius: "7px", flexShrink: 0,
+          background: DARK, display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <rect x="2" y="1" width="12" height="14" rx="2" stroke="white" strokeWidth="1.5"/>
+            <path d="M5 5h6M5 8h6M5 11h4" stroke="white" strokeWidth="1.3" strokeLinecap="round"/>
+          </svg>
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>IT Equipment — 4 items</div>
+          <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>Req-4421 · $12,450 · Dell Technologies</div>
+        </div>
+      </div>
+
+      {/* Approval steps */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: variant === "full" ? "10px" : 0 }}>
+        {steps.map(({ label, detail, ok, delay }) => (
+          <div key={label} style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "6px 10px", background: "#f8f9fa", borderRadius: "7px",
+          }}>
+            <div>
+              <div style={{ fontSize: "11px", fontWeight: 600, color: "#111" }}>{label}</div>
+              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{detail}</div>
+            </div>
+            <span style={{
+              fontSize: "10px", fontWeight: 700, color: ok ? "#16a34a" : RED,
+              opacity: active ? 1 : 0, transition: `opacity 0.3s ease ${delay}s`,
+            }}>
+              {ok ? "✓" : "✗"}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Spend tiles — full only */}
+      {variant === "full" && (
+        <div style={{ display: "flex", gap: "8px" }}>
+          {[
+            { value: "100%", label: "Policy compliant" },
+            { value: "0",    label: "Maverick POs" },
+          ].map(({ value, label }) => (
+            <div key={label} style={{ flex: 1, textAlign: "center", background: "#f8f9fa", borderRadius: "8px", padding: "8px 4px" }}>
+              <div style={{ fontSize: "15px", fontWeight: 700, color: DARK }}>{value}</div>
+              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "2px" }}>{label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── AP Capabilities metadata ──────────────────────────────────────────────────
 export const AP_CAPABILITIES = [
   { id: "invoice-capture",          label: "Invoice capture",          title: "No invoice left behind.",                shortDescription: "Every format, every channel — captured and digitised automatically, with zero manual keying.",                                              url: "https://www.medius.com/solutions/medius-accounts-payable-automation/invoice-capture/" },
@@ -1372,6 +1583,22 @@ export const AP_CAPABILITY_CARDS: React.ComponentType<CardProps>[] = [
   APReconCard,      // 7 — Statement reconciliation
   APCard1,          // 8 — ERP integrations
   APAnalyticsCard,  // 9 — Analytics
+];
+
+// ─── Spend Management capabilities metadata ───────────────────────────────────
+export const SM_CAPABILITIES = [
+  { id: "sourcing",             label: "Sourcing",             title: "Win better deals, faster.",             shortDescription: "Run RFX events, quick quotes, and eAuctions with automated supplier scoring — cut sourcing cycles by 17% and deliver 1.9× greater savings.",   url: "https://www.medius.com/solutions/medius-sourcing/" },
+  { id: "contract-management", label: "Contract Management",   title: "Every contract, always in control.",     shortDescription: "Centralise contracts, automate renewal alerts, and cut lapsed agreements by 39% — so you never miss a deadline or a renegotiation window.",   url: "https://www.medius.com/solutions/medius-contract-management/" },
+  { id: "supplier-onboarding", label: "Supplier Onboarding",   title: "Ready to trade from day one.",           shortDescription: "Suppliers self-serve their own data through guided forms. Registry checks, bank validation, and compliance rules run automatically.",            url: "https://www.medius.com/solutions/supplier-onboarding/" },
+  { id: "procurement",         label: "Procurement",           title: "Spend that stays on policy.",           shortDescription: "A consumer-style buying experience with hard budget controls, catalogue punchouts, and automatic PO matching — maverick spend eliminated.",    url: "https://www.medius.com/solutions/medius-procurement-solutions/" },
+];
+
+// ─── Card component per SM capability (index matches SM_CAPABILITIES) ──────────
+export const SM_CAPABILITY_CARDS: React.ComponentType<CardProps>[] = [
+  SMSourcingCard,          // 0 — Sourcing
+  SMContractCard,          // 1 — Contract Management
+  APSupplierOnboardingCard,// 2 — Supplier Onboarding
+  SMProcurementCard,       // 3 — Procurement
 ];
 
 // ─── Card sets for Spend / Expenses carousels ────────────────────────────────
