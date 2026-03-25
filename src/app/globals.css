@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 0.5rem;
+  /* Medius color scheme */
+  --background: 60 7% 95%; /* Light cream/beige #f4f4f2 */
+  --foreground: 180 20% 20%; /* Dark teal text */
+  --card: 0 0% 100%; /* White cards */
+  --card-foreground: 180 20% 20%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 180 20% 20%;
+  --primary: 357 66% 49%; /* Medius red #d02a31 */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 180 20% 26%; /* Dark teal #2d4242 */
+  --secondary-foreground: 0 0% 100%;
+  --muted: 60 5% 90%;
+  --muted-foreground: 180 10% 40%;
+  --accent: 357 66% 49%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 60 5% 85%;
+  --input: 60 5% 90%;
+  --ring: 357 66% 49%;
+  --chart-1: 357 66% 49%;
+  --chart-2: 180 20% 26%;
+  --chart-3: 35 80% 45%;
+  --chart-4: 50 80% 50%;
+  --chart-5: 65 80% 55%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+/* ─────────────────────────────────────────
+   Hero Concept – animation keyframes
+───────────────────────────────────────── */
+@keyframes pdot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.6); }
+}
+@keyframes approv {
+  0%   { box-shadow: 0 0 0 0 rgba(47,67,68,0.55); }
+  50%  { box-shadow: 0 0 0 8px rgba(47,67,68,0); background: #4a6567; }
+  100% { box-shadow: 0 0 0 0 rgba(47,67,68,0); }
+}
+
+/* Eyebrow pill + pulsing dot */
+.hero-eyebrow-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.75);
+  font-size: 11px; font-weight: 500;
+  padding: 5px 14px; border-radius: 100px;
+  margin-bottom: 24px; letter-spacing: 0.9px; text-transform: uppercase;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #da2028; flex-shrink: 0;
+  animation: pdot 2.2s ease-in-out infinite;
+}
+
+/* AP card state classes */
+.ap-card {
+  position: absolute; top: 0; left: 50%;
+  width: 360px;
+  background: white; border-radius: 14px; padding: 22px 24px;
+  box-shadow: 0 28px 56px rgba(0,0,0,0.30), 0 6px 14px rgba(0,0,0,0.10);
+  pointer-events: none; z-index: 5;
+  opacity: 0;
+  transform: translateX(-50%) translateY(18px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.ap-card.ap-card--on {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.ap-card.ap-card--exit {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-14px);
+  transition-duration: 0.3s, 0.3s;
+}
+
+/* Progress bar (card 2) */
+.ap-pbar-fill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, #da2028, #f87171);
+  border-radius: 2px;
+  transition: width 1.9s ease;
+}
+.ap-pbar-fill.go { width: 100%; }
+
+/* Target icon animate-in */
+@keyframes targetSpin {
+  0%   { opacity: 0; transform: scale(0.3) rotate(-120deg); }
+  60%  { opacity: 1; transform: scale(1.15) rotate(8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes targetPulse {
+  0%   { opacity: 0; transform: scale(0.4); }
+  60%  { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.target-icon-wrap {
+  position: relative;
+  width: 30px; height: 30px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.target-icon-orb {
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(218,32,40,0.25) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.target-icon-orb.visible { opacity: 0; }
+.target-icon-svg {
+  width: 26px; height: 26px;
+  opacity: 0;
+  transform: scale(0.3) rotate(-120deg);
+  transition: none;
+}
+.target-icon-svg.animate-in {
+  animation: targetSpin 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ─────────────────────────────────────────
+   Customer logo marquee
+───────────────────────────────────────── */
+@keyframes logoMarquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─────────────────────────────────────────
+   Section connector dot animation
+───────────────────────────────────────── */
+@keyframes sectionDot {
+  0%   { top: -4px;  opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { top: 66px;  opacity: 0; }
+}
+
+/* Approve button pulse (card 3) */
+.ap-approve-btn {
+  flex: 1.5; padding: 8px; border: none;
+  background: #2f4344; color: white;
+  border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer;
+  font-family: var(--font-poppins), sans-serif;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+.ap-approve-btn.pulse {
+  animation: approv 0.9s ease 2.3s 1 forwards;
+}
