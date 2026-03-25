@@ -1637,7 +1637,7 @@ export function SMContractIntakeCard({ active, exit, variant = "compact" }: Card
         opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.5s",
         marginBottom: variant === "full" ? "10px" : 0,
       }}>
-        ✓ Classified · routed to Legal · stored in repository
+        ✓ Classified · stored in repository · renewal alert set
       </div>
 
       {/* Stat tiles — full only */}
