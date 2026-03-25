@@ -38,7 +38,7 @@ function CardHeader({
 function Card1({ active, exit }: { active: boolean; exit: boolean }) {
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <CardHeader icon="📄" iconBg="rgba(218,32,40,0.10)" title="New Invoice" step="1 of 4" />
+      <CardHeader title="New Invoice" step="1 of 4" active={active} />
       <div className="flex justify-between items-baseline mb-[5px]">
         <span className="text-[15px] font-bold" style={{ color: "#111" }}>Acme Corp</span>
         <span className="text-[18px] font-bold" style={{ color: "#111" }}>$12,450</span>
