@@ -1,12 +1,4 @@
 node_modules/
 .next/
 .env*
-public/videos/
-public/video/
-public/images/*.jpg
-public/images/*.png
-public/images/*.svg
-public/ai-bg.mov
-*.mov
-*.mp4
-*.webm
+*.local
