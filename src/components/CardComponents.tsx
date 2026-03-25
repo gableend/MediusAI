@@ -1568,6 +1568,96 @@ export function SMProcurementCard({ active, exit, variant = "compact" }: CardPro
   );
 }
 
+// ─── SM Contract Intake ───────────────────────────────────────────────────────
+// Compact: document tile + 3 AI-extracted fields + classified badge
+// Full:    document tile + 4 fields + classified badge + stat tiles
+export function SMContractIntakeCard({ active, exit, variant = "compact" }: CardProps) {
+  const allFields = [
+    { label: "Parties",       value: "Medius · Microsoft Corp",   delay: 0.1  },
+    { label: "Value",         value: "$240,000 / yr",              delay: 0.2  },
+    { label: "Term",          value: "3 yrs · ends Dec 2026",      delay: 0.3  },
+    { label: "Renewal notice", value: "90 days required",          delay: 0.4  },
+  ];
+  const fields = variant === "compact" ? allFields.slice(0, 3) : allFields;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <CardHeader title="Contract Intake" badge="AI-extracted" />
+
+      {/* Document tile */}
+      <div style={{
+        display: "flex", alignItems: "center", gap: "10px",
+        background: "#f8f9fa", borderRadius: "8px",
+        padding: variant === "compact" ? "5px 12px" : "9px 12px",
+        marginBottom: variant === "compact" ? "8px" : "12px",
+      }}>
+        <div style={{
+          width: "28px", height: "28px", borderRadius: "7px", flexShrink: 0,
+          background: DARK, display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <rect x="2" y="1" width="12" height="14" rx="2" stroke="white" strokeWidth="1.5"/>
+            <path d="M5 5h6M5 8h6M5 11h3" stroke="white" strokeWidth="1.3" strokeLinecap="round"/>
+          </svg>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>Microsoft_EA_2024.pdf</div>
+          <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>Received via email · 2.4 MB</div>
+        </div>
+        <div style={{
+          fontSize: "9px", fontWeight: 700, color: "#16a34a",
+          background: "#f0fdf4", border: "1px solid #bbf7d0",
+          borderRadius: "100px", padding: "2px 7px", flexShrink: 0,
+          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.05s",
+        }}>
+          ✓ Parsed
+        </div>
+      </div>
+
+      {/* AI-extracted fields */}
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "5px" : "7px", marginBottom: variant === "compact" ? "8px" : "12px" }}>
+        {fields.map(({ label, value, delay }) => (
+          <div key={label} style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: variant === "compact" ? "4px 10px" : "6px 10px",
+            background: "#f8f9fa", borderRadius: "7px",
+            opacity: active ? 1 : 0, transition: `opacity 0.3s ease ${delay}s`,
+          }}>
+            <span style={{ fontSize: "10px", color: "#888" }}>{label}</span>
+            <span style={{ fontSize: "11px", fontWeight: 600, color: "#111" }}>{value}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Classified + stored badge */}
+      <div style={{
+        background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px",
+        padding: variant === "compact" ? "5px 12px" : "7px 12px",
+        fontSize: "11px", fontWeight: 600, color: "#16a34a",
+        opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.5s",
+        marginBottom: variant === "full" ? "10px" : 0,
+      }}>
+        ✓ Classified · routed to Legal · stored in repository
+      </div>
+
+      {/* Stat tiles — full only */}
+      {variant === "full" && (
+        <div style={{ display: "flex", gap: "8px" }}>
+          {[
+            { value: "94%", label: "Extraction accuracy" },
+            { value: "0",   label: "Manual data entry" },
+          ].map(({ value, label }) => (
+            <div key={label} style={{ flex: 1, textAlign: "center", background: "#f8f9fa", borderRadius: "8px", padding: "8px 4px" }}>
+              <div style={{ fontSize: "15px", fontWeight: 700, color: DARK }}>{value}</div>
+              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "2px" }}>{label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── AP Capabilities metadata ──────────────────────────────────────────────────
 export const AP_CAPABILITIES = [
   { id: "invoice-capture",          label: "Invoice capture",          title: "No invoice left behind.",                shortDescription: "Every format, every channel — captured and digitised automatically, with zero manual keying.",                                              url: "https://www.medius.com/solutions/medius-accounts-payable-automation/invoice-capture/" },

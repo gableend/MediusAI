@@ -10,6 +10,7 @@ import {
   SMIntelligentIntakeCard,
   SMSourcingCard,
   SMContractCard,
+  SMContractIntakeCard,
   SMProcurementCard,
   PMCard0, PMCard1, PMCard2,
   SMCard0, SMCard1, SMCard2,
@@ -58,6 +59,7 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
     cards: [
       { id: "sm-sourcing",           label: "Sourcing",              Component: SMSourcingCard },
       { id: "sm-contracts",          label: "Contract Management",   Component: SMContractCard },
+      { id: "sm-contract-intake",    label: "Contract Intake",        Component: SMContractIntakeCard },
       { id: "supplier-onboarding",   label: "Supplier onboarding",   Component: APSupplierOnboardingCard },
       { id: "sm-procurement",        label: "Procurement",           Component: SMProcurementCard },
       { id: "intelligent-intake",    label: "Intelligent Intake",    Component: SMIntelligentIntakeCard },
