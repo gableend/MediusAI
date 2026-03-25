@@ -607,7 +607,7 @@ export default function PaymentMaturityPage() {
             <h2 style={{ fontSize: "clamp(20px, 2.5vw, 30px)", fontWeight: 800, color: DARK, lineHeight: 1.2, margin: "0 0 14px", letterSpacing: "-0.3px" }}>
               Are inefficient vendor payments costing you more than money?
             </h2>
-            <p style={{ fontSize: "15px", color: "rgba(47,67,68,0.72)", lineHeight: 1.7, margin: "0 0 28px", maxWidth: "680px" }}>
+            <p style={{ fontSize: "15px", color: "rgba(47,67,68,0.72)", lineHeight: 1.7, margin: "0 0 28px", maxWidth: "700px" }}>
               The Ardent Partners <em>Pulse of B2B Payments</em> report reveals the state of enterprise payment operations — and how to turn efficiency into real bottom-line impact.
             </p>
             <a
