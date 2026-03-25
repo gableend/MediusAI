@@ -87,7 +87,6 @@ export default function VideoSection() {
           <video
             ref={videoRef}
             autoPlay
-            loop
             muted
             playsInline
             preload="auto"
