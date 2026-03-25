@@ -8,9 +8,10 @@ const RED  = "#da2028";
 const DARK = "#2f4344";
 
 const LINKS = [
-  { href: "/",          label: "Homepage Concept"     },
-  { href: "/all-cards", label: "UI Cards Concept"      },
-  { href: "/roi",       label: "ROI Calculator Concept" },
+  { href: "/",                  label: "Homepage Concept"          },
+  { href: "/all-cards",         label: "UI Cards Concept"          },
+  { href: "/roi",               label: "ROI Calculator Concept"    },
+  { href: "/payment-maturity",  label: "Payment Maturity Concept"  },
 ];
 
 export default function SideNav() {
