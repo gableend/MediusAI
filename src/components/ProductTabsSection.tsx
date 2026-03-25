@@ -346,7 +346,7 @@ export default function ProductTabsSection() {
                       {cap.shortDescription}
                     </p>
                     <div className="ap-cap-detail" style={{ marginBottom: "16px" }}>
-                      <CapCard active={true} exit={false} variant="full" />
+                      <CapCard active={true} exit={false} variant="compact" />
                     </div>
                     <a href={cap.url} target="_blank" rel="noopener noreferrer" className="ap-cap-link">
                       Explore {cap.label}
@@ -488,7 +488,7 @@ export default function ProductTabsSection() {
                           {smCap.shortDescription}
                         </p>
                         <div className="ap-cap-detail" style={{ marginBottom: "16px" }}>
-                          <SmCard active={true} exit={false} variant="full" />
+                          <SmCard active={true} exit={false} variant="compact" />
                         </div>
                         <a href={smCap.url} target="_blank" rel="noopener noreferrer" className="ap-cap-link">
                           Explore {smCap.label}
@@ -579,14 +579,14 @@ export default function ProductTabsSection() {
         /* Override absolute positioning when ap-card renders in the capability detail panel */
         .ap-cap-detail .ap-card {
           position: static;
-          width: 360px;
+          width: 100%;
           left: auto;
           transform: none;
           opacity: 1;
           pointer-events: auto;
           transition: none;
           box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
-          height: 320px;
+          height: 240px;
           overflow: hidden;
         }
         .ap-cap-detail .ap-card.ap-card--on,

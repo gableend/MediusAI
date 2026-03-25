@@ -48,12 +48,12 @@ export function APCard0({ active, exit, variant = "compact" }: CardProps) {
       <CardHeader title="Treat every invoice equally" badge="Any format" />
 
       {variant === "compact" ? (
-        /* ── Compact: vertical stack ── */
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          {formats.map(({ type, abbr, source, delay }) => (
-            <div key={type} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "8px 12px", background: "#f8f9fa", borderRadius: "8px" }}>
+        /* ── Compact: vertical stack — 3 items only ── */
+        <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
+          {formats.slice(0, 3).map(({ type, abbr, source, delay }) => (
+            <div key={type} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "6px 12px", background: "#f8f9fa", borderRadius: "8px" }}>
               <div style={{
-                width: "32px", height: "32px", borderRadius: "7px", flexShrink: 0,
+                width: "30px", height: "30px", borderRadius: "7px", flexShrink: 0,
                 background: DARK, display: "flex", alignItems: "center", justifyContent: "center",
               }}>
                 <span style={{ fontSize: "9px", fontWeight: 800, color: "white", letterSpacing: "0px" }}>{abbr}</span>
@@ -194,7 +194,8 @@ export function APCard2({ active, exit, variant = "compact" }: CardProps) {
       {/* Alert box */}
       <div style={{
         background: "#fff5f5", border: "1px solid #fecaca", borderRadius: "8px",
-        padding: "8px 12px", marginBottom: "12px",
+        padding: variant === "compact" ? "6px 12px" : "8px 12px",
+        marginBottom: variant === "compact" ? "8px" : "12px",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "7px", marginBottom: "2px" }}>
           <span style={{ color: RED, fontSize: "13px" }}>⚠</span>
@@ -203,7 +204,7 @@ export function APCard2({ active, exit, variant = "compact" }: CardProps) {
         <div style={{ fontSize: "11px", color: "#888" }}>Invoice/Master Data bank mismatch</div>
       </div>
       {/* Mitigation action rows */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "9px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "7px" : "9px", marginBottom: variant === "compact" ? "8px" : "10px" }}>
         {actions.map(({ label, status, delay }) => (
           <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontSize: "11px", color: "#555" }}>{label}</span>
@@ -229,7 +230,8 @@ export function APCard2({ active, exit, variant = "compact" }: CardProps) {
       {/* Footer */}
       <div style={{
         background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px",
-        padding: "8px 12px", fontSize: "11px", fontWeight: 600, color: "#16a34a",
+        padding: variant === "compact" ? "6px 12px" : "8px 12px",
+        fontSize: "11px", fontWeight: 600, color: "#16a34a",
         opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.4s",
       }}>
         ✓ Risk flagged, mitigated and logged
@@ -910,11 +912,13 @@ export function EXCard0({ active, exit, variant = "compact" }: CardProps) {
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <CardHeader title="Receipt Capture" badge="AI-powered" />
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "6px" : "8px", marginBottom: variant === "compact" ? "8px" : "10px" }}>
         {receipts.map(({ merchant, amount, category, delay }) => (
-          <div key={merchant} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "7px 10px", background: "#f8f9fa", borderRadius: "8px" }}>
+          <div key={merchant} style={{ display: "flex", alignItems: "center", gap: "10px", padding: variant === "compact" ? "5px 10px" : "7px 10px", background: "#f8f9fa", borderRadius: "8px" }}>
             <div style={{
-              width: "32px", height: "32px", borderRadius: "6px", flexShrink: 0,
+              width: variant === "compact" ? "28px" : "32px",
+              height: variant === "compact" ? "28px" : "32px",
+              borderRadius: "6px", flexShrink: 0,
               background: DARK, display: "flex", alignItems: "center", justifyContent: "center",
             }}>
               <span style={{ fontSize: "8px", fontWeight: 800, color: "white" }}>{category.slice(0, 3).toUpperCase()}</span>
@@ -930,7 +934,7 @@ export function EXCard0({ active, exit, variant = "compact" }: CardProps) {
           </div>
         ))}
       </div>
-      <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px", padding: "8px 12px", display: "flex", justifyContent: "space-between" }}>
+      <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px", padding: variant === "compact" ? "6px 12px" : "8px 12px", display: "flex", justifyContent: "space-between" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#16a34a" }}>
           {variant === "compact" ? "3 receipts" : "4 receipts"} auto-categorised
         </span>
@@ -1180,11 +1184,11 @@ export function APSupplierOnboardingCard({ active, exit, variant = "compact" }: 
       <div style={{
         display: "flex", alignItems: "center", gap: "10px",
         background: "#f8f9fa", borderRadius: "8px",
-        padding: variant === "compact" ? "8px 12px" : "10px 12px",
-        marginBottom: "12px",
+        padding: variant === "compact" ? "6px 12px" : "10px 12px",
+        marginBottom: variant === "compact" ? "8px" : "12px",
       }}>
         <div style={{
-          width: "32px", height: "32px", borderRadius: "8px", flexShrink: 0,
+          width: "30px", height: "30px", borderRadius: "8px", flexShrink: 0,
           background: DARK, display: "flex", alignItems: "center", justifyContent: "center",
         }}>
           <span style={{ fontSize: "11px", fontWeight: 800, color: "white" }}>AC</span>
@@ -1203,42 +1207,45 @@ export function APSupplierOnboardingCard({ active, exit, variant = "compact" }: 
         </div>
       </div>
 
-      {/* 3-step progress bar */}
-      <div style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
-        {steps.map(({ label, done }, i) => (
-          <div key={label} style={{ display: "flex", alignItems: "center", flex: i < steps.length - 1 ? 1 : 0 }}>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-              <div style={{
-                width: "22px", height: "22px", borderRadius: "50%",
-                background: done && active ? DARK : "#e5e7eb",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                transition: `background 0.3s ease ${i * 0.15 + 0.1}s`,
-                flexShrink: 0,
-              }}>
-                <span style={{ fontSize: "10px", color: "white", fontWeight: 700 }}>✓</span>
+      {/* 3-step progress bar — full variant only */}
+      {variant !== "compact" && (
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
+          {steps.map(({ label, done }, i) => (
+            <div key={label} style={{ display: "flex", alignItems: "center", flex: i < steps.length - 1 ? 1 : 0 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+                <div style={{
+                  width: "22px", height: "22px", borderRadius: "50%",
+                  background: done && active ? DARK : "#e5e7eb",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  transition: `background 0.3s ease ${i * 0.15 + 0.1}s`,
+                  flexShrink: 0,
+                }}>
+                  <span style={{ fontSize: "10px", color: "white", fontWeight: 700 }}>✓</span>
+                </div>
+                <span style={{ fontSize: "9px", color: done && active ? DARK : "#aaa", fontWeight: 600, whiteSpace: "nowrap", transition: `color 0.3s ease ${i * 0.15 + 0.1}s` }}>
+                  {label}
+                </span>
               </div>
-              <span style={{ fontSize: "9px", color: done && active ? DARK : "#aaa", fontWeight: 600, whiteSpace: "nowrap", transition: `color 0.3s ease ${i * 0.15 + 0.1}s` }}>
-                {label}
-              </span>
+              {i < steps.length - 1 && (
+                <div style={{
+                  flex: 1, height: "2px", borderRadius: "1px",
+                  background: active ? DARK : "#e5e7eb",
+                  margin: "0 6px", marginBottom: "14px",
+                  transition: `background 0.4s ease ${i * 0.15 + 0.2}s`,
+                }} />
+              )}
             </div>
-            {i < steps.length - 1 && (
-              <div style={{
-                flex: 1, height: "2px", borderRadius: "1px",
-                background: active ? DARK : "#e5e7eb",
-                margin: "0 6px", marginBottom: "14px",
-                transition: `background 0.4s ease ${i * 0.15 + 0.2}s`,
-              }} />
-            )}
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Validation checks */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "7px", marginBottom: variant === "full" ? "12px" : 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "5px" : "7px", marginBottom: variant === "full" ? "12px" : 0 }}>
         {checks.map(({ label, detail, ok, delay }) => (
           <div key={label} style={{
             display: "flex", alignItems: "center", justifyContent: "space-between",
-            padding: "6px 10px", background: "#f8f9fa", borderRadius: "7px",
+            padding: variant === "compact" ? "5px 10px" : "6px 10px",
+            background: "#f8f9fa", borderRadius: "7px",
           }}>
             <div>
               <div style={{ fontSize: "11px", fontWeight: 600, color: "#111" }}>{label}</div>

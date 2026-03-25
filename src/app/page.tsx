@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import CustomerLogoBar from "@/components/CustomerLogoBar";
 import ProductTabsSection from "@/components/ProductTabsSection";
 import AISection from "@/components/AISection";
+import VideoSection from "@/components/VideoSection";
 
 // ─── Card metadata ─────────────────────────────────────────────────
 const LABELS = ["AP Automation", "Fraud & Risk Detection", "Supplier Conversations"];
@@ -380,10 +381,8 @@ export default function HeroConcept2Page() {
       {/* ─── AI Section ─── */}
       <AISection />
 
-      {/* ─────────────────────────────────────────────────────────────────
-          SECTIONS BELOW — hero-concept-2 variant
-          Add your new sections here
-      ───────────────────────────────────────────────────────────────── */}
+      {/* ─── Video Section ─── */}
+      <VideoSection />
 
     </main>
   );

@@ -8,6 +8,9 @@ import {
   APSupplierCard, APReconCard, APCard1, APAnalyticsCard,
   APSupplierOnboardingCard,
   SMIntelligentIntakeCard,
+  SMSourcingCard,
+  SMContractCard,
+  SMProcurementCard,
   PMCard0, PMCard1, PMCard2,
   SMCard0, SMCard1, SMCard2,
   EXCard0, EXCard1, EXCard2,
@@ -53,11 +56,12 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
   {
     group: "Spend Management",
     cards: [
-      { id: "supplier-onboarding",   label: "Supplier onboarding",  Component: APSupplierOnboardingCard },
-      { id: "intelligent-intake",    label: "Intelligent Intake",   Component: SMIntelligentIntakeCard },
+      { id: "sm-sourcing",           label: "Sourcing",              Component: SMSourcingCard },
+      { id: "sm-contracts",          label: "Contract Management",   Component: SMContractCard },
+      { id: "supplier-onboarding",   label: "Supplier onboarding",   Component: APSupplierOnboardingCard },
+      { id: "sm-procurement",        label: "Procurement",           Component: SMProcurementCard },
+      { id: "intelligent-intake",    label: "Intelligent Intake",    Component: SMIntelligentIntakeCard },
       { id: "sm-budget",             label: "Budget vs Actual",      Component: SMCard0 },
-      { id: "sm-policy",           label: "Policy control",      Component: SMCard1 },
-      { id: "sm-spend",            label: "Spend by category",   Component: SMCard2 },
     ],
   },
   {
@@ -66,6 +70,8 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
       { id: "ex-capture",   label: "Receipt capture",  Component: EXCard0 },
       { id: "ex-policy",    label: "Policy check",     Component: EXCard1 },
       { id: "ex-reimburse", label: "Reimbursements",   Component: EXCard2 },
+      { id: "sm-policy",    label: "Policy control",   Component: SMCard1 },
+      { id: "sm-spend",     label: "Spend by category", Component: SMCard2 },
     ],
   },
 ];
