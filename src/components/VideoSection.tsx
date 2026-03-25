@@ -77,11 +77,8 @@ export default function VideoSection() {
         {/* ── Video ── */}
         <div
           style={{
-            borderRadius: "20px",
-            overflow: "hidden",
-            boxShadow: "0 24px 64px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)",
             opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0) scale(1)" : "translateY(32px) scale(0.98)",
+            transform: visible ? "translateY(0)" : "translateY(32px)",
             transition: visible ? "opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s" : "none",
           }}
         >
