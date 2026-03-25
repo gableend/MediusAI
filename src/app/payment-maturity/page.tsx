@@ -588,26 +588,26 @@ export default function PaymentMaturityPage() {
       )}
 
       {/* ── Report CTA ── */}
-      <div style={{ background: DARK, padding: "72px 32px" }}>
+      <div style={{ background: SAND, padding: "72px 32px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", gap: "64px", alignItems: "center" }}>
           {/* Stat */}
           <div style={{ flexShrink: 0, textAlign: "center", minWidth: "200px" }}>
-            <div style={{ fontSize: "clamp(52px, 6vw, 80px)", fontWeight: 800, color: RED, lineHeight: 1, letterSpacing: "-2px" }}>34%</div>
-            <div style={{ fontSize: "14px", color: "rgba(255,255,255,0.6)", lineHeight: 1.5, marginTop: "10px", maxWidth: "180px" }}>
+            <div style={{ fontSize: "clamp(52px, 6vw, 80px)", fontWeight: 800, color: DARK, lineHeight: 1, letterSpacing: "-2px" }}>34%</div>
+            <div style={{ fontSize: "14px", color: "rgba(47,67,68,0.7)", lineHeight: 1.5, marginTop: "10px", maxWidth: "180px" }}>
               of AP departments reported a B2B payment fraud attack last year
             </div>
           </div>
           {/* Divider */}
-          <div style={{ width: "1px", alignSelf: "stretch", background: "rgba(255,255,255,0.12)", flexShrink: 0 }} />
+          <div style={{ width: "1px", alignSelf: "stretch", background: "rgba(47,67,68,0.2)", flexShrink: 0 }} />
           {/* Copy + CTA */}
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", color: SAND, marginBottom: "14px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", color: "rgba(47,67,68,0.6)", marginBottom: "14px" }}>
               Ardent Partners · Industry Report
             </div>
-            <h2 style={{ fontSize: "clamp(20px, 2.5vw, 30px)", fontWeight: 800, color: "white", lineHeight: 1.2, margin: "0 0 14px", letterSpacing: "-0.3px" }}>
+            <h2 style={{ fontSize: "clamp(20px, 2.5vw, 30px)", fontWeight: 800, color: DARK, lineHeight: 1.2, margin: "0 0 14px", letterSpacing: "-0.3px" }}>
               Are inefficient vendor payments costing you more than money?
             </h2>
-            <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.62)", lineHeight: 1.7, margin: "0 0 28px", maxWidth: "520px" }}>
+            <p style={{ fontSize: "15px", color: "rgba(47,67,68,0.72)", lineHeight: 1.7, margin: "0 0 28px", maxWidth: "520px" }}>
               The Ardent Partners <em>Pulse of B2B Payments</em> report reveals the state of enterprise payment operations — and how to turn efficiency into real bottom-line impact.
             </p>
             <a
@@ -616,11 +616,10 @@ export default function PaymentMaturityPage() {
               rel="noopener noreferrer"
               style={{
                 display: "inline-flex", alignItems: "center", gap: "8px",
-                background: RED, color: "white",
+                background: DARK, color: "white",
                 padding: "13px 24px", borderRadius: "8px",
                 fontSize: "14px", fontWeight: 700,
                 textDecoration: "none",
-                boxShadow: "0 4px 16px rgba(218,32,40,0.3)",
               }}
             >
               Get the report
