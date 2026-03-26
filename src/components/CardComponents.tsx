@@ -763,6 +763,196 @@ export function PMCard2({ active, exit, variant = "compact" }: CardProps) {
   );
 }
 
+// ─── PM-3: Card fraud prevention ─────────────────────────────────────────────
+// Compact: card visual + 2 flagged transactions
+// Full:    card visual + 3 flagged transactions + stat tiles
+export function PMFraudPreventionCard({ active, exit, variant = "compact" }: CardProps) {
+  const SAND = "#ab9c6d";
+  const allAlerts = [
+    { merchant: "Night club charge — Paris",     amount: "€247",  card: "•••• 4429", status: "Blocked",    statusColor: RED,     icon: "🚫" },
+    { merchant: "ATM withdrawal 02:14 AM",       amount: "€300",  card: "•••• 4429", status: "Blocked",    statusColor: RED,     icon: "🚫" },
+    { merchant: "Unknown online merchant",       amount: "€89",   card: "•••• 8821", status: "Under review", statusColor: "#e07b00", icon: "⚠️" },
+  ];
+  const alerts = variant === "compact" ? allAlerts.slice(0, 2) : allAlerts;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <CardHeader title="Card Fraud Prevention" badge="Real-time" />
+
+      {/* Mini card visual */}
+      <div style={{
+        position: "relative", marginBottom: variant === "compact" ? "10px" : "14px",
+        height: variant === "compact" ? "52px" : "64px",
+        display: "flex", alignItems: "center",
+      }}>
+        {/* Card background */}
+        <div style={{
+          position: "absolute", left: 0, top: 0, bottom: 0,
+          width: variant === "compact" ? "88px" : "108px",
+          borderRadius: "8px",
+          background: `linear-gradient(135deg, ${DARK} 0%, #3d5657 100%)`,
+          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+          overflow: "hidden",
+          display: "flex", alignItems: "flex-end", justifyContent: "space-between",
+          padding: "6px 8px",
+        }}>
+          {/* Card chip */}
+          <div style={{
+            position: "absolute", top: variant === "compact" ? "8px" : "10px", left: "8px",
+            width: variant === "compact" ? "16px" : "20px",
+            height: variant === "compact" ? "12px" : "15px",
+            borderRadius: "3px", background: SAND, opacity: 0.9,
+          }} />
+          {/* Card number */}
+          <span style={{ fontSize: "7px", color: "rgba(255,255,255,0.6)", letterSpacing: "1px", marginTop: "auto" }}>•••• •••• •••• 4429</span>
+          {/* Expensya logo placeholder */}
+          <img
+            src="https://www.expensya.com/media/o1sgxnxa/expensya-card-transparent.png?rmode=max&width=120&height=0&v=1dc99dbe9086000"
+            alt=""
+            style={{
+              position: "absolute", right: 0, top: 0, bottom: 0,
+              height: "100%", width: "60%", objectFit: "contain", objectPosition: "right center",
+              opacity: 0.85,
+            }}
+          />
+        </div>
+        {/* Status badge beside card */}
+        <div style={{
+          marginLeft: variant === "compact" ? "100px" : "122px",
+          display: "flex", flexDirection: "column", gap: "4px",
+        }}>
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: "5px",
+            background: "rgba(218,32,40,0.08)", borderRadius: "6px",
+            padding: "3px 8px",
+          }}>
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: RED, flexShrink: 0 }} />
+            <span style={{ fontSize: "10px", fontWeight: 700, color: RED }}>2 transactions blocked</span>
+          </div>
+          <div style={{ fontSize: "10px", color: "#888" }}>Card •••• 4429 · Active</div>
+        </div>
+      </div>
+
+      {/* Flagged transactions */}
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "5px" : "7px" }}>
+        {alerts.map(({ merchant, amount, card, status, statusColor }, i) => (
+          <div key={merchant} style={{
+            display: "flex", alignItems: "center", gap: "8px",
+            padding: variant === "compact" ? "5px 8px" : "7px 10px",
+            background: "#fdf5f5", border: `1px solid rgba(218,32,40,0.1)`,
+            borderRadius: "7px",
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.3s ease ${i * 0.1}s`,
+          }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: "11px", fontWeight: 600, color: "#111", lineHeight: 1.2 }}>{merchant}</div>
+              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{card}</div>
+            </div>
+            <span style={{ fontSize: "11px", fontWeight: 700, color: DARK, flexShrink: 0 }}>{amount}</span>
+            <span style={{
+              fontSize: "9px", fontWeight: 700, color: statusColor,
+              background: `${statusColor}15`, borderRadius: "4px",
+              padding: "2px 6px", flexShrink: 0,
+            }}>{status}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Stats — full only */}
+      {variant === "full" && (
+        <div style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
+          {[
+            { label: "Flagged this week", value: "5" },
+            { label: "Auto-blocked",      value: "3" },
+            { label: "False positives",   value: "0%" },
+          ].map(({ label, value }) => (
+            <div key={label} style={{ flex: 1, textAlign: "center", background: "#f8f9fa", borderRadius: "8px", padding: "7px 4px" }}>
+              <div style={{ fontSize: "14px", fontWeight: 700, color: DARK }}>{value}</div>
+              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── PM-4: Dispute resolution ─────────────────────────────────────────────────
+// Compact: 2 disputed transactions + status
+// Full:    3 disputes + resolution stats
+export function PMDisputeCard({ active, exit, variant = "compact" }: CardProps) {
+  const allDisputes = [
+    { desc: "Software subscription renewal", employee: "Sarah K.", amount: "$149", status: "Investigating", statusColor: "#e07b00", step: 2 },
+    { desc: "Hotel room upgrade charge",      employee: "James R.", amount: "$320", status: "Awaiting docs",  statusColor: "#e07b00", step: 1 },
+    { desc: "Team lunch — duplicate charge",  employee: "Mike T.",  amount: "$89",  status: "Resolved",      statusColor: "#5a8a5a", step: 3 },
+  ];
+  const disputes = variant === "compact" ? allDisputes.slice(0, 2) : allDisputes;
+  const steps = ["Flagged", "Docs requested", "Resolved"];
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <CardHeader title="Dispute Resolution" badge="3 open" />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "6px" : "8px", marginBottom: variant === "full" ? "14px" : 0 }}>
+        {disputes.map(({ desc, employee, amount, status, statusColor, step }, i) => (
+          <div key={desc} style={{
+            background: "#f8f9fa", borderRadius: "8px",
+            padding: variant === "compact" ? "7px 10px" : "9px 12px",
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.3s ease ${i * 0.12}s`,
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "6px" }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: "11px", fontWeight: 600, color: "#111", lineHeight: 1.3 }}>{desc}</div>
+                <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{employee}</div>
+              </div>
+              <div style={{ textAlign: "right", flexShrink: 0, marginLeft: "8px" }}>
+                <div style={{ fontSize: "12px", fontWeight: 700, color: DARK }}>{amount}</div>
+                <div style={{ fontSize: "9px", fontWeight: 600, color: statusColor }}>{status}</div>
+              </div>
+            </div>
+            {/* Mini step tracker */}
+            <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              {steps.map((s, si) => (
+                <div key={s} style={{ display: "flex", alignItems: "center", flex: si < steps.length - 1 ? 1 : "none" }}>
+                  <div style={{
+                    width: "14px", height: "14px", borderRadius: "50%", flexShrink: 0,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    background: si < step ? RED : si === step - 1 ? RED : "#e0e0e0",
+                    transition: `background 0.3s ease ${i * 0.1 + si * 0.05}s`,
+                  }}>
+                    {si < step && <span style={{ fontSize: "8px", color: "white", fontWeight: 700 }}>✓</span>}
+                  </div>
+                  {si < steps.length - 1 && (
+                    <div style={{ flex: 1, height: "2px", background: si < step - 1 ? RED : "#e0e0e0", margin: "0 2px" }} />
+                  )}
+                </div>
+              ))}
+              <span style={{ fontSize: "8px", color: "#aaa", marginLeft: "4px", whiteSpace: "nowrap" }}>{steps[step - 1]}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Stats — full only */}
+      {variant === "full" && (
+        <div style={{ borderTop: "1px solid #f0f0f0", paddingTop: "10px", display: "flex" }}>
+          {[
+            { value: "94%",    label: "Resolution rate" },
+            { value: "2.1d",   label: "Avg resolution" },
+            { value: "$0",     label: "Unrecovered spend" },
+          ].map(({ value, label }) => (
+            <div key={label} style={{ flex: 1, textAlign: "center" }}>
+              <div style={{ fontSize: "15px", fontWeight: 700, color: DARK }}>{value}</div>
+              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "2px" }}>{label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ══════════════════════════════════════════════════════════════════════════════
 // SPEND MANAGEMENT CARDS
 // ══════════════════════════════════════════════════════════════════════════════

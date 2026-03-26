@@ -29,6 +29,11 @@ const nextConfig = {
         hostname: "www.medius.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.expensya.com",
+        pathname: "/**",
+      },
     ],
   },
 };

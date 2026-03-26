@@ -12,7 +12,7 @@ import {
   SMContractCard,
   SMContractIntakeCard,
   SMProcurementCard,
-  PMCard0, PMCard1, PMCard2,
+  PMCard0, PMCard1, PMCard2, PMFraudPreventionCard, PMDisputeCard,
   SMCard0, SMCard1, SMCard2,
   EXCard0, EXCard1, EXCard2,
 } from "@/components/CardComponents";
@@ -49,9 +49,11 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
   {
     group: "Payments",
     cards: [
-      { id: "pm-payment-run",   label: "Payment run",          Component: PMCard0 },
-      { id: "pm-methods",       label: "Payment methods",      Component: PMCard1 },
-      { id: "pm-cash-flow",     label: "Cash flow visibility", Component: PMCard2 },
+      { id: "pm-payment-run",        label: "Payment run",             Component: PMCard0 },
+      { id: "pm-methods",            label: "Payment methods",         Component: PMCard1 },
+      { id: "pm-cash-flow",          label: "Cash flow visibility",    Component: PMCard2 },
+      { id: "pm-fraud-prevention",   label: "Card fraud prevention",   Component: PMFraudPreventionCard },
+      { id: "pm-dispute-resolution", label: "Dispute resolution",      Component: PMDisputeCard },
     ],
   },
   {
