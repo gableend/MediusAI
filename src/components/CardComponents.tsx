@@ -858,21 +858,6 @@ export function PMFraudPreventionCard({ active, exit, variant = "compact" }: Car
         ))}
       </div>
 
-      {/* Stats — full only */}
-      {variant === "full" && (
-        <div style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
-          {[
-            { label: "Flagged this week", value: "5" },
-            { label: "Auto-blocked",      value: "3" },
-            { label: "False positives",   value: "0%" },
-          ].map(({ label, value }) => (
-            <div key={label} style={{ flex: 1, textAlign: "center", background: "#f8f9fa", borderRadius: "8px", padding: "7px 4px" }}>
-              <div style={{ fontSize: "14px", fontWeight: 700, color: DARK }}>{value}</div>
-              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{label}</div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
@@ -934,21 +919,6 @@ export function PMDisputeCard({ active, exit, variant = "compact" }: CardProps) 
         ))}
       </div>
 
-      {/* Stats — full only */}
-      {variant === "full" && (
-        <div style={{ borderTop: "1px solid #f0f0f0", paddingTop: "10px", display: "flex" }}>
-          {[
-            { value: "94%",    label: "Resolution rate" },
-            { value: "2.1d",   label: "Avg resolution" },
-            { value: "$0",     label: "Unrecovered spend" },
-          ].map(({ value, label }) => (
-            <div key={label} style={{ flex: 1, textAlign: "center" }}>
-              <div style={{ fontSize: "15px", fontWeight: 700, color: DARK }}>{value}</div>
-              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "2px" }}>{label}</div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
