@@ -787,7 +787,7 @@ export function PMFraudPreventionCard({ active, exit, variant = "compact" }: Car
       }}>
         {/* Expensya card image */}
         <img
-          src="https://www.expensya.com/media/o1sgxnxa/expensya-card-transparent.png?rmode=max&width=120&height=0&v=1dc99dbe9086000"
+          src="/images/expensya-card.png"
           alt="Expensya card"
           style={{
             position: "absolute", left: 0, top: 0, bottom: 0,
