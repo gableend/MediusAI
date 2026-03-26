@@ -783,8 +783,8 @@ export function PMFraudPreventionCard({ active, exit, variant = "compact" }: Car
           display: "flex", alignItems: "center", gap: "8px",
           padding: "10px 12px 8px", borderBottom: "1px solid #f3f3f3",
         }}>
-          <img src="/images/expensya-card.png" alt="" style={{ height: "18px", width: "auto" }} />
-          <span style={{ fontSize: "10px", fontWeight: 700, color: "#555", flex: 1 }}>Medius Payments</span>
+          <img src="/images/expensya-card.png" alt="" style={{ height: "32px", width: "auto" }} />
+          <span style={{ fontSize: "10px", fontWeight: 700, color: "#555", flex: 1 }}>Expense Card</span>
           <span style={{ fontSize: "9px", color: "#aaa" }}>now</span>
         </div>
         {/* Notification body */}
@@ -815,37 +815,6 @@ export function PMFraudPreventionCard({ active, exit, variant = "compact" }: Car
         </div>
       </div>
 
-      {/* Second notification — resolved (full only) */}
-      {variant === "full" && (
-        <div style={{
-          background: "white", borderRadius: "14px",
-          boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
-          overflow: "hidden",
-          opacity: active ? 1 : 0, transition: "opacity 0.35s ease 0.3s",
-        }}>
-          <div style={{
-            display: "flex", alignItems: "center", gap: "8px",
-            padding: "10px 12px 8px", borderBottom: "1px solid #f3f3f3",
-          }}>
-            <img src="/images/expensya-card.png" alt="" style={{ height: "18px", width: "auto" }} />
-            <span style={{ fontSize: "10px", fontWeight: 700, color: "#555", flex: 1 }}>Medius Payments</span>
-            <span style={{ fontSize: "9px", color: "#aaa" }}>2m ago</span>
-          </div>
-          <div style={{ padding: "10px 12px", display: "flex", alignItems: "center", gap: "10px" }}>
-            <div style={{
-              width: "28px", height: "28px", borderRadius: "50%", flexShrink: 0,
-              background: "rgba(218,32,40,0.08)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
-              <span style={{ fontSize: "13px" }}>🚫</span>
-            </div>
-            <div>
-              <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>Card •••• 4429 blocked</div>
-              <div style={{ fontSize: "10px", color: "#888" }}>ATM withdrawal €300 — stopped before processing</div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
