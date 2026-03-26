@@ -785,37 +785,17 @@ export function PMFraudPreventionCard({ active, exit, variant = "compact" }: Car
         height: variant === "compact" ? "52px" : "64px",
         display: "flex", alignItems: "center",
       }}>
-        {/* Card background */}
-        <div style={{
-          position: "absolute", left: 0, top: 0, bottom: 0,
-          width: variant === "compact" ? "88px" : "108px",
-          borderRadius: "8px",
-          background: `linear-gradient(135deg, ${DARK} 0%, #3d5657 100%)`,
-          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-          overflow: "hidden",
-          display: "flex", alignItems: "flex-end", justifyContent: "space-between",
-          padding: "6px 8px",
-        }}>
-          {/* Card chip */}
-          <div style={{
-            position: "absolute", top: variant === "compact" ? "8px" : "10px", left: "8px",
-            width: variant === "compact" ? "16px" : "20px",
-            height: variant === "compact" ? "12px" : "15px",
-            borderRadius: "3px", background: SAND, opacity: 0.9,
-          }} />
-          {/* Card number */}
-          <span style={{ fontSize: "7px", color: "rgba(255,255,255,0.6)", letterSpacing: "1px", marginTop: "auto" }}>•••• •••• •••• 4429</span>
-          {/* Expensya logo placeholder */}
-          <img
-            src="https://www.expensya.com/media/o1sgxnxa/expensya-card-transparent.png?rmode=max&width=120&height=0&v=1dc99dbe9086000"
-            alt=""
-            style={{
-              position: "absolute", right: 0, top: 0, bottom: 0,
-              height: "100%", width: "60%", objectFit: "contain", objectPosition: "right center",
-              opacity: 0.85,
-            }}
-          />
-        </div>
+        {/* Expensya card image */}
+        <img
+          src="https://www.expensya.com/media/o1sgxnxa/expensya-card-transparent.png?rmode=max&width=120&height=0&v=1dc99dbe9086000"
+          alt="Expensya card"
+          style={{
+            position: "absolute", left: 0, top: 0, bottom: 0,
+            height: "100%", width: "auto",
+            objectFit: "contain", objectPosition: "left center",
+            filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.18))",
+          }}
+        />
         {/* Status badge beside card */}
         <div style={{
           marginLeft: variant === "compact" ? "100px" : "122px",
