@@ -764,80 +764,88 @@ export function PMCard2({ active, exit, variant = "compact" }: CardProps) {
 }
 
 // ─── PM-3: Card fraud prevention ─────────────────────────────────────────────
-// Compact: card visual + 2 flagged transactions
-// Full:    card visual + 3 flagged transactions + stat tiles
+// Compact: push notification (pending approval)
+// Full:    push notification + resolved second notification
 export function PMFraudPreventionCard({ active, exit, variant = "compact" }: CardProps) {
-  const SAND = "#ab9c6d";
-  const allAlerts = [
-    { merchant: "Night club charge — Paris",     amount: "€247",  card: "•••• 4429", status: "Blocked",    statusColor: RED,     icon: "🚫" },
-    { merchant: "ATM withdrawal 02:14 AM",       amount: "€300",  card: "•••• 4429", status: "Blocked",    statusColor: RED,     icon: "🚫" },
-    { merchant: "Unknown online merchant",       amount: "€89",   card: "•••• 8821", status: "Under review", statusColor: "#e07b00", icon: "⚠️" },
-  ];
-  const alerts = variant === "compact" ? allAlerts.slice(0, 2) : allAlerts;
-
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <CardHeader title="Card Fraud Prevention" badge="Real-time" />
 
-      {/* Mini card visual */}
+      {/* Push notification — pending */}
       <div style={{
-        position: "relative", marginBottom: variant === "compact" ? "10px" : "14px",
-        height: variant === "compact" ? "52px" : "64px",
-        display: "flex", alignItems: "center",
+        background: "white", borderRadius: "14px",
+        boxShadow: "0 8px 28px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.07)",
+        overflow: "hidden", marginBottom: variant === "compact" ? "10px" : "14px",
+        opacity: active ? 1 : 0, transition: "opacity 0.35s ease 0.1s",
       }}>
-        {/* Expensya card image */}
-        <img
-          src="/images/expensya-card.png"
-          alt="Expensya card"
-          style={{
-            position: "absolute", left: 0, top: 0, bottom: 0,
-            height: "100%", width: "auto",
-            objectFit: "contain", objectPosition: "left center",
-            filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.18))",
-          }}
-        />
-        {/* Status badge beside card */}
+        {/* Notification header */}
         <div style={{
-          marginLeft: variant === "compact" ? "100px" : "122px",
-          display: "flex", flexDirection: "column", gap: "4px",
+          display: "flex", alignItems: "center", gap: "8px",
+          padding: "10px 12px 8px", borderBottom: "1px solid #f3f3f3",
         }}>
-          <div style={{
-            display: "inline-flex", alignItems: "center", gap: "5px",
-            background: "rgba(218,32,40,0.08)", borderRadius: "6px",
-            padding: "3px 8px",
-          }}>
-            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: RED, flexShrink: 0 }} />
-            <span style={{ fontSize: "10px", fontWeight: 700, color: RED }}>2 transactions blocked</span>
+          <img src="/images/expensya-card.png" alt="" style={{ height: "18px", width: "auto" }} />
+          <span style={{ fontSize: "10px", fontWeight: 700, color: "#555", flex: 1 }}>Medius Payments</span>
+          <span style={{ fontSize: "9px", color: "#aaa" }}>now</span>
+        </div>
+        {/* Notification body */}
+        <div style={{ padding: "10px 12px" }}>
+          <div style={{ fontSize: "12px", fontWeight: 700, color: "#111", marginBottom: "3px" }}>
+            Unusual transaction detected
           </div>
-          <div style={{ fontSize: "10px", color: "#888" }}>Card •••• 4429 · Active</div>
+          <div style={{ fontSize: "11px", color: "#555", marginBottom: "10px", lineHeight: 1.4 }}>
+            <strong>Le Duplex Club, Paris</strong> is attempting to charge <strong>€247</strong> on card •••• 4429. Did you authorise this?
+          </div>
+          {/* Action buttons */}
+          <div style={{ display: "flex", gap: "8px" }}>
+            <div style={{
+              flex: 1, textAlign: "center", padding: "7px 0",
+              background: "#f5f5f5", borderRadius: "8px",
+              fontSize: "11px", fontWeight: 700, color: "#555",
+            }}>
+              Yes, approve
+            </div>
+            <div style={{
+              flex: 1, textAlign: "center", padding: "7px 0",
+              background: RED, borderRadius: "8px",
+              fontSize: "11px", fontWeight: 700, color: "white",
+            }}>
+              No, block it
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Flagged transactions */}
-      <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "5px" : "7px" }}>
-        {alerts.map(({ merchant, amount, card, status, statusColor }, i) => (
-          <div key={merchant} style={{
+      {/* Second notification — resolved (full only) */}
+      {variant === "full" && (
+        <div style={{
+          background: "white", borderRadius: "14px",
+          boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
+          overflow: "hidden",
+          opacity: active ? 1 : 0, transition: "opacity 0.35s ease 0.3s",
+        }}>
+          <div style={{
             display: "flex", alignItems: "center", gap: "8px",
-            padding: variant === "compact" ? "5px 8px" : "7px 10px",
-            background: "#fdf5f5", border: `1px solid rgba(218,32,40,0.1)`,
-            borderRadius: "7px",
-            opacity: active ? 1 : 0,
-            transition: `opacity 0.3s ease ${i * 0.1}s`,
+            padding: "10px 12px 8px", borderBottom: "1px solid #f3f3f3",
           }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: "11px", fontWeight: 600, color: "#111", lineHeight: 1.2 }}>{merchant}</div>
-              <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>{card}</div>
-            </div>
-            <span style={{ fontSize: "11px", fontWeight: 700, color: DARK, flexShrink: 0 }}>{amount}</span>
-            <span style={{
-              fontSize: "9px", fontWeight: 700, color: statusColor,
-              background: `${statusColor}15`, borderRadius: "4px",
-              padding: "2px 6px", flexShrink: 0,
-            }}>{status}</span>
+            <img src="/images/expensya-card.png" alt="" style={{ height: "18px", width: "auto" }} />
+            <span style={{ fontSize: "10px", fontWeight: 700, color: "#555", flex: 1 }}>Medius Payments</span>
+            <span style={{ fontSize: "9px", color: "#aaa" }}>2m ago</span>
           </div>
-        ))}
-      </div>
-
+          <div style={{ padding: "10px 12px", display: "flex", alignItems: "center", gap: "10px" }}>
+            <div style={{
+              width: "28px", height: "28px", borderRadius: "50%", flexShrink: 0,
+              background: "rgba(218,32,40,0.08)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <span style={{ fontSize: "13px" }}>🚫</span>
+            </div>
+            <div>
+              <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>Card •••• 4429 blocked</div>
+              <div style={{ fontSize: "10px", color: "#888" }}>ATM withdrawal €300 — stopped before processing</div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
