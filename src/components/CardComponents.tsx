@@ -2077,11 +2077,11 @@ export function AgentCopilotCard({ active, exit, variant = "compact" }: CardProp
   );
 }
 
-// ─── Agent 5: Supplier Conversations Agent ───────────────────────────────────
+// ─── Agent 5: Supplier Inquiries Agent ───────────────────────────────────
 export function AgentSupplierCard({ active, exit, variant = "compact" }: CardProps) {
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <AgentLabel name="Supplier Conversations Agent" />
+      <AgentLabel name="Supplier Inquiries Agent" />
       <CardHeader title="Supplier conversations" badge="24/7" />
 
       <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
@@ -2218,5 +2218,5 @@ export const AGENT_HERO_CARDS: React.ComponentType<CardProps>[] = [
 export const AGENT_HERO_LABELS = [
   "Invoice Capture Agent",
   "Fraud & Risk Agent",
-  "Supplier Conversations Agent",
+  "Supplier Inquiries Agent",
 ];

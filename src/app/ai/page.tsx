@@ -13,7 +13,7 @@ const DARK = "#2f4344";
 const SAND = "#ab9c6d";
 const MOSS = "#84985c";
 
-const HERO_LABELS = ["Invoice Capture Agent", "Fraud & Risk Agent", "Supplier Conversations Agent"];
+const HERO_LABELS = ["Invoice Capture Agent", "Fraud & Risk Agent", "Supplier Inquiries Agent"];
 const HOLD = [5000, 5000, 5000];
 
 // ─── Agent data for body sections ─────────────────────────────────────────────
@@ -80,7 +80,7 @@ const AGENTS = [
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    label: "Supplier Conversations Agent",
+    label: "Supplier Inquiries Agent",
     headline: "24/7 autonomous supplier responses",
     description:
       "Responds to supplier invoice and payment inquiries instantly, around the clock. Fully autonomous — no human handoff needed for standard queries.",
