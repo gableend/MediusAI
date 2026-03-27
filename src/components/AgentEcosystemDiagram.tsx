@@ -1,193 +1,223 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const RED  = "#da2028";
 const DARK = "#2f4344";
+const SAND = "#ab9c6d";
+
+// ── Geometry helpers ────────────────────────────────────────────────────────
+const CX = 300;
+const CY = 300;
+const SIZE = 600;
+
+const toRad = (d: number) => (d * Math.PI) / 180;
+const px = (r: number, deg: number) => CX + r * Math.cos(toRad(deg));
+const py = (r: number, deg: number) => CY + r * Math.sin(toRad(deg));
+
+// SVG arc helper (large-arc = 0 for arcs < 180 deg)
+function arcPath(r: number, startDeg: number, endDeg: number) {
+  const x1 = px(r, startDeg), y1 = py(r, startDeg);
+  const x2 = px(r, endDeg),   y2 = py(r, endDeg);
+  const sweep = endDeg - startDeg;
+  const large = Math.abs(sweep) > 180 ? 1 : 0;
+  const dir = sweep > 0 ? 1 : 0;
+  return `M ${x1} ${y1} A ${r} ${r} 0 ${large} ${dir} ${x2} ${y2}`;
+}
+
+// ── Domain data ─────────────────────────────────────────────────────────────
+// 7 domains placed clockwise starting from top-centre
+// Angles measured from 12-o'clock position (SVG: -90 offset)
+const domains = [
+  { label: "Sourcing",      angle: -60  },
+  { label: "Contracts",     angle: -8   },
+  { label: "Suppliers",     angle:  42  },
+  { label: "Procurement",   angle:  95  },
+  { label: "Invoicing",     angle: 148  },
+  { label: "Payments",      angle: 200  },
+  { label: "Expenses",      angle: 252  },
+];
+
+const LABEL_R   = 182;  // radius for domain label placement
+const ARROW_R   = 175;  // radius for arrow arcs
+const OUTER_R   = 280;  // outer grey ring
+const RED_R     = 232;  // red circle
+const CENTRE_R  = 108;  // centre dark circle
 
 /**
- * Concentric-circle diagram showing the Medius agent ecosystem.
+ * Concentric-circle diagram: Medius Agent Ecosystem
  *
- * Outer ring:  "Finance and Procurement define and control"
- * Middle ring: 7 spend-management domains with directional arrows
- * Centre:      "Agents executing across the system"
- * AP badge:    positioned on the red border ring
- *
- * Pure HTML / CSS / inline SVG, no canvas, no external images.
+ * Outer grey ring:  "Finance and Procurement define and control"
+ * Red border:       separating governance from workflow
+ * Cream middle:     7 spend domains with clockwise arrows
+ * Dark centre:      "Agents executing across the system"
+ * AP badge:         on the red ring at ~210 degrees
  */
 export default function AgentEcosystemDiagram() {
-  /* ------------------------------------------------------------------ */
-  /*  Layout constants (px, relative to the 600px wrapper)               */
-  /* ------------------------------------------------------------------ */
-  const SIZE       = 600;   // overall viewbox
-  const OUTER_R    = 290;   // outer grey ring outer radius
-  const RED_R      = 240;   // red circle radius
-  const INNER_R    = 120;   // dark centre outer radius
-  const CX         = SIZE / 2;
-  const CY         = SIZE / 2;
+  const [visible, setVisible] = useState(false);
 
-  /* Domain labels placed on the mid-ring (between red circle and centre) */
-  const MID_R = (RED_R + INNER_R) / 2 + 8; // radial position of labels
-  const domains = [
-    { label: "Sourcing",      angle: -72  },
-    { label: "Contracts",     angle: -20  },
-    { label: "Suppliers",     angle:  35  },
-    { label: "Procurement",   angle:  80  },
-    { label: "Invoicing",     angle: 135  },
-    { label: "Payments",      angle: 190  },
-    { label: "Expenses",      angle: 245  },
-  ];
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 100);
+    return () => clearTimeout(t);
+  }, []);
 
-  /* Arrow angles: each sits between two consecutive domain labels */
-  const arrows = domains.map((_, i) => {
-    const a1 = domains[i].angle;
-    const a2 = domains[(i + 1) % domains.length].angle;
-    let mid = (a1 + a2) / 2;
-    // handle wrap-around
-    if (a2 < a1) mid = ((a1 + a2 + 360) / 2) % 360;
-    return { angle: mid, direction: (a1 + a2) / 2 };
+  // Arrow arcs: small curved arrows between consecutive domains
+  const arrowArcs = domains.map((d, i) => {
+    const next = domains[(i + 1) % domains.length];
+    let startA = d.angle + 14;       // offset past the label
+    let endA   = next.angle - 14;    // stop before next label
+    // handle wrap from Expenses back to Sourcing
+    if (endA < startA) endA += 360;
+    return { startA, endA, idx: i };
   });
 
-  const toRad = (deg: number) => (deg * Math.PI) / 180;
-
-  /* Helper: polar to cartesian */
-  const polar = (r: number, angleDeg: number) => ({
-    x: CX + r * Math.cos(toRad(angleDeg)),
-    y: CY + r * Math.sin(toRad(angleDeg)),
-  });
-
-  /* AP badge position -- lower-left on the red ring */
-  const apPos = polar(RED_R, 210);
+  // AP badge at ~210 degrees on the red ring
+  const apAngle = 215;
 
   return (
     <div
       style={{
         width: "100%",
-        maxWidth: `${SIZE}px`,
+        maxWidth: "560px",
         margin: "0 auto",
-        aspectRatio: "1 / 1",
-        position: "relative",
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.8s ease",
       }}
     >
-      <svg
-        viewBox={`0 0 ${SIZE} ${SIZE}`}
-        width="100%"
-        height="100%"
-        style={{ display: "block" }}
-      >
-        {/* ── Outer grey ring ─────────────────────────────────── */}
-        <circle cx={CX} cy={CY} r={OUTER_R} fill="#e4e6e6" />
-
-        {/* ── Red border circle ───────────────────────────────── */}
-        <circle cx={CX} cy={CY} r={RED_R} fill="none" stroke={RED} strokeWidth="4" />
-
-        {/* ── Inner cream area (between red circle and centre) ─ */}
-        <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f5f0e8" />
-
-        {/* ── Centre dark circle with red-ring gradient ────────  */}
+      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} style={{ width: "100%", height: "auto", display: "block" }}>
         <defs>
+          {/* Arrowhead marker */}
+          <marker id="arrowHead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6" fill="#8a9a9a" />
+          </marker>
+
+          {/* Centre radial gradient */}
           <radialGradient id="centreGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"  stopColor="#1a1a1a" />
-            <stop offset="60%" stopColor="#2a1215" />
-            <stop offset="85%" stopColor={RED} />
+            <stop offset="0%"   stopColor="#0a0a0a" />
+            <stop offset="55%"  stopColor="#1a0c0e" />
+            <stop offset="78%"  stopColor="#8b1a1f" />
+            <stop offset="92%"  stopColor={RED} />
             <stop offset="100%" stopColor={RED} />
           </radialGradient>
-        </defs>
-        <circle cx={CX} cy={CY} r={INNER_R} fill="url(#centreGrad)" />
-        {/* Inner dark core */}
-        <circle cx={CX} cy={CY} r={INNER_R * 0.6} fill="#0f0f0f" />
 
-        {/* ── Centre text ─────────────────────────────────────── */}
+          {/* Outer text arc: top half, clockwise */}
+          <path
+            id="outerTextArc"
+            d={arcPath(OUTER_R - 22, -210, -330)}
+            fill="none"
+          />
+        </defs>
+
+        {/* ── Outer grey ring ──────────────────────────────────────────────── */}
+        <circle cx={CX} cy={CY} r={OUTER_R} fill="#e2e4e4" />
+
+        {/* ── Red border ring ──────────────────────────────────────────────── */}
+        <circle cx={CX} cy={CY} r={RED_R} fill="none" stroke={RED} strokeWidth="3.5" />
+
+        {/* ── Inner cream fill ─────────────────────────────────────────────── */}
+        <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f3ede1" />
+
+        {/* ── Centre dark circle ───────────────────────────────────────────── */}
+        <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)" />
+        <circle cx={CX} cy={CY} r={CENTRE_R * 0.55} fill="#0c0c0c" />
+
+        {/* ── Centre text ──────────────────────────────────────────────────── */}
         <text
-          x={CX}
-          y={CY - 14}
+          x={CX} y={CY - 12}
           textAnchor="middle"
-          style={{ fontSize: "16px", fontWeight: 800, fill: "white", fontFamily: "Poppins, sans-serif" }}
+          style={{ fontSize: "15px", fontWeight: 700, fill: "white", fontFamily: "Poppins, sans-serif" }}
         >
           Agents executing
         </text>
         <text
-          x={CX}
-          y={CY + 8}
+          x={CX} y={CY + 10}
           textAnchor="middle"
-          style={{ fontSize: "16px", fontWeight: 800, fill: "white", fontFamily: "Poppins, sans-serif" }}
+          style={{ fontSize: "15px", fontWeight: 700, fill: "white", fontFamily: "Poppins, sans-serif" }}
         >
           across the system
         </text>
 
-        {/* ── Curved text on outer ring ───────────────────────── */}
-        <defs>
-          <path
-            id="outerTextPath"
-            d={`M ${CX - OUTER_R + 24},${CY} A ${OUTER_R - 24},${OUTER_R - 24} 0 1,1 ${CX + OUTER_R - 24},${CY}`}
-            fill="none"
-          />
-        </defs>
-        <text style={{ fontSize: "18px", fontWeight: 600, fill: DARK, fontFamily: "Poppins, sans-serif", letterSpacing: "2px" }}>
-          <textPath href="#outerTextPath" startOffset="50%" textAnchor="middle">
+        {/* ── Curved outer text ────────────────────────────────────────────── */}
+        <text
+          style={{
+            fontSize: "16.5px",
+            fontWeight: 600,
+            fill: DARK,
+            fontFamily: "Poppins, sans-serif",
+            letterSpacing: "1.5px",
+          }}
+        >
+          <textPath href="#outerTextArc" startOffset="50%" textAnchor="middle">
             Finance and Procurement define and control
           </textPath>
         </text>
 
-        {/* ── Domain labels ───────────────────────────────────── */}
-        {domains.map(({ label, angle }) => {
-          const pos = polar(MID_R, angle);
-          return (
-            <text
-              key={label}
-              x={pos.x}
-              y={pos.y}
-              textAnchor="middle"
-              dominantBaseline="central"
-              style={{
-                fontSize: "15px",
-                fontWeight: 700,
-                fill: DARK,
-                fontFamily: "Poppins, sans-serif",
-              }}
-            >
-              {label}
-            </text>
-          );
-        })}
+        {/* ── Arrow arcs between domains ───────────────────────────────────── */}
+        {arrowArcs.map(({ startA, endA, idx }) => (
+          <path
+            key={`arc-${idx}`}
+            d={arcPath(ARROW_R, startA, endA)}
+            fill="none"
+            stroke="#8a9a9a"
+            strokeWidth="1.2"
+            markerEnd="url(#arrowHead)"
+            style={{
+              opacity: visible ? 1 : 0,
+              transition: `opacity 0.5s ease ${0.3 + idx * 0.08}s`,
+            }}
+          />
+        ))}
 
-        {/* ── Arrows between domains ──────────────────────────── */}
-        {arrows.map(({ angle }, i) => {
-          const ARROW_R = MID_R + 2;
-          const pos = polar(ARROW_R, angle);
-          const dir = toRad(angle + 90); // tangent direction (clockwise)
-          const arrowSize = 5;
-          // arrowhead pointing clockwise along the circle
-          const tip = { x: pos.x + arrowSize * Math.cos(dir), y: pos.y + arrowSize * Math.sin(dir) };
-          const left = {
-            x: pos.x - arrowSize * Math.cos(dir) + arrowSize * 0.6 * Math.cos(dir + Math.PI / 2),
-            y: pos.y - arrowSize * Math.sin(dir) + arrowSize * 0.6 * Math.sin(dir + Math.PI / 2),
-          };
-          const right = {
-            x: pos.x - arrowSize * Math.cos(dir) - arrowSize * 0.6 * Math.cos(dir + Math.PI / 2),
-            y: pos.y - arrowSize * Math.sin(dir) - arrowSize * 0.6 * Math.sin(dir + Math.PI / 2),
-          };
-          return (
-            <polygon
-              key={`arrow-${i}`}
-              points={`${tip.x},${tip.y} ${left.x},${left.y} ${right.x},${right.y}`}
-              fill="#7a8a8a"
-            />
-          );
-        })}
+        {/* ── Domain labels ────────────────────────────────────────────────── */}
+        {domains.map(({ label, angle }, i) => (
+          <text
+            key={label}
+            x={px(LABEL_R, angle)}
+            y={py(LABEL_R, angle)}
+            textAnchor="middle"
+            dominantBaseline="central"
+            style={{
+              fontSize: "15px",
+              fontWeight: 700,
+              fill: DARK,
+              fontFamily: "Poppins, sans-serif",
+              opacity: visible ? 1 : 0,
+              transition: `opacity 0.4s ease ${0.2 + i * 0.08}s`,
+            }}
+          >
+            {label}
+          </text>
+        ))}
 
-        {/* ── AP badge ────────────────────────────────────────── */}
-        <circle cx={apPos.x} cy={apPos.y} r="20" fill="#6b1015" />
-        <circle cx={apPos.x} cy={apPos.y} r="16" fill={RED} />
-        <text
-          x={apPos.x}
-          y={apPos.y + 1}
-          textAnchor="middle"
-          dominantBaseline="central"
-          style={{ fontSize: "13px", fontWeight: 800, fill: "white", fontFamily: "Poppins, sans-serif" }}
-        >
-          AP
-        </text>
+        {/* ── AP badge ─────────────────────────────────────────────────────── */}
+        <g style={{ opacity: visible ? 1 : 0, transition: "opacity 0.6s ease 0.8s" }}>
+          <circle
+            cx={px(RED_R, apAngle)}
+            cy={py(RED_R, apAngle)}
+            r="18"
+            fill="#5a1012"
+          />
+          <circle
+            cx={px(RED_R, apAngle)}
+            cy={py(RED_R, apAngle)}
+            r="14.5"
+            fill={RED}
+          />
+          <text
+            x={px(RED_R, apAngle)}
+            y={py(RED_R, apAngle) + 1}
+            textAnchor="middle"
+            dominantBaseline="central"
+            style={{
+              fontSize: "11.5px",
+              fontWeight: 800,
+              fill: "white",
+              fontFamily: "Poppins, sans-serif",
+            }}
+          >
+            AP
+          </text>
+        </g>
       </svg>
     </div>
   );
