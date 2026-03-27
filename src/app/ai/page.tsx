@@ -210,20 +210,21 @@ export default function AIPage() {
             </div>
 
             <h1 style={{
-              fontSize: "54px", fontWeight: 700, lineHeight: 1.07,
-              letterSpacing: "-1.3px", color: "white",
+              fontSize: "48px", fontWeight: 700, lineHeight: 1.1,
+              letterSpacing: "-1.2px", color: "white",
               marginBottom: "20px",
             }}>
-              Medius Agents
+              Autonomous finance,<br />powered by Medius Agents
             </h1>
 
             <p style={{
-              fontSize: "16px", lineHeight: 1.7,
+              fontSize: "16px", lineHeight: 1.75,
               color: "rgba(255,255,255,0.65)",
-              maxWidth: "390px", marginBottom: "36px",
+              maxWidth: "420px", marginBottom: "36px",
             }}>
-              Six purpose-built AI agents working together to automate
-              the full invoice-to-pay lifecycle — from capture to settlement.
+              From inform to decide to act, Medius Agents take on more of the work
+              across the spend management lifecycle. Finance teams stay in control
+              while the system executes within defined policies.
             </p>
 
             <div style={{ display: "flex", gap: "12px" }}>
