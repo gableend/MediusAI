@@ -1980,9 +1980,8 @@ export function AgentPOConnectCard({ active, exit, variant = "compact" }: CardPr
     { num: "FA246532111", lines: 34, total: 34, delay: 0    },
     { num: "FA246532112", lines: 5,  total: 5,  delay: 0.10 },
     { num: "FA246532113", lines: 26, total: 26, delay: 0.20 },
-    { num: "FA246532114", lines: 8,  total: 8,  delay: 0.30 },
   ];
-  const visible = variant === "compact" ? invoices.slice(0, 3) : invoices;
+  const visible = invoices;
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
