@@ -19,8 +19,8 @@ import {
   AgentCaptureCard, AgentCodingCard, AgentPOConnectCard, AgentFraudRiskCard,
   AgentCopilotCard, AgentSupplierCard, AgentStatementReconCard, AgentPaymentsCard,
   AgentExpenseProcessingCard, AgentExpenseFraudCard,
-  RoadmapProcurementCard, RoadmapSupplierOnboardingCard, RoadmapTravelCard,
-  RoadmapContractCard, RoadmapCashFlowCard, RoadmapExpenseManagementCard,
+  RoadmapProcurementCard, RoadmapSupplierOnboardingCard,
+  RoadmapContractCard, RoadmapExpenseFraudCard,
 } from "@/components/CardComponents";
 
 // ─── Dimensions ───────────────────────────────────────────────────────────────
@@ -34,6 +34,8 @@ type CardEntry = {
   id: string;
   label: string;
   Component: React.ComponentType<CardProps>;
+  fixedW?: number; // override card dimensions (e.g. square roadmap cards)
+  fixedH?: number;
 };
 
 const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
@@ -102,24 +104,22 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
   {
     group: "Roadmap Agents",
     cards: [
-      { id: "roadmap-procurement",         label: "Procurement Agent",           Component: RoadmapProcurementCard         },
-      { id: "roadmap-supplier-onboarding", label: "Supplier Onboarding Agent",   Component: RoadmapSupplierOnboardingCard  },
-      { id: "roadmap-travel",              label: "Travel Booking Agent",         Component: RoadmapTravelCard              },
-      { id: "roadmap-contract",            label: "Contract Intelligence Agent",  Component: RoadmapContractCard            },
-      { id: "roadmap-cashflow",            label: "Cash Flow Forecasting Agent",  Component: RoadmapCashFlowCard            },
-      { id: "roadmap-expense-mgmt",        label: "Expense Management Agent",     Component: RoadmapExpenseManagementCard   },
+      { id: "roadmap-procurement",         label: "Procurement Agent",          Component: RoadmapProcurementCard,        fixedW: 240, fixedH: 240 },
+      { id: "roadmap-supplier-onboarding", label: "Supplier Onboarding Agent",  Component: RoadmapSupplierOnboardingCard, fixedW: 240, fixedH: 240 },
+      { id: "roadmap-contract",            label: "Contract Intake Agent",       Component: RoadmapContractCard,           fixedW: 240, fixedH: 240 },
+      { id: "roadmap-expense-fraud",       label: "Expense Fraud Agent",         Component: RoadmapExpenseFraudCard,       fixedW: 240, fixedH: 240 },
     ],
   },
 ];
 
 // ─── Single card cell ─────────────────────────────────────────────────────────
 function CardCell({
-  id, label, Component, variant,
+  id, label, Component, variant, fixedW, fixedH,
 }: CardEntry & { variant: "compact" | "full" }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
-  const cardW = variant === "compact" ? CARD_W_COMPACT : CARD_W;
-  const cardH = variant === "compact" ? CARD_H_COMPACT : CARD_H_FULL;
+  const cardW = fixedW ?? (variant === "compact" ? CARD_W_COMPACT : CARD_W);
+  const cardH = fixedH ?? (variant === "compact" ? CARD_H_COMPACT : CARD_H_FULL);
 
   const download = useCallback(async () => {
     if (!wrapRef.current || downloading) return;

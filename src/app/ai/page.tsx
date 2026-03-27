@@ -730,12 +730,10 @@ export default function AIPage() {
             {/* Right: upcoming agent tiles */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
               {[
-                { label: "Procurement",          body: "Automate PO creation, approvals, and supplier selection." },
-                { label: "Supplier Onboarding",   body: "Validate, onboard, and activate new suppliers without manual effort." },
-                { label: "Expense Management",    body: "Review, code, and approve employee expenses automatically." },
-                { label: "Travel Booking",         body: "Policy-compliant travel booking and reconciliation, end to end." },
-                { label: "Contract Intelligence",  body: "Extract obligations, flag renewals, and surface risk automatically." },
-                { label: "Cash Flow Forecasting",  body: "Predict payment timing and optimise working capital continuously." },
+                { label: "Procurement",        body: "Automate PO creation, approvals, and supplier selection." },
+                { label: "Supplier Onboarding", body: "Validate, onboard, and activate new suppliers without manual effort." },
+                { label: "Contract Intake",     body: "Upload, extract obligations, and flag risks automatically." },
+                { label: "Expense Fraud",       body: "Detect, investigate, and block suspicious expense claims in real time." },
               ].map(({ label, body }) => (
                 <div key={label} style={{
                   padding: "20px 18px",
