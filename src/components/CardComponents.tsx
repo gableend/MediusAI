@@ -1850,7 +1850,7 @@ function AgentLabel({ name }: { name: string }) {
   );
 }
 
-// ─── Agent 1: Capture Agent ───────────────────────────────────────────────────
+// ─── Agent 1: Invoice Capture Agent ──────────────────────────────────────────
 export function AgentCaptureCard({ active, exit, variant = "compact" }: CardProps) {
   const fields = [
     { label: "Vendor",      value: "Apex Office Supplies",  conf: 99 },
@@ -1863,7 +1863,7 @@ export function AgentCaptureCard({ active, exit, variant = "compact" }: CardProp
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <AgentLabel name="Capture Agent" />
+      <AgentLabel name="Invoice Capture Agent" />
       <CardHeader title="Invoice data extraction" badge="100% captured" />
 
       <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -1905,7 +1905,7 @@ export function AgentCaptureCard({ active, exit, variant = "compact" }: CardProp
   );
 }
 
-// ─── Agent 2: Coding Agent ────────────────────────────────────────────────────
+// ─── Agent 2: Invoice Coding Agent ───────────────────────────────────────────
 export function AgentCodingCard({ active, exit, variant = "compact" }: CardProps) {
   const lines = [
     { desc: "Office equipment — desks × 4",  gl: "7210 · Fixed Assets",    cc: "CC-101",  amt: "€2,800" },
@@ -1916,7 +1916,7 @@ export function AgentCodingCard({ active, exit, variant = "compact" }: CardProps
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <AgentLabel name="Coding Agent" />
+      <AgentLabel name="Invoice Coding Agent" />
       <CardHeader title="Auto GL coding" badge="95% precision" />
 
       <div style={{ marginBottom: "10px", padding: "7px 10px", background: "#f0f3f2", borderRadius: "7px", display: "flex", justifyContent: "space-between" }}>
@@ -2025,7 +2025,7 @@ export function AgentFraudRiskCard({ active, exit, variant = "compact" }: CardPr
   );
 }
 
-// ─── Agent 4: Copilot Agent ───────────────────────────────────────────────────
+// ─── Agent 4: Approvals Agent ─────────────────────────────────────────────────
 export function AgentCopilotCard({ active, exit, variant = "compact" }: CardProps) {
   const pending = [
     { vendor: "TechSource Ltd",    amount: "€12,450", age: "3 days",  risk: "low"    },
@@ -2036,7 +2036,7 @@ export function AgentCopilotCard({ active, exit, variant = "compact" }: CardProp
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <AgentLabel name="Copilot Agent" />
+      <AgentLabel name="Approvals Agent" />
       <CardHeader title="Approval guidance" badge="3 pending" />
 
       <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
@@ -2160,7 +2160,7 @@ export function AgentSupplierCard({ active, exit, variant = "compact" }: CardPro
   );
 }
 
-// ─── Agent 6: Payments Agent ──────────────────────────────────────────────────
+// ─── Agent 6: Payment Optimization Agent ──────────────────────────────────────
 export function AgentPaymentsCard({ active, exit, variant = "compact" }: CardProps) {
   const payments = [
     { vendor: "TechSource Ltd",    amount: "€12,450", method: "SEPA",  status: "Sent to bank" },
@@ -2171,7 +2171,7 @@ export function AgentPaymentsCard({ active, exit, variant = "compact" }: CardPro
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <AgentLabel name="Payments Agent" />
+      <AgentLabel name="Payment Optimization Agent" />
       <CardHeader title="Straight-through processing" badge="Touchless" />
 
       <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
@@ -2216,7 +2216,7 @@ export const AGENT_HERO_CARDS: React.ComponentType<CardProps>[] = [
 ];
 
 export const AGENT_HERO_LABELS = [
-  "Capture Agent",
+  "Invoice Capture Agent",
   "Fraud & Risk Agent",
   "Supplier Agent",
 ];

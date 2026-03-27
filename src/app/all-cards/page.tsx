@@ -83,12 +83,12 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
   {
     group: "Medius Agents",
     cards: [
-      { id: "agent-capture",  label: "Capture Agent",         Component: AgentCaptureCard  },
-      { id: "agent-coding",   label: "Coding Agent",          Component: AgentCodingCard   },
+      { id: "agent-capture",  label: "Invoice Capture Agent",  Component: AgentCaptureCard  },
+      { id: "agent-coding",   label: "Invoice Coding Agent",   Component: AgentCodingCard   },
       { id: "agent-fraud",    label: "Fraud & Risk Agent",    Component: AgentFraudRiskCard },
-      { id: "agent-copilot",  label: "Copilot Agent",         Component: AgentCopilotCard  },
-      { id: "agent-supplier", label: "Supplier Agent",        Component: AgentSupplierCard  },
-      { id: "agent-payments", label: "Payments Agent",        Component: AgentPaymentsCard  },
+      { id: "agent-copilot",  label: "Approvals Agent",             Component: AgentCopilotCard  },
+      { id: "agent-supplier", label: "Supplier Agent",              Component: AgentSupplierCard  },
+      { id: "agent-payments", label: "Payment Optimization Agent",  Component: AgentPaymentsCard  },
     ],
   },
 ];

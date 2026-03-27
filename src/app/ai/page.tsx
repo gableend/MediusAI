@@ -13,7 +13,7 @@ const DARK = "#2f4344";
 const SAND = "#ab9c6d";
 const MOSS = "#84985c";
 
-const HERO_LABELS = ["Capture Agent", "Fraud & Risk Agent", "Supplier Agent"];
+const HERO_LABELS = ["Invoice Capture Agent", "Fraud & Risk Agent", "Supplier Agent"];
 const HOLD = [5000, 5000, 5000];
 
 // ─── Agent data for body sections ─────────────────────────────────────────────
@@ -28,7 +28,7 @@ const AGENTS = [
         <path d="M13 17h8M17 13v8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
       </svg>
     ),
-    label: "Capture Agent",
+    label: "Invoice Capture Agent",
     headline: "100% touchless invoice capture",
     description:
       "Extracts vendor, amount, PO, and line items from any format — PDF, image, or eInvoice — trained on hundreds of millions of real invoices.",
@@ -40,7 +40,7 @@ const AGENTS = [
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    label: "Coding Agent",
+    label: "Invoice Coding Agent",
     headline: "95% auto-coding precision",
     description:
       "Learns your GL coding rules after just two invoices. Applies account codes, cost centres, and routing automatically — no templates required.",
@@ -68,7 +68,7 @@ const AGENTS = [
         <circle cx="18" cy="5" r="3" stroke="currentColor" strokeWidth="1.3"/>
       </svg>
     ),
-    label: "Copilot Agent",
+    label: "Approvals Agent",
     headline: "Autonomous approval guidance",
     description:
       "Surfaces the right invoices to the right approvers at the right time. Answers free-text queries and guides reviewers through exceptions intelligently.",
@@ -94,7 +94,7 @@ const AGENTS = [
         <path d="M6 15h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
       </svg>
     ),
-    label: "Payments Agent",
+    label: "Payment Optimization Agent",
     headline: "Straight-through payment processing",
     description:
       "Extends AP automation all the way to settlement. Auto-approves trusted vendor payments and initiates bank transfers — fully touchless.",
