@@ -2672,6 +2672,103 @@ export function AgentExpenseFraudCard({ active, exit, variant = "compact" }: Car
   );
 }
 
+// ─── Agent 10: Suspicious Expense Agent ────────────────────────────────────────
+export function AgentSuspiciousExpenseCard({ active, exit, variant = "compact" }: CardProps) {
+  const signals = [
+    "Amount 3× above typical spend",
+    "Unexpected country",
+    "Unknown merchant",
+  ];
+
+  if (variant === "compact") {
+    return (
+      <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+        <AgentLabel name="Suspicious Expense Agent" />
+        <CardHeader title="AI-powered suspicious detection" badge="Real-time" />
+        <div style={{ display: "flex", gap: "12px" }}>
+          {/* Left: flagged transaction */}
+          <div style={{ flex: 1, background: "#fef8f0", borderRadius: "10px", padding: "10px", border: "1px solid #f5e6d0" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "5px" }}>
+              <span style={{ fontSize: "14px" }}>🔥</span>
+              <span style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>$4,280.00</span>
+              <span style={{ fontSize: "9px", color: "#888" }}>Marrakech, MA</span>
+            </div>
+            <div style={{ fontSize: "10px", color: "#666", lineHeight: 1.35 }}>Hotel & Resort Services · ····4429</div>
+          </div>
+          {/* Right: signals + actions */}
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div>
+              {signals.map(s => (
+                <div key={s} style={{ display: "flex", alignItems: "center", gap: "5px", marginBottom: "3px" }}>
+                  <span style={{ fontSize: "8px", color: "#e67e22" }}>▲</span>
+                  <span style={{ fontSize: "10px", color: "#555" }}>{s}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: "flex", gap: "6px" }}>
+              <div style={{ flex: 1, textAlign: "center", padding: "5px 0", background: "#f0fdf4", borderRadius: "6px", fontSize: "10px", fontWeight: 600, color: "#16a34a", border: "1px solid #bbf7d0" }}>All good</div>
+              <div style={{ flex: 1, textAlign: "center", padding: "5px 0", background: "#fef2f2", borderRadius: "6px", fontSize: "10px", fontWeight: 600, color: "#dc2626", border: "1px solid #fecaca" }}>Flag for review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Full variant (360×320px)
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Suspicious Expense Agent" />
+      <CardHeader title="AI-powered suspicious detection" badge="Real-time" />
+
+      {/* Flagged transaction */}
+      <div style={{
+        background: "#fef8f0", borderRadius: "10px",
+        padding: "12px 14px", marginBottom: "12px",
+        border: "1px solid #f5e6d0",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "5px" }}>
+          <span style={{ fontSize: "16px" }}>🔥</span>
+          <span style={{ fontSize: "14px", fontWeight: 700, color: "#111" }}>$4,280.00</span>
+          <span style={{ fontSize: "11px", color: "#888", marginLeft: "auto" }}>Marrakech, MA</span>
+        </div>
+        <div style={{ fontSize: "11.5px", color: "#555", lineHeight: 1.4, paddingLeft: "24px" }}>
+          Hotel & Resort Services · Card ····4429
+        </div>
+      </div>
+
+      {/* Signals */}
+      <div style={{ marginBottom: "14px" }}>
+        <div style={{ fontSize: "9px", fontWeight: 700, color: "#999", textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: "7px" }}>
+          Why flagged
+        </div>
+        {signals.map(s => (
+          <div key={s} style={{ display: "flex", alignItems: "center", gap: "7px", marginBottom: "5px" }}>
+            <span style={{ fontSize: "9px", color: "#e67e22" }}>▲</span>
+            <span style={{ fontSize: "11.5px", color: DARK, fontWeight: 500 }}>{s}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Actions */}
+      <div style={{ display: "flex", gap: "8px" }}>
+        <div style={{
+          flex: 1, textAlign: "center", padding: "8px 0",
+          background: "#f0fdf4", borderRadius: "8px",
+          fontSize: "11px", fontWeight: 700, color: "#16a34a",
+          border: "1px solid #bbf7d0",
+        }}>✓ All good</div>
+        <div style={{
+          flex: 1, textAlign: "center", padding: "8px 0",
+          background: "#fef2f2", borderRadius: "8px",
+          fontSize: "11px", fontWeight: 700, color: "#dc2626",
+          border: "1px solid #fecaca",
+        }}>🔥 Flag for review</div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Card component per Expense capability (index matches EX_CAPABILITIES) ────
 export const EX_CAPABILITY_CARDS: React.ComponentType<CardProps>[] = [
   AgentExpenseProcessingCard,  // 0 — Expense Management
@@ -2790,4 +2887,9 @@ export const RoadmapContractCard = makeRoadmapCard({
 export const RoadmapExpenseFraudCard = makeRoadmapCard({
   label: "Expense Fraud Agent",
   steps: ["Flag suspicious claim", "Investigate pattern", "Block & alert"],
+});
+
+export const RoadmapExpenseCardFraudCard = makeRoadmapCard({
+  label: "Expense Card Fraud Agent",
+  steps: ["Detect unusual charge", "Alert cardholder", "Block & investigate"],
 });

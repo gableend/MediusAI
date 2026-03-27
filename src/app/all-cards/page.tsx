@@ -18,9 +18,9 @@ import {
   EXCard0, EXCard1, EXCard2,
   AgentCaptureCard, AgentCodingCard, AgentPOConnectCard, AgentFraudRiskCard,
   AgentCopilotCard, AgentSupplierCard, AgentStatementReconCard, AgentPaymentsCard,
-  AgentExpenseProcessingCard, AgentExpenseFraudCard,
+  AgentExpenseProcessingCard, AgentExpenseFraudCard, AgentSuspiciousExpenseCard,
   RoadmapProcurementCard, RoadmapSupplierOnboardingCard,
-  RoadmapContractCard, RoadmapExpenseFraudCard,
+  RoadmapContractCard, RoadmapExpenseFraudCard, RoadmapExpenseCardFraudCard,
 } from "@/components/CardComponents";
 
 // ─── Dimensions ───────────────────────────────────────────────────────────────
@@ -98,7 +98,7 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
       { id: "agent-stmt-recon", label: "Statement Reconciliation Agent",    Component: AgentStatementReconCard },
       { id: "agent-payments",         label: "Payment Optimization Agent",    Component: AgentPaymentsCard          },
       { id: "agent-expense-processing", label: "Expense Processing Agent",    Component: AgentExpenseProcessingCard },
-      { id: "agent-expense-fraud",      label: "Expense Card Fraud Agent",      Component: AgentExpenseFraudCard    },
+      { id: "agent-suspicious-expense",  label: "Suspicious Expense Agent",      Component: AgentSuspiciousExpenseCard },
     ],
   },
   {
@@ -107,7 +107,8 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
       { id: "roadmap-procurement",         label: "Procurement Agent",          Component: RoadmapProcurementCard,        fixedW: 240, fixedH: 240 },
       { id: "roadmap-supplier-onboarding", label: "Supplier Onboarding Agent",  Component: RoadmapSupplierOnboardingCard, fixedW: 240, fixedH: 240 },
       { id: "roadmap-contract",            label: "Contract Intake Agent",       Component: RoadmapContractCard,           fixedW: 240, fixedH: 240 },
-      { id: "roadmap-expense-fraud",       label: "Expense Fraud Agent",         Component: RoadmapExpenseFraudCard,       fixedW: 240, fixedH: 240 },
+      { id: "roadmap-expense-fraud",       label: "Expense Fraud Agent",          Component: RoadmapExpenseFraudCard,       fixedW: 240, fixedH: 240 },
+      { id: "roadmap-card-fraud",         label: "Expense Card Fraud Agent",     Component: RoadmapExpenseCardFraudCard,   fixedW: 240, fixedH: 240 },
     ],
   },
 ];

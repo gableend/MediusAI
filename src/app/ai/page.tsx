@@ -11,7 +11,7 @@ import {
   AgentCopilotCard,
   AgentStatementReconCard,
   AgentExpenseProcessingCard,
-  AgentExpenseFraudCard,
+  AgentSuspiciousExpenseCard,
 } from "@/components/CardComponents";
 
 const RED  = "#da2028";
@@ -131,11 +131,11 @@ const EM_AGENTS = [
     stat: "Automatically read and categorize receipts.",
   },
   {
-    label: "Expense Card Fraud Agent",
-    headline: "Real-time card fraud prevention",
+    label: "Suspicious Expense Agent",
+    headline: "AI-powered suspicious detection",
     description:
-      "Detects unusual card transactions the moment they're attempted — alerting the cardholder instantly and blocking suspicious charges before they're processed.",
-    stat: "Blocks fraud before payment clears",
+      "Scores and categorises every transaction for suspicious behaviour — flagging unusual amounts, unexpected countries, and unknown merchants for instant review.",
+    stat: "AI learns from every review decision",
   },
 ];
 
@@ -660,7 +660,7 @@ export default function AIPage() {
               </div>
             </div>
 
-            {/* Expense Card Fraud Agent */}
+            {/* Suspicious Expense Agent */}
             <div style={{ display: "flex", flexDirection: "column" }}>
               {/* Text */}
               <div style={{ marginBottom: "20px" }}>
@@ -676,7 +676,7 @@ export default function AIPage() {
               </div>
               {/* Card */}
               <div style={{ position: "relative", height: "320px", width: "360px" }}>
-                <AgentExpenseFraudCard active={true} exit={false} variant="full" />
+                <AgentSuspiciousExpenseCard active={true} exit={false} variant="full" />
               </div>
               {/* Stat pill */}
               <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-start", width: "360px" }}>
