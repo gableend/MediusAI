@@ -2507,36 +2507,6 @@ export function AgentExpenseFraudCard({ active, exit, variant = "compact" }: Car
         </div>
       </div>
 
-      {/* Full variant: resolved outcome notification */}
-      {variant === "full" && (
-        <div style={{
-          background: "white", borderRadius: "14px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)",
-          overflow: "hidden",
-          opacity: active ? 1 : 0, transition: "opacity 0.35s ease 0.45s",
-        }}>
-          <div style={{
-            display: "flex", alignItems: "center", gap: "8px",
-            padding: "9px 12px 7px", borderBottom: "1px solid #f3f3f3",
-          }}>
-            <img src="/images/expensya-card.png" alt="" style={{ height: "28px", width: "auto" }} />
-            <span style={{ fontSize: "10px", fontWeight: 700, color: "#555", flex: 1 }}>Expense Card</span>
-            <span style={{ fontSize: "9px", color: "#aaa" }}>just now</span>
-          </div>
-          <div style={{ padding: "9px 12px", display: "flex", alignItems: "center", gap: "8px" }}>
-            <div style={{
-              width: "24px", height: "24px", borderRadius: "50%", flexShrink: 0,
-              background: "rgba(132,152,92,0.12)", display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
-              <span style={{ fontSize: "12px", color: MOSS }}>✓</span>
-            </div>
-            <div>
-              <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>Card blocked · Transaction declined</div>
-              <div style={{ fontSize: "10px", color: "#aaa" }}>•••• 4429 temporarily frozen. Fraud case opened.</div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
