@@ -626,7 +626,7 @@ export default function AIPage() {
             }}>
               Expense Management Agents
             </h2>
-            <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "380px", margin: "0 auto" }}>
               Autonomous processing and fraud detection for employee expenses — from submission to reimbursement, without manual review.
             </p>
           </div>
@@ -634,46 +634,56 @@ export default function AIPage() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", maxWidth: "900px", margin: "0 auto" }}>
 
             {/* Expense Processing Agent */}
-            <div>
-              <div style={{ marginBottom: "12px" }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {/* Text */}
+              <div style={{ marginBottom: "20px" }}>
                 <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>
                   {EM_AGENTS[0].label}
                 </div>
                 <div style={{ fontSize: "17px", fontWeight: 700, color: DARK, lineHeight: 1.25, marginBottom: "8px" }}>
                   {EM_AGENTS[0].headline}
                 </div>
-                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: "0 0 10px" }}>
+                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: 0 }}>
                   {EM_AGENTS[0].description}
                 </p>
+              </div>
+              {/* Card */}
+              <div style={{ position: "relative", height: "320px" }}>
+                <AgentExpenseProcessingCard active={true} exit={false} variant="full" />
+              </div>
+              {/* Stat pill */}
+              <div style={{ marginTop: "16px" }}>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: "9999px", background: "rgba(132,152,92,0.10)", border: "1px solid rgba(132,152,92,0.22)" }}>
                   <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS }} />
                   <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{EM_AGENTS[0].stat}</span>
                 </div>
               </div>
-              <div style={{ position: "relative", height: "320px" }}>
-                <AgentExpenseProcessingCard active={true} exit={false} variant="full" />
-              </div>
             </div>
 
             {/* Expense Card Fraud Agent */}
-            <div>
-              <div style={{ marginBottom: "12px" }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {/* Text */}
+              <div style={{ marginBottom: "20px" }}>
                 <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>
                   {EM_AGENTS[1].label}
                 </div>
                 <div style={{ fontSize: "17px", fontWeight: 700, color: DARK, lineHeight: 1.25, marginBottom: "8px" }}>
                   {EM_AGENTS[1].headline}
                 </div>
-                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: "0 0 10px" }}>
+                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: 0 }}>
                   {EM_AGENTS[1].description}
                 </p>
+              </div>
+              {/* Card */}
+              <div style={{ position: "relative", height: "320px" }}>
+                <AgentExpenseFraudCard active={true} exit={false} variant="full" />
+              </div>
+              {/* Stat pill */}
+              <div style={{ marginTop: "16px" }}>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: "9999px", background: "rgba(132,152,92,0.10)", border: "1px solid rgba(132,152,92,0.22)" }}>
                   <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS }} />
                   <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{EM_AGENTS[1].stat}</span>
                 </div>
-              </div>
-              <div style={{ position: "relative", height: "320px" }}>
-                <AgentExpenseFraudCard active={true} exit={false} variant="full" />
               </div>
             </div>
 
