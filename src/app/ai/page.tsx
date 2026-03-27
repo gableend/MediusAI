@@ -194,8 +194,9 @@ export default function AIPage() {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // ── AP agent carousel ──────────────────────────────────────────────────────
-  const [apIdx,     setApIdx]     = useState(0);
-  const [apVisible, setApVisible] = useState(true);
+  const [apIdx,      setApIdx]      = useState(0);
+  const [apVisible,  setApVisible]  = useState(true);
+  const [hoveredPill, setHoveredPill] = useState<number | null>(null);
   const apTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function selectAgent(idx: number) {
@@ -214,7 +215,7 @@ export default function AIPage() {
   ];
   const AP_PILL_LABELS = [
     "Invoice Capture", "Invoice Coding", "PO Connect",
-    "Approvals", "Supplier Inquiries", "Statement Recon", "Fraud & Risk",
+    "Approvals", "Supplier Inquiries", "Statement Reconciliation", "Fraud & Risk",
   ];
   const ActiveAPCard = AP_CARD_COMPONENTS[apIdx];
 
@@ -523,22 +524,34 @@ export default function AIPage() {
 
           {/* ── Agent selector pills ── */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", justifyContent: "center", marginBottom: "48px" }}>
-            {AP_PILL_LABELS.map((pill, i) => (
-              <button
-                key={i}
-                onClick={() => selectAgent(i)}
-                style={{
-                  padding: "9px 20px", borderRadius: "9999px",
-                  background: apIdx === i ? DARK : "white",
-                  color: apIdx === i ? "white" : "#5a7070",
-                  border: `1px solid ${apIdx === i ? DARK : "#dde2e2"}`,
-                  cursor: "pointer", fontSize: "12.5px", fontWeight: 600,
-                  fontFamily: "inherit", transition: "all 0.2s",
-                }}
-              >
-                {pill}
-              </button>
-            ))}
+            {AP_PILL_LABELS.map((pill, i) => {
+              const isActive  = apIdx === i;
+              const isHovered = hoveredPill === i && !isActive;
+              return (
+                <button
+                  key={i}
+                  onClick={() => selectAgent(i)}
+                  onMouseEnter={() => setHoveredPill(i)}
+                  onMouseLeave={() => setHoveredPill(null)}
+                  style={{
+                    padding: "9px 20px", borderRadius: "9999px",
+                    background: isActive  ? RED
+                              : isHovered ? "rgba(218,32,40,0.06)"
+                              : "white",
+                    color:  isActive  ? "white"
+                          : isHovered ? RED
+                          : "#5a7070",
+                    border: `1px solid ${isActive  ? RED
+                                       : isHovered ? "rgba(218,32,40,0.35)"
+                                       : "#dde2e2"}`,
+                    cursor: "pointer", fontSize: "12.5px", fontWeight: 600,
+                    fontFamily: "inherit", transition: "all 0.18s",
+                  }}
+                >
+                  {pill}
+                </button>
+              );
+            })}
           </div>
 
           {/* ── Active card + description (two-column) ── */}
@@ -621,6 +634,79 @@ export default function AIPage() {
               <AgentCard key={label} icon={icon} label={label} headline={headline} description={description} stat={stat} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Agent Roadmap ──────────────────────────────────────────────────── */}
+      <section style={{ background: DARK, padding: "96px 32px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
+            {/* Left: copy */}
+            <div>
+              <div style={{ fontSize: "11px", fontWeight: 600, color: SAND, textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "14px" }}>
+                Agent Roadmap
+              </div>
+              <h2 style={{
+                fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700,
+                lineHeight: 1.1, letterSpacing: "-0.7px", color: "white", marginBottom: "20px",
+              }}>
+                We&rsquo;re doubling down<br />
+                <span style={{ color: SAND }}>on new agents.</span>
+              </h2>
+              <p style={{ fontSize: "15.5px", lineHeight: 1.75, color: "rgba(255,255,255,0.65)", marginBottom: "14px" }}>
+                From procurement and supplier onboarding, to payments and expense management —
+                new agents are being built across the full Medius suite.
+              </p>
+              <p style={{ fontSize: "15.5px", lineHeight: 1.75, color: "rgba(255,255,255,0.65)", marginBottom: "32px" }}>
+                Every part of the spend management lifecycle is getting smarter. The more you use
+                Medius, the more there is to hand off.
+              </p>
+              <button style={{
+                background: "transparent", color: "white",
+                border: "2px solid rgba(255,255,255,0.45)",
+                padding: "12px 30px", borderRadius: "9999px",
+                fontSize: "13px", fontWeight: 700, textTransform: "uppercase",
+                letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
+              }}>
+                See the Roadmap
+              </button>
+            </div>
+
+            {/* Right: upcoming agent tiles */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+              {[
+                { label: "Procurement",          body: "Automate PO creation, approvals, and supplier selection." },
+                { label: "Supplier Onboarding",   body: "Validate, onboard, and activate new suppliers without manual effort." },
+                { label: "Expense Management",    body: "Review, code, and approve employee expenses automatically." },
+                { label: "Travel Booking",         body: "Policy-compliant travel booking and reconciliation, end to end." },
+                { label: "Contract Intelligence",  body: "Extract obligations, flag renewals, and surface risk automatically." },
+                { label: "Cash Flow Forecasting",  body: "Predict payment timing and optimise working capital continuously." },
+              ].map(({ label, body }) => (
+                <div key={label} style={{
+                  padding: "20px 18px",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px dashed rgba(255,255,255,0.18)",
+                  borderRadius: "14px",
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                    <span style={{
+                      fontSize: "9px", fontWeight: 700, padding: "2px 8px", borderRadius: "9999px",
+                      background: "rgba(171,156,109,0.18)", color: SAND,
+                      textTransform: "uppercase", letterSpacing: "0.8px",
+                    }}>Coming Soon</span>
+                  </div>
+                  <div style={{ fontSize: "13px", fontWeight: 700, color: "white", marginBottom: "6px" }}>
+                    {label} Agent
+                  </div>
+                  <p style={{ fontSize: "12px", lineHeight: 1.6, color: "rgba(255,255,255,0.45)", margin: 0 }}>
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
