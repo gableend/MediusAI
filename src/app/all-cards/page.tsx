@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback } from "react";
+import Link from "next/link";
 import { toPng } from "html-to-image";
 import {
   RED, DARK, CardProps,
@@ -295,14 +296,26 @@ export default function AllCardsPage() {
         position: "sticky", top: 0, zIndex: 100,
         boxShadow: "0 2px 12px rgba(0,0,0,0.25)",
       }}>
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: RED }} />
-            <span style={{ fontSize: "16px", fontWeight: 700, color: "white" }}>Medius Card Library</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+          {/* Medius logo — links back to homepage */}
+          <Link href="/" style={{ flexShrink: 0 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://ext.same-assets.com/1543560847/102504094.svg"
+              alt="Medius"
+              style={{ height: "28px", filter: "brightness(0) invert(1)", display: "block" }}
+            />
+          </Link>
+          <div style={{ width: "1px", height: "32px", background: "rgba(255,255,255,0.2)" }} />
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: RED }} />
+              <span style={{ fontSize: "16px", fontWeight: 700, color: "white" }}>Card Library</span>
+            </div>
+            <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.45)", margin: "3px 0 0 20px" }}>
+              {totalCards} cards · 2 sizes each · @2× PNG export for PowerPoint
+            </p>
           </div>
-          <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.45)", margin: "3px 0 0 20px" }}>
-            {totalCards} cards · 2 sizes each · @2× PNG export for PowerPoint
-          </p>
         </div>
         <div style={{ display: "flex", gap: "10px" }}>
           <button
