@@ -161,12 +161,12 @@ export default function AIPage() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            right: 0,
+            right: "-100px",
             top: 0,
             height: "100%",
             width: "58%",
             objectFit: "cover",
-            objectPosition: "center top",
+            objectPosition: "left top",
           }}
         />
 
@@ -214,8 +214,7 @@ export default function AIPage() {
               letterSpacing: "-1.3px", color: "white",
               marginBottom: "20px",
             }}>
-              Medius<br />
-              <span style={{ color: SAND }}>Agents</span>
+              Medius Agents
             </h1>
 
             <p style={{
