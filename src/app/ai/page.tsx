@@ -198,24 +198,6 @@ export default function AIPage() {
   const [apVisible,   setApVisible]   = useState(true);
   const [hoveredPill, setHoveredPill] = useState<number | null>(null);
   const apTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const AP_COUNT = 7;
-  const AP_HOLD  = 4200;
-
-  const apAdvance = useCallback((current: number) => {
-    const next = (current + 1) % AP_COUNT;
-    setApVisible(false);
-    if (apTimerRef.current) clearTimeout(apTimerRef.current);
-    apTimerRef.current = setTimeout(() => {
-      setApIdx(next);
-      setApVisible(true);
-      apTimerRef.current = setTimeout(() => apAdvance(next), AP_HOLD);
-    }, 220);
-  }, []);
-
-  useEffect(() => {
-    apTimerRef.current = setTimeout(() => apAdvance(0), AP_HOLD);
-    return () => { if (apTimerRef.current) clearTimeout(apTimerRef.current); };
-  }, [apAdvance]);
 
   function selectAgent(idx: number) {
     if (idx === apIdx) return;
@@ -224,8 +206,7 @@ export default function AIPage() {
     apTimerRef.current = setTimeout(() => {
       setApIdx(idx);
       setApVisible(true);
-      apTimerRef.current = setTimeout(() => apAdvance(idx), AP_HOLD);
-    }, 220);
+    }, 200);
   }
 
   const AP_CARD_COMPONENTS = [
@@ -550,7 +531,7 @@ export default function AIPage() {
                 <button
                   key={i}
                   onClick={() => selectAgent(i)}
-                  onMouseEnter={() => setHoveredPill(i)}
+                  onMouseEnter={() => { setHoveredPill(i); selectAgent(i); }}
                   onMouseLeave={() => setHoveredPill(null)}
                   style={{
                     padding: "9px 20px", borderRadius: "9999px",
