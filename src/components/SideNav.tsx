@@ -24,8 +24,8 @@ export default function SideNav() {
       {/* Slide-in panel */}
       <div style={{
         position: "fixed", top: 0, right: 0, bottom: 0,
-        width: "220px", zIndex: 1000,
-        transform: open ? "translateX(0)" : "translateX(220px)",
+        width: "270px", zIndex: 1000,
+        transform: open ? "translateX(0)" : "translateX(270px)",
         transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
         background: "white",
         boxShadow: open ? "-4px 0 32px rgba(0,0,0,0.12)" : "none",
@@ -82,7 +82,7 @@ export default function SideNav() {
         style={{
           position: "fixed",
           top: "50%",
-          right: open ? "220px" : "0",
+          right: open ? "270px" : "0",
           transform: "translateY(-50%)",
           zIndex: 1001,
           transition: "right 0.3s cubic-bezier(0.4,0,0.2,1)",
