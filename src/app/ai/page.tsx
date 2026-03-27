@@ -153,7 +153,7 @@ export default function AIPage() {
           background: DARK,
         }}
       >
-        {/* Right-side hero photo */}
+        {/* Right-side hero photo — masked on left edge for smooth blend */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/homepage-hero.jpg"
@@ -164,19 +164,21 @@ export default function AIPage() {
             right: "-200px",
             top: 0,
             height: "100%",
-            width: "58%",
+            width: "62%",
             objectFit: "cover",
             objectPosition: "left top",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 18%, black 38%)",
+            maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 18%, black 38%)",
           }}
         />
 
-        {/* Dark-to-transparent blend overlay — left side */}
+        {/* Subtle overall darkening so text stays legible over image midtones */}
         <div
           aria-hidden="true"
           style={{
             position: "absolute",
             inset: 0,
-            background: `linear-gradient(to right, ${DARK} 28%, rgba(47,67,68,0.88) 40%, rgba(47,67,68,0.42) 54%, rgba(47,67,68,0.08) 68%, transparent 82%)`,
+            background: `linear-gradient(to right, ${DARK} 30%, rgba(47,67,68,0.6) 46%, rgba(47,67,68,0.1) 62%, transparent 78%)`,
           }}
         />
 
@@ -195,7 +197,7 @@ export default function AIPage() {
           }}
         >
           {/* ── Left: headline + CTAs ── */}
-          <div style={{ flex: "0 0 430px" }}>
+          <div style={{ flex: "0 0 500px" }}>
             {/* Eyebrow */}
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "7px",
@@ -210,9 +212,9 @@ export default function AIPage() {
             </div>
 
             <h1 style={{
-              fontSize: "48px", fontWeight: 700, lineHeight: 1.1,
-              letterSpacing: "-1.2px", color: "white",
-              marginBottom: "20px",
+              fontSize: "44px", fontWeight: 700, lineHeight: 1.12,
+              letterSpacing: "-1.1px", color: "white",
+              marginBottom: "22px",
             }}>
               Autonomous finance,<br />powered by Medius Agents
             </h1>
