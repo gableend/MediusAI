@@ -655,7 +655,7 @@ export default function AIPage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", maxWidth: "900px", margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", maxWidth: "1020px", margin: "0 auto" }}>
 
             {/* Expense Processing Agent */}
             <div style={{ display: "flex", flexDirection: "column" }}>
