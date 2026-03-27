@@ -127,17 +127,17 @@ const AP_AGENTS = [
 const EM_AGENTS = [
   {
     label: "Expense Processing Agent",
-    headline: "Auto-categorised expense processing",
+    headline: "Auto-processed expenses",
     description:
-      "Automatically reads, categorises, and policy-checks employee expenses from receipts to reimbursement without manual review.",
-    stat: "Automatically read and categorize receipts.",
+      "Automatically processes employee expenses from receipt to reimbursement. Categorised, policy-checked, and ready for approval with minimal manual effort.",
+    stat: "Receipts processed automatically",
   },
   {
     label: "Suspicious Expense Agent",
-    headline: "AI-powered suspicious detection",
+    headline: "Suspicious activity detected",
     description:
-      "Scores and categorises every transaction for suspicious behaviour, flagging unusual amounts, unexpected countries, and unknown merchants for instant review.",
-    stat: "AI learns from every review decision",
+      "Identifies and flags suspicious transactions in real time. Surfaces anomalies so finance can review and take action.",
+    stat: "Learns from every review",
   },
 ];
 
@@ -650,7 +650,7 @@ export default function AIPage() {
               Expense Management Agents
             </h2>
             <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "460px", margin: "0 auto" }}>
-              Autonomous processing and fraud detection for employee expenses from submission to reimbursement, without manual review.
+              Process employee expenses and surface risk from submission to reimbursement. Automation where possible. Review where it matters.
             </p>
           </div>
 

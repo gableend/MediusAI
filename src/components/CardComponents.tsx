@@ -2557,7 +2557,7 @@ export function AgentExpenseProcessingCard({ active, exit, variant = "compact" }
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <AgentLabel name="Expense Processing Agent" />
-      <CardHeader title="Auto-categorisation" badge="96% compliant" />
+      <CardHeader title="Auto-processed expenses" badge="96% compliant" />
 
       <div style={{ marginBottom: "6px", padding: "6px 10px", background: "#f0f3f2", borderRadius: "7px", display: "flex", justifyContent: "space-between" }}>
         <span style={{ fontSize: "11px", color: "#777" }}>Sarah Chen · Q1 Expenses</span>
@@ -2684,7 +2684,7 @@ export function AgentSuspiciousExpenseCard({ active, exit, variant = "compact" }
     return (
       <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
         <AgentLabel name="Suspicious Expense Agent" />
-        <CardHeader title="AI-powered suspicious detection" badge="Real-time" />
+        <CardHeader title="Suspicious activity detected" badge="Real-time" />
         <div style={{ display: "flex", gap: "12px" }}>
           {/* Left: flagged transaction */}
           <div style={{ flex: 1, background: "#fef8f0", borderRadius: "10px", padding: "10px", border: "1px solid #f5e6d0" }}>
@@ -2719,7 +2719,7 @@ export function AgentSuspiciousExpenseCard({ active, exit, variant = "compact" }
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <AgentLabel name="Suspicious Expense Agent" />
-      <CardHeader title="AI-powered suspicious detection" badge="Real-time" />
+      <CardHeader title="Suspicious activity detected" badge="Real-time" />
 
       {/* Flagged transaction */}
       <div style={{
