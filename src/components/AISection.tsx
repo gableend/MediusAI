@@ -60,7 +60,7 @@ export default function AISection() {
           Medius delivers AI you can trust to act. Since 2016, we have been guiding teams through the financial moments that matter because when money moves, reliability is everything.
         </p>
         <a
-          href="#"
+          href="/ai"
           style={{
             display: "inline-flex", alignItems: "center", gap: "8px",
             background: RED, color: "white",
