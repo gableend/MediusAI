@@ -25,37 +25,32 @@ function arcPath(r: number, startDeg: number, endDeg: number) {
 
 // ── 8 domains equally spaced (45 deg apart), starting from top ──────────
 // -90 deg = 12 o'clock in SVG coordinates
+// Order: Sourcing > Contracts > Suppliers > Procurement > Invoicing > AP > Payments > Expenses
 const DOMAIN_LABELS = [
   "Sourcing",
   "Contracts",
   "Suppliers",
   "Procurement",
   "Invoicing",
-  "Payments",
   "AP",
+  "Payments",
   "Expenses",
 ];
 
 const domains = DOMAIN_LABELS.map((label, i) => ({
   label,
-  // 8 items, 45 deg apart, starting at -90 (top)
   angle: -90 + i * 45,
 }));
 
 const LABEL_R   = 175;  // radius for label placement (cream ring)
-const ARROW_R   = 168;  // radius for arrow arcs
+const ARROW_R   = 185;  // arrow arcs on a wider path intersecting midpoint of labels
 const OUTER_R   = 280;  // outer grey ring
 const RED_R     = 232;  // red circle border
 const CENTRE_R  = 108;  // centre dark circle
 
-/**
- * Concentric-circle diagram: Medius Agent Ecosystem
- *
- * Outer grey ring:  "Finance and Procurement define and control" (top arc)
- * Red border:       separating governance from workflow
- * Cream middle:     8 spend domains (including AP) equally spaced with clockwise arrows
- * Dark centre:      "Agents executing across the system"
- */
+// Text arc radius: midpoint of the grey ring (between RED_R and OUTER_R)
+const TEXT_ARC_R = (RED_R + OUTER_R) / 2;  // 256
+
 export default function AgentEcosystemDiagram() {
   const [visible, setVisible] = useState(false);
 
@@ -67,8 +62,8 @@ export default function AgentEcosystemDiagram() {
   // Arrow arcs between consecutive domains
   const arrowArcs = domains.map((d, i) => {
     const next = domains[(i + 1) % domains.length];
-    let startA = d.angle + 10;
-    let endA   = next.angle - 10;
+    let startA = d.angle + 12;
+    let endA   = next.angle - 12;
     if (endA < startA) endA += 360;
     return { startA, endA, idx: i };
   });
@@ -85,9 +80,9 @@ export default function AgentEcosystemDiagram() {
     >
       <svg viewBox={`0 0 ${SIZE} ${SIZE}`} style={{ width: "100%", height: "auto", display: "block" }}>
         <defs>
-          {/* Arrowhead marker */}
-          <marker id="arrowHead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" fill="#8a9a9a" />
+          {/* Smaller arrowhead marker */}
+          <marker id="arrowHead" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
+            <path d="M0,0 L6,2.5 L0,5" fill="#8a9a9a" />
           </marker>
 
           {/* Centre radial gradient */}
@@ -99,10 +94,10 @@ export default function AgentEcosystemDiagram() {
             <stop offset="100%" stopColor={RED} />
           </radialGradient>
 
-          {/* Curved text path: arc across the TOP of the outer ring */}
+          {/* Curved text path: arc across the TOP, using mid-grey-ring radius */}
           <path
             id="outerTextArc"
-            d={`M ${CX - (OUTER_R - 22)},${CY} A ${OUTER_R - 22},${OUTER_R - 22} 0 0,1 ${CX + (OUTER_R - 22)},${CY}`}
+            d={`M ${CX - TEXT_ARC_R},${CY} A ${TEXT_ARC_R},${TEXT_ARC_R} 0 0,1 ${CX + TEXT_ARC_R},${CY}`}
             fill="none"
           />
         </defs>
@@ -136,7 +131,7 @@ export default function AgentEcosystemDiagram() {
           across the system
         </text>
 
-        {/* ── Curved outer text (top arc) ─────────────────────────────────── */}
+        {/* ── Curved outer text (top arc, centred in grey ring) ───────────── */}
         <text
           style={{
             fontSize: "16.5px",
@@ -158,7 +153,7 @@ export default function AgentEcosystemDiagram() {
             d={arcPath(ARROW_R, startA, endA)}
             fill="none"
             stroke="#8a9a9a"
-            strokeWidth="1.2"
+            strokeWidth="1"
             markerEnd="url(#arrowHead)"
             style={{
               opacity: visible ? 1 : 0,
@@ -167,7 +162,7 @@ export default function AgentEcosystemDiagram() {
           />
         ))}
 
-        {/* ── 8 domain labels (equally spaced, including AP) ──────────────── */}
+        {/* ── 8 domain labels (equally spaced) ────────────────────────────── */}
         {domains.map(({ label, angle }, i) => {
           const isAP = label === "AP";
           return (
