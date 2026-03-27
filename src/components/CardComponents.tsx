@@ -1870,53 +1870,51 @@ function AgentLabel({ name }: { name: string }) {
 
 // ─── Agent 1: Invoice Capture Agent ──────────────────────────────────────────
 export function AgentCaptureCard({ active, exit, variant = "compact" }: CardProps) {
-  const fields = [
-    { label: "Vendor",      value: "Apex Office Supplies",  conf: 99 },
-    { label: "Invoice #",   value: "INV-2024-0891",         conf: 100 },
-    { label: "Amount",      value: "€4,320.00",             conf: 100 },
-    { label: "Due date",    value: "15 Apr 2025",           conf: 97 },
-    { label: "PO match",    value: "PO-8821 · 3-way ✓",    conf: 100 },
+  const formats = [
+    { abbr: "PDF", type: "PDF invoice",      source: "Email attachment",   delay: 0    },
+    { abbr: "EDI", type: "EDI 810",           source: "Supplier portal",    delay: 0.12 },
+    { abbr: "IMG", type: "Paper / scanned",   source: "OCR extracted",      delay: 0.24 },
+    { abbr: "XML", type: "XML / UBL",         source: "e-Invoice network",  delay: 0.36 },
   ];
-  const visible = variant === "compact" ? fields.slice(0, 4) : fields;
+  const visible = variant === "compact" ? formats.slice(0, 3) : formats;
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <AgentLabel name="Invoice Capture Agent" />
-      <CardHeader title="Invoice data extraction" badge="100% captured" />
+      <CardHeader title="Any format, zero exceptions" badge="100% touchless" />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-        {visible.map(({ label, value, conf }, i) => (
-          <div key={label} style={{
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-            padding: "6px 10px", background: "#f8f9fa", borderRadius: "7px",
+      <div style={{ display: "flex", flexDirection: "column", gap: "7px", marginBottom: "12px" }}>
+        {visible.map(({ abbr, type, source, delay }) => (
+          <div key={abbr} style={{
+            display: "flex", alignItems: "center", gap: "10px",
+            padding: "7px 10px", background: "#f8f9fa", borderRadius: "8px",
             opacity: active ? 1 : 0,
-            transition: `opacity 0.25s ease ${i * 0.08}s`,
+            transition: `opacity 0.3s ease ${delay}s`,
           }}>
-            <div>
-              <div style={{ fontSize: "9px", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.5px" }}>{label}</div>
-              <div style={{ fontSize: "11.5px", fontWeight: 600, color: DARK }}>{value}</div>
-            </div>
             <div style={{
-              fontSize: "10px", fontWeight: 700,
-              color: conf === 100 ? MOSS : SAND,
-              background: conf === 100 ? "rgba(132,152,92,0.10)" : "rgba(171,156,109,0.12)",
-              padding: "2px 8px", borderRadius: "9999px",
+              width: "30px", height: "30px", borderRadius: "7px", flexShrink: 0,
+              background: DARK, display: "flex", alignItems: "center", justifyContent: "center",
             }}>
-              {conf}%
+              <span style={{ fontSize: "8px", fontWeight: 800, color: "white" }}>{abbr}</span>
             </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: "11.5px", fontWeight: 600, color: "#111" }}>{type}</div>
+              <div style={{ fontSize: "10px", color: "#aaa" }}>{source}</div>
+            </div>
+            <span style={{ fontSize: "13px", color: "#16a34a", fontWeight: 700 }}>✓</span>
           </div>
         ))}
       </div>
 
       {variant === "full" && (
         <div style={{
-          marginTop: "12px", padding: "8px 12px",
-          background: "rgba(132,152,92,0.08)", borderRadius: "8px",
-          display: "flex", alignItems: "center", gap: "8px",
-          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.5s",
+          padding: "8px 12px", borderRadius: "8px",
+          background: "rgba(132,152,92,0.08)", border: "1px solid rgba(132,152,92,0.18)",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.52s",
         }}>
-          <span style={{ fontSize: "12px" }}>✓</span>
-          <span style={{ fontSize: "11px", fontWeight: 600, color: MOSS }}>Ready for coding — routed to SmartFlow</span>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: MOSS }}>✓ 4 formats captured — routed to coding</span>
+          <span style={{ fontSize: "10px", color: "#aaa" }}>0 exceptions</span>
         </div>
       )}
     </div>
@@ -1978,58 +1976,72 @@ export function AgentCodingCard({ active, exit, variant = "compact" }: CardProps
 
 // ─── Agent 3: PO Connect Agent ────────────────────────────────────────────────
 export function AgentPOConnectCard({ active, exit, variant = "compact" }: CardProps) {
-  const lines = [
-    { desc: "Office equipment — desks × 4", inv: "€2,800", po: "€2,800", gr: "€2,800", ok: true  },
-    { desc: "Delivery & installation",       inv: "€620",   po: "€580",   gr: "€580",   ok: false },
-    { desc: "Extended warranty (2yr)",       inv: "€900",   po: "€900",   gr: "€900",   ok: true  },
+  const invoices = [
+    { num: "FA246532111", lines: 34, total: 34, delay: 0    },
+    { num: "FA246532112", lines: 5,  total: 5,  delay: 0.10 },
+    { num: "FA246532113", lines: 26, total: 26, delay: 0.20 },
+    { num: "FA246532114", lines: 8,  total: 8,  delay: 0.30 },
   ];
-  const visible = variant === "compact" ? lines.slice(0, 2) : lines;
+  const visible = variant === "compact" ? invoices.slice(0, 3) : invoices;
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <AgentLabel name="PO Connect Agent" />
-      <CardHeader title="3-way PO matching" badge="Auto" />
+      <CardHeader title="Invoice-to-PO line matching" badge="95% connected" />
 
-      {/* Column headers */}
+      {/* Impact metrics */}
       <div style={{
-        display: "grid", gridTemplateColumns: "1fr 52px 52px 52px",
-        gap: "4px", padding: "0 4px", marginBottom: "6px",
+        display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+        gap: "6px", marginBottom: "12px",
+        opacity: active ? 1 : 0, transition: "opacity 0.25s ease",
       }}>
-        {["Line item", "Invoice", "PO", "GR"].map(h => (
-          <div key={h} style={{ fontSize: "9px", fontWeight: 600, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.4px", textAlign: h === "Line item" ? "left" : "center" }}>{h}</div>
-        ))}
-      </div>
-
-      <div style={{ display: "flex", flexDirection: "column", gap: "5px", marginBottom: "10px" }}>
-        {visible.map(({ desc, inv, po, gr, ok }, i) => (
-          <div key={desc} style={{
-            display: "grid", gridTemplateColumns: "1fr 52px 52px 52px",
-            gap: "4px", alignItems: "center",
-            padding: "7px 8px", borderRadius: "7px",
-            background: ok ? "#f8f9fa" : "#fff8f8",
-            border: ok ? "1px solid transparent" : `1px solid #fde8e8`,
-            opacity: active ? 1 : 0,
-            transition: `opacity 0.25s ease ${i * 0.12}s`,
+        {[
+          { value: "245",   label: "Invoices",    sub: "Last 7 days",   hi: false },
+          { value: "95%",   label: "Connected",   sub: "+13% ↑",        hi: true  },
+          { value: "1 hr",  label: "Saved / day", sub: "Est. time",     hi: false },
+        ].map(({ value, label, sub, hi }) => (
+          <div key={label} style={{
+            padding: "7px 6px", textAlign: "center",
+            background: hi ? "rgba(132,152,92,0.08)" : "#f8f9fa", borderRadius: "8px",
+            border: hi ? "1px solid rgba(132,152,92,0.2)" : "1px solid transparent",
           }}>
-            <div style={{ fontSize: "11px", fontWeight: 600, color: "#222", lineHeight: 1.3 }}>{desc}</div>
-            {[inv, po, gr].map((val, j) => (
-              <div key={j} style={{ fontSize: "10.5px", fontWeight: 600, textAlign: "center", color: !ok && j === 1 ? RED : "#444" }}>{val}</div>
-            ))}
+            <div style={{ fontSize: "15px", fontWeight: 700, color: hi ? MOSS : DARK }}>{value}</div>
+            <div style={{ fontSize: "9px", fontWeight: 600, color: "#888", marginTop: "1px" }}>{label}</div>
+            <div style={{ fontSize: "9px", color: hi ? MOSS : "#bbb" }}>{sub}</div>
           </div>
         ))}
       </div>
 
+      {/* Column headers */}
       <div style={{
-        padding: "7px 10px", borderRadius: "7px",
-        background: "#fff5f5", border: "1px solid #fde8e8",
-        display: "flex", alignItems: "center", gap: "8px",
-        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+        display: "grid", gridTemplateColumns: "1fr 16px auto",
+        gap: "6px", padding: "0 6px", marginBottom: "5px",
       }}>
-        <span style={{ fontSize: "11px", color: RED }}>⚠</span>
-        <div>
-          <div style={{ fontSize: "11px", fontWeight: 700, color: RED }}>PO variance detected</div>
-          <div style={{ fontSize: "10px", color: "#b91c1c" }}>Delivery & installation: €40 over PO — held for review</div>
-        </div>
+        {["Invoice number", "", "Lines connected"].map((h, i) => (
+          <div key={i} style={{
+            fontSize: "9px", fontWeight: 600, color: "#bbb",
+            textTransform: "uppercase", letterSpacing: "0.4px",
+            textAlign: i === 2 ? "right" : "left",
+          }}>{h}</div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+        {visible.map(({ num, lines, total, delay }) => (
+          <div key={num} style={{
+            display: "grid", gridTemplateColumns: "1fr 16px auto",
+            gap: "6px", alignItems: "center",
+            padding: "6px 8px", borderRadius: "7px", background: "#f8f9fa",
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.25s ease ${delay}s`,
+          }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, color: "#222" }}>{num}</div>
+            <div style={{ fontSize: "11px", color: RED }}>⚡</div>
+            <div style={{ fontSize: "11px", fontWeight: 700, color: MOSS, textAlign: "right" }}>
+              {lines} / {total} lines
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

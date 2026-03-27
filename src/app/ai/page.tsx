@@ -589,8 +589,8 @@ export default function AIPage() {
             </div>
 
             {/* Right: card in a positioned container */}
-            <div style={{ position: "relative", height: "290px", width: "400px" }}>
-              <ActiveAPCard active={apVisible} exit={false} />
+            <div style={{ position: "relative", height: "320px", width: "400px" }}>
+              <ActiveAPCard active={apVisible} exit={false} variant="full" />
             </div>
           </div>
 
@@ -650,8 +650,8 @@ export default function AIPage() {
                   <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{EM_AGENTS[0].stat}</span>
                 </div>
               </div>
-              <div style={{ position: "relative", height: "290px" }}>
-                <AgentExpenseProcessingCard active={true} exit={false} />
+              <div style={{ position: "relative", height: "320px" }}>
+                <AgentExpenseProcessingCard active={true} exit={false} variant="full" />
               </div>
             </div>
 
@@ -672,8 +672,8 @@ export default function AIPage() {
                   <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{EM_AGENTS[1].stat}</span>
                 </div>
               </div>
-              <div style={{ position: "relative", height: "290px" }}>
-                <AgentExpenseFraudCard active={true} exit={false} />
+              <div style={{ position: "relative", height: "320px" }}>
+                <AgentExpenseFraudCard active={true} exit={false} variant="full" />
               </div>
             </div>
 
