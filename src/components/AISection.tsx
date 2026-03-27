@@ -174,7 +174,7 @@ export default function AISection() {
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "3px" }}>
                     <span style={{ fontSize: "13px", color: accent, lineHeight: 1 }}>{icon}</span>
-                    <span style={{ fontSize: "12px", fontWeight: 700, color: "#111" }}>{title}</span>
+                    <span style={{ fontSize: "10.5px", fontWeight: 700, color: "#111" }}>{title}</span>
                   </div>
                   <div style={{ fontSize: "11px", color: "#666", lineHeight: 1.4 }}>{detail}</div>
                 </div>
