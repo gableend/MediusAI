@@ -518,7 +518,7 @@ export default function AIPage() {
               Meet the Medius AP Agents
             </h2>
             <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
-              Six specialized agents working in sequence to deliver fully autonomous invoice-to-pay processing — from first touch to final payment.
+              AP-focused agents that enable autonomous processing and autonomous governance — with finance teams always in control.
             </p>
           </div>
 
