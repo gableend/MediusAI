@@ -508,7 +508,7 @@ export default function AIPage() {
         </div>
       </section>
 
-      {/* ── Agent Ecosystem Diagram ──────────────────────────────────────── */}
+      {/* ── Agent Ecosystem Diagram (commented out for now) ────────────────
       <section style={{ background: "white", padding: "96px 32px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
@@ -528,6 +528,7 @@ export default function AIPage() {
           <AgentEcosystemDiagram />
         </div>
       </section>
+      ────────────────────────────────────────────────────────────────────── */}
 
       {/* ── Meet the Medius AP Agents ──────────────────────────────────────── */}
       <section style={{ background: "white", padding: "96px 32px" }}>
