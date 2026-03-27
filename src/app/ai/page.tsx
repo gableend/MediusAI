@@ -371,13 +371,13 @@ export default function AIPage() {
                 <span style={{ color: SAND }}>A decade ahead.</span>
               </h2>
               <p style={{ fontSize: "15.5px", lineHeight: 1.75, color: "#5a7070", marginBottom: "16px" }}>
-                While others have been retrofitting AI onto legacy platforms, Medius was built on an
-                event-driven, agentic core from the start. That ten-year head start means our models
-                are trained on real-world data no competitor can match.
+                While others are retrofitting AI onto legacy platforms, Medius has been applying
+                machine learning to real financial workflows for nearly a decade.
               </p>
               <p style={{ fontSize: "15.5px", lineHeight: 1.75, color: "#5a7070" }}>
-                Every invoice processed, every human correction, every payment decision makes our
-                agents smarter — for every customer on the platform.
+                Every invoice processed, every correction made, and every payment decision improves
+                the system. That experience compounds across the platform, making Medius AI more
+                accurate, more reliable, and more effective over time.
               </p>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
