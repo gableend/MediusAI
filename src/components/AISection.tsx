@@ -7,12 +7,12 @@ const DARK = "#2f4344";
 const BG   = "#192828";
 
 const CARDS = [
-  { title: "AI-assisted ingestion",           detail: "PDF, EDI, XML & paper captured touchlessly",      accent: "#6b8c8c", icon: "⬇" },
-  { title: "Adaptive matching & coding",      detail: "3-way match · GL coded · ready to approve",       accent: "#4a7c7c", icon: "⇄" },
-  { title: "AI guided approvals",             detail: "INV-5512 · $4,200 · approved in 4 mins",          accent: "#16a34a", icon: "✓" },
-  { title: "AI fraud detection",              detail: "Bank account mismatch — INV-7743 held",            accent: RED,       icon: "⚠" },
-  { title: "AI statement reconciliation",     detail: "14 supplier statements matched automatically",     accent: "#ab9c6d", icon: "◎" },
-  { title: "Supplier query handling",         detail: "Auto-response sent · INV-4821 status confirmed",  accent: DARK,      icon: "↩" },
+  { title: "Invoice Capture Agent",           detail: "PDF, EDI, XML & paper captured touchlessly",      accent: "#6b8c8c", icon: "⬇" },
+  { title: "Invoice Coding Agent",            detail: "GL coded · cost centre assigned · routed",        accent: "#4a7c7c", icon: "⇄" },
+  { title: "Approvals Agent",                 detail: "INV-5512 · $4,200 · approved in 4 mins",          accent: "#16a34a", icon: "✓" },
+  { title: "Fraud & Risk Detection Agent",    detail: "Bank account mismatch — INV-7743 held",           accent: RED,       icon: "⚠" },
+  { title: "Statement Reconciliation Agent",  detail: "14 supplier statements matched automatically",    accent: "#ab9c6d", icon: "◎" },
+  { title: "Supplier Inquiries Agent",        detail: "Auto-response sent · INV-4821 status confirmed",  accent: DARK,      icon: "↩" },
 ];
 
 // ─── Main component ────────────────────────────────────────────────────────────
