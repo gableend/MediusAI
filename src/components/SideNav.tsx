@@ -12,6 +12,7 @@ const LINKS = [
   { href: "/all-cards",         label: "UI Cards Concept"          },
   { href: "/roi",               label: "ROI Calculator Concept"    },
   { href: "/payment-maturity",  label: "Payment Maturity Concept"  },
+  { href: "/ai",               label: "Medius Agents Concept"     },
 ];
 
 export default function SideNav() {
