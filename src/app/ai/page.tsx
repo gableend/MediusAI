@@ -648,11 +648,11 @@ export default function AIPage() {
                 </p>
               </div>
               {/* Card */}
-              <div style={{ position: "relative", height: "320px" }}>
+              <div style={{ position: "relative", height: "320px", width: "360px" }}>
                 <AgentExpenseProcessingCard active={true} exit={false} variant="full" />
               </div>
               {/* Stat pill */}
-              <div style={{ marginTop: "16px", display: "flex", justifyContent: "center" }}>
+              <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-start", width: "360px" }}>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: "9999px", background: "rgba(132,152,92,0.10)", border: "1px solid rgba(132,152,92,0.22)" }}>
                   <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS }} />
                   <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{EM_AGENTS[0].stat}</span>
@@ -675,11 +675,11 @@ export default function AIPage() {
                 </p>
               </div>
               {/* Card */}
-              <div style={{ position: "relative", height: "320px" }}>
+              <div style={{ position: "relative", height: "320px", width: "360px" }}>
                 <AgentExpenseFraudCard active={true} exit={false} variant="full" />
               </div>
               {/* Stat pill */}
-              <div style={{ marginTop: "16px", display: "flex", justifyContent: "center" }}>
+              <div style={{ marginTop: "16px", display: "flex", justifyContent: "flex-start", width: "360px" }}>
                 <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: "9999px", background: "rgba(132,152,92,0.10)", border: "1px solid rgba(132,152,92,0.22)" }}>
                   <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS }} />
                   <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{EM_AGENTS[1].stat}</span>
