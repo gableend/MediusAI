@@ -129,14 +129,14 @@ const EM_AGENTS = [
     label: "Expense Processing Agent",
     headline: "Auto-processed expenses",
     description:
-      "Automatically processes employee expenses from receipt to reimbursement. Categorised, policy-checked, and ready for approval with minimal manual effort.",
+      "Automatically processes expenses from receipt to reimbursement. Categorised and policy-checked, ready for approval.",
     stat: "Receipts processed automatically",
   },
   {
     label: "Suspicious Expense Agent",
     headline: "Suspicious activity detected",
     description:
-      "Identifies and flags suspicious transactions in real time. Surfaces anomalies so finance can review and take action.",
+      "Flags suspicious transactions in real time. Surfaces anomalies for review and action.",
     stat: "Learns from every review",
   },
 ];
@@ -650,7 +650,7 @@ export default function AIPage() {
             }}>
               Expense Management Agents
             </h2>
-            <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "460px", margin: "0 auto" }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "620px", margin: "0 auto" }}>
               Process employee expenses and surface risk from submission to reimbursement. Automation where possible. Review where it matters.
             </p>
           </div>
