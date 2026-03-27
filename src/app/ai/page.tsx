@@ -88,6 +88,20 @@ const AP_AGENTS = [
       "Responds to supplier invoice and payment inquiries instantly, around the clock. Fully autonomous — no human handoff needed for standard queries.",
     stat: "100% auto-resolved",
   },
+  {
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+        <rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" strokeWidth="1.7"/>
+        <path d="M9 12h6M9 16h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+      </svg>
+    ),
+    label: "Statement Reconciliation Agent",
+    headline: "Automated supplier statement matching",
+    description:
+      "Matches supplier statements against the AP ledger automatically — identifying matched items, variances, and missing invoices without manual effort.",
+    stat: "Discrepancies surfaced instantly",
+  },
 ];
 
 const SM_AGENTS = [
@@ -475,7 +489,7 @@ export default function AIPage() {
               Meet the Medius AP Agents
             </h2>
             <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
-              Five specialized agents working in sequence to deliver fully autonomous invoice-to-pay processing — from first touch to final payment.
+              Six specialized agents working in sequence to deliver fully autonomous invoice-to-pay processing — from first touch to final payment.
             </p>
           </div>
 

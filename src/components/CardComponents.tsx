@@ -2219,7 +2219,78 @@ export function AgentSupplierCard({ active, exit, variant = "compact" }: CardPro
   );
 }
 
-// ─── Agent 6: Payment Optimization Agent ──────────────────────────────────────
+// ─── Agent 6: Statement Reconciliation Agent ─────────────────────────────────
+export function AgentStatementReconCard({ active, exit, variant = "compact" }: CardProps) {
+  const items = [
+    { ref: "INV-2024-0891", supplierAmt: "€4,320", ledgerAmt: "€4,320", status: "matched" },
+    { ref: "INV-2024-0744", supplierAmt: "€1,850", ledgerAmt: "€1,750", status: "variance" },
+    { ref: "INV-2024-0612", supplierAmt: "€920",   ledgerAmt: "—",      status: "missing"  },
+  ];
+  const visible = variant === "compact" ? items.slice(0, 2) : items;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Statement Reconciliation Agent" />
+      <CardHeader title="Supplier statement match" badge="Auto" />
+
+      {/* Column headers */}
+      <div style={{
+        display: "grid", gridTemplateColumns: "1fr 64px 64px 60px",
+        gap: "4px", padding: "0 4px", marginBottom: "6px",
+      }}>
+        {["Reference", "Supplier", "Ledger", ""].map((h, i) => (
+          <div key={i} style={{ fontSize: "9px", fontWeight: 600, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.4px", textAlign: i === 0 ? "left" : "center" }}>{h}</div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px", marginBottom: "10px" }}>
+        {visible.map(({ ref, supplierAmt, ledgerAmt, status }, i) => {
+          const bg = status === "matched" ? "#f8f9fa" : status === "variance" ? "#fffbf0" : "#fff8f8";
+          const border = status === "matched" ? "transparent" : status === "variance" ? "#fef3c7" : "#fde8e8";
+          const badge = status === "matched"
+            ? { label: "✓", color: MOSS }
+            : status === "variance"
+            ? { label: "Δ", color: "#d97706" }
+            : { label: "!", color: RED };
+          return (
+            <div key={ref} style={{
+              display: "grid", gridTemplateColumns: "1fr 64px 64px 60px",
+              gap: "4px", alignItems: "center",
+              padding: "7px 8px", borderRadius: "7px",
+              background: bg, border: `1px solid ${border}`,
+              opacity: active ? 1 : 0,
+              transition: `opacity 0.25s ease ${i * 0.12}s`,
+            }}>
+              <div style={{ fontSize: "11px", fontWeight: 600, color: "#222" }}>{ref}</div>
+              <div style={{ fontSize: "10.5px", textAlign: "center", color: "#444" }}>{supplierAmt}</div>
+              <div style={{ fontSize: "10.5px", textAlign: "center", color: status === "missing" ? "#ccc" : "#444" }}>{ledgerAmt}</div>
+              <div style={{ textAlign: "center", fontSize: "11px", fontWeight: 700, color: badge.color }}>{badge.label}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{
+        display: "flex", gap: "8px",
+        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+      }}>
+        {[
+          { label: "1 matched",  color: MOSS,    bg: "rgba(132,152,92,0.08)" },
+          { label: "1 variance", color: "#d97706", bg: "rgba(217,119,6,0.07)" },
+          ...(variant === "full" ? [{ label: "1 missing", color: RED, bg: "rgba(218,32,40,0.06)" }] : []),
+        ].map(({ label, color, bg }) => (
+          <div key={label} style={{
+            flex: 1, textAlign: "center", padding: "6px 0",
+            background: bg, borderRadius: "7px",
+            fontSize: "10.5px", fontWeight: 700, color,
+          }}>{label}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Agent 7: Payment Optimization Agent ──────────────────────────────────────
 export function AgentPaymentsCard({ active, exit, variant = "compact" }: CardProps) {
   const payments = [
     { vendor: "TechSource Ltd",    amount: "€12,450", method: "SEPA",  status: "Sent to bank" },

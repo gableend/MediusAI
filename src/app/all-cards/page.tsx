@@ -16,7 +16,7 @@ import {
   SMCard0, SMCard1, SMCard2,
   EXCard0, EXCard1, EXCard2,
   AgentCaptureCard, AgentCodingCard, AgentPOConnectCard, AgentFraudRiskCard,
-  AgentCopilotCard, AgentSupplierCard, AgentPaymentsCard,
+  AgentCopilotCard, AgentSupplierCard, AgentStatementReconCard, AgentPaymentsCard,
 } from "@/components/CardComponents";
 
 // ─── Dimensions ───────────────────────────────────────────────────────────────
@@ -88,8 +88,9 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
       { id: "agent-po-connect", label: "PO Connect Agent",           Component: AgentPOConnectCard  },
       { id: "agent-fraud",      label: "Fraud & Risk Agent",         Component: AgentFraudRiskCard  },
       { id: "agent-copilot",    label: "Approvals Agent",            Component: AgentCopilotCard    },
-      { id: "agent-supplier",   label: "Supplier Inquiries Agent",   Component: AgentSupplierCard   },
-      { id: "agent-payments",   label: "Payment Optimization Agent", Component: AgentPaymentsCard   },
+      { id: "agent-supplier",   label: "Supplier Inquiries Agent",          Component: AgentSupplierCard       },
+      { id: "agent-stmt-recon", label: "Statement Reconciliation Agent",    Component: AgentStatementReconCard },
+      { id: "agent-payments",   label: "Payment Optimization Agent",        Component: AgentPaymentsCard       },
     ],
   },
 ];
