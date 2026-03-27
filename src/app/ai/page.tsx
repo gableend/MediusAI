@@ -105,9 +105,6 @@ const AP_AGENTS = [
       "Matches supplier statements against the AP ledger automatically — identifying matched items, variances, and missing invoices without manual effort.",
     stat: "Discrepancies surfaced instantly",
   },
-];
-
-const SM_AGENTS = [
   {
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -115,12 +112,15 @@ const SM_AGENTS = [
         <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    label: "Fraud & Risk Agent",
+    label: "Fraud & Risk Detection Agent",
     headline: "Pre- and post-transaction fraud detection",
     description:
       "Monitors anomalies across the entire payment lifecycle — from invoice submission through to settlement — flagging risks before money moves.",
     stat: "Real-time alerts",
   },
+];
+
+const SM_AGENTS = [
   {
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -192,6 +192,31 @@ export default function AIPage() {
   const [activeCard, setActiveCard] = useState<number>(-1);
   const [exitCard,   setExitCard]   = useState<number>(-1);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // ── AP agent carousel ──────────────────────────────────────────────────────
+  const [apIdx,     setApIdx]     = useState(0);
+  const [apVisible, setApVisible] = useState(true);
+  const apTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function selectAgent(idx: number) {
+    if (idx === apIdx) return;
+    setApVisible(false);
+    if (apTimerRef.current) clearTimeout(apTimerRef.current);
+    apTimerRef.current = setTimeout(() => {
+      setApIdx(idx);
+      setApVisible(true);
+    }, 220);
+  }
+
+  const AP_CARD_COMPONENTS = [
+    AgentCaptureCard, AgentCodingCard, AgentPOConnectCard,
+    AgentCopilotCard, AgentSupplierCard, AgentStatementReconCard, AgentFraudRiskCard,
+  ];
+  const AP_PILL_LABELS = [
+    "Invoice Capture", "Invoice Coding", "PO Connect",
+    "Approvals", "Supplier Inquiries", "Statement Recon", "Fraud & Risk",
+  ];
+  const ActiveAPCard = AP_CARD_COMPONENTS[apIdx];
 
   const advance = useCallback((current: number) => {
     const next = (current + 1) % 3;
@@ -496,62 +521,79 @@ export default function AIPage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "28px" }}>
+          {/* ── Agent selector pills ── */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", justifyContent: "center", marginBottom: "48px" }}>
+            {AP_PILL_LABELS.map((pill, i) => (
+              <button
+                key={i}
+                onClick={() => selectAgent(i)}
+                style={{
+                  padding: "9px 20px", borderRadius: "9999px",
+                  background: apIdx === i ? DARK : "white",
+                  color: apIdx === i ? "white" : "#5a7070",
+                  border: `1px solid ${apIdx === i ? DARK : "#dde2e2"}`,
+                  cursor: "pointer", fontSize: "12.5px", fontWeight: 600,
+                  fontFamily: "inherit", transition: "all 0.2s",
+                }}
+              >
+                {pill}
+              </button>
+            ))}
+          </div>
 
-            {/* Invoice Capture Agent */}
+          {/* ── Active card + description (two-column) ── */}
+          <div style={{
+            opacity: apVisible ? 1 : 0,
+            transition: "opacity 0.22s ease",
+            display: "grid",
+            gridTemplateColumns: "1fr 400px",
+            gap: "64px",
+            alignItems: "center",
+            maxWidth: "960px",
+            margin: "0 auto",
+          }}>
+            {/* Left: text */}
             <div>
-              <div style={{ marginBottom: "12px" }}>
-                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Invoice Capture Agent</div>
-                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>100% touchless invoice capture</div>
+              <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1.1px", marginBottom: "10px" }}>
+                {AP_AGENTS[apIdx].label}
               </div>
-              <AgentCaptureCard active={true} exit={false} />
+              <h3 style={{ fontSize: "28px", fontWeight: 700, color: DARK, lineHeight: 1.2, letterSpacing: "-0.5px", marginBottom: "16px" }}>
+                {AP_AGENTS[apIdx].headline}
+              </h3>
+              <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#5a7070", marginBottom: "22px" }}>
+                {AP_AGENTS[apIdx].description}
+              </p>
+              <div style={{
+                display: "inline-flex", alignItems: "center", gap: "7px",
+                padding: "6px 16px", borderRadius: "9999px",
+                background: "rgba(132,152,92,0.10)", border: "1px solid rgba(132,152,92,0.25)",
+              }}>
+                <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS, flexShrink: 0 }} />
+                <span style={{ fontSize: "12px", fontWeight: 600, color: DARK }}>{AP_AGENTS[apIdx].stat}</span>
+              </div>
             </div>
 
-            {/* Invoice Coding Agent */}
-            <div>
-              <div style={{ marginBottom: "12px" }}>
-                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Invoice Coding Agent</div>
-                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>96%+ touchless invoice processing</div>
-              </div>
-              <AgentCodingCard active={true} exit={false} />
+            {/* Right: card in a positioned container */}
+            <div style={{ position: "relative", height: "290px", width: "400px" }}>
+              <ActiveAPCard active={apVisible} exit={false} />
             </div>
+          </div>
 
-            {/* PO Connect Agent */}
-            <div>
-              <div style={{ marginBottom: "12px" }}>
-                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>PO Connect Agent</div>
-                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>Automated 3-way PO matching</div>
-              </div>
-              <AgentPOConnectCard active={true} exit={false} />
-            </div>
-
-            {/* Approvals Agent */}
-            <div>
-              <div style={{ marginBottom: "12px" }}>
-                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Approvals Agent</div>
-                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>Autonomous approval guidance</div>
-              </div>
-              <AgentCopilotCard active={true} exit={false} />
-            </div>
-
-            {/* Supplier Inquiries Agent */}
-            <div>
-              <div style={{ marginBottom: "12px" }}>
-                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Supplier Inquiries Agent</div>
-                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>24/7 autonomous supplier responses</div>
-              </div>
-              <AgentSupplierCard active={true} exit={false} />
-            </div>
-
-            {/* Statement Reconciliation Agent */}
-            <div>
-              <div style={{ marginBottom: "12px" }}>
-                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Statement Reconciliation Agent</div>
-                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>Automated supplier statement matching</div>
-              </div>
-              <AgentStatementReconCard active={true} exit={false} />
-            </div>
-
+          {/* ── Dot navigation ── */}
+          <div style={{ display: "flex", gap: "6px", justifyContent: "center", marginTop: "40px" }}>
+            {AP_AGENTS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => selectAgent(i)}
+                style={{
+                  width: apIdx === i ? "24px" : "8px", height: "8px",
+                  borderRadius: "4px",
+                  background: apIdx === i ? SAND : "#dde2e2",
+                  border: "none", cursor: "pointer", padding: 0,
+                  transition: "all 0.3s",
+                }}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -570,11 +612,11 @@ export default function AIPage() {
               Spend Management Agents
             </h2>
             <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
-              Agents that extend intelligence beyond AP — protecting payments and optimizing how and when money moves.
+              Extends intelligence beyond AP — automating how and when money moves from approval all the way to settlement.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px", maxWidth: "740px", margin: "0 auto" }}>
+          <div style={{ maxWidth: "400px", margin: "0 auto" }}>
             {SM_AGENTS.map(({ icon, label, headline, description, stat }) => (
               <AgentCard key={label} icon={icon} label={label} headline={headline} description={description} stat={stat} />
             ))}
