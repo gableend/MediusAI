@@ -692,7 +692,7 @@ export default function AIPage() {
       </section>
 
       {/* ── Agent Roadmap ──────────────────────────────────────────────────── */}
-      <section style={{ background: "#111e1f", padding: "96px 32px" }}>
+      <section style={{ background: DARK, padding: "96px 32px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
@@ -761,6 +761,35 @@ export default function AIPage() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* ── Benefits ───────────────────────────────────────────────────────── */}
+      <section style={{ background: "#f8f9fa", padding: "96px 32px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "56px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, color: SAND, textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px" }}>
+              What you gain
+            </div>
+            <h2 style={{
+              fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 700,
+              lineHeight: 1.1, letterSpacing: "-0.6px", color: DARK,
+            }}>
+              Built for finance teams that want more
+            </h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+            {BENEFITS.map(({ icon, title, body }) => (
+              <div key={title} style={{
+                padding: "28px 24px", background: "white",
+                border: "1px solid #e8ecec", borderRadius: "14px",
+              }}>
+                <div style={{ fontSize: "24px", marginBottom: "12px" }}>{icon}</div>
+                <div style={{ fontSize: "15px", fontWeight: 700, color: DARK, marginBottom: "8px" }}>{title}</div>
+                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: 0 }}>{body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -854,35 +883,6 @@ export default function AIPage() {
             }}>
               Contact Us
             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Benefits ───────────────────────────────────────────────────────── */}
-      <section style={{ background: "#f8f9fa", padding: "96px 32px" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "56px" }}>
-            <div style={{ fontSize: "11px", fontWeight: 600, color: SAND, textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px" }}>
-              What you gain
-            </div>
-            <h2 style={{
-              fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 700,
-              lineHeight: 1.1, letterSpacing: "-0.6px", color: DARK,
-            }}>
-              Built for finance teams that want more
-            </h2>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-            {BENEFITS.map(({ icon, title, body }) => (
-              <div key={title} style={{
-                padding: "28px 24px", background: "white",
-                border: "1px solid #e8ecec", borderRadius: "14px",
-              }}>
-                <div style={{ fontSize: "24px", marginBottom: "12px" }}>{icon}</div>
-                <div style={{ fontSize: "15px", fontWeight: 700, color: DARK, marginBottom: "8px" }}>{title}</div>
-                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: 0 }}>{body}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
