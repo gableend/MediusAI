@@ -1824,3 +1824,399 @@ export const TAB_CARDS: React.ComponentType<CardProps>[][] = [
   [SMCard0, SMCard1, SMCard2],
   [EXCard0, EXCard1, EXCard2],
 ];
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// MEDIUS AGENTS — Six purpose-built AI agent cards
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const MOSS  = "#84985c";
+const SAND  = "#ab9c6d";
+const AGENT_BADGE_BG   = "rgba(47,67,68,0.07)";
+const AGENT_BADGE_TEXT = DARK;
+
+// Shared agent card label pill
+function AgentLabel({ name }: { name: string }) {
+  return (
+    <div style={{
+      display: "inline-flex", alignItems: "center", gap: "5px",
+      padding: "3px 9px", borderRadius: "9999px",
+      background: AGENT_BADGE_BG, marginBottom: "14px",
+    }}>
+      <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS, flexShrink: 0 }} />
+      <span style={{ fontSize: "10px", fontWeight: 700, color: AGENT_BADGE_TEXT, letterSpacing: "0.5px", textTransform: "uppercase" }}>
+        {name}
+      </span>
+    </div>
+  );
+}
+
+// ─── Agent 1: Capture Agent ───────────────────────────────────────────────────
+export function AgentCaptureCard({ active, exit, variant = "compact" }: CardProps) {
+  const fields = [
+    { label: "Vendor",      value: "Apex Office Supplies",  conf: 99 },
+    { label: "Invoice #",   value: "INV-2024-0891",         conf: 100 },
+    { label: "Amount",      value: "€4,320.00",             conf: 100 },
+    { label: "Due date",    value: "15 Apr 2025",           conf: 97 },
+    { label: "PO match",    value: "PO-8821 · 3-way ✓",    conf: 100 },
+  ];
+  const visible = variant === "compact" ? fields.slice(0, 4) : fields;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Capture Agent" />
+      <CardHeader title="Invoice data extraction" badge="100% captured" />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+        {visible.map(({ label, value, conf }, i) => (
+          <div key={label} style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "6px 10px", background: "#f8f9fa", borderRadius: "7px",
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.25s ease ${i * 0.08}s`,
+          }}>
+            <div>
+              <div style={{ fontSize: "9px", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.5px" }}>{label}</div>
+              <div style={{ fontSize: "11.5px", fontWeight: 600, color: DARK }}>{value}</div>
+            </div>
+            <div style={{
+              fontSize: "10px", fontWeight: 700,
+              color: conf === 100 ? MOSS : SAND,
+              background: conf === 100 ? "rgba(132,152,92,0.10)" : "rgba(171,156,109,0.12)",
+              padding: "2px 8px", borderRadius: "9999px",
+            }}>
+              {conf}%
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {variant === "full" && (
+        <div style={{
+          marginTop: "12px", padding: "8px 12px",
+          background: "rgba(132,152,92,0.08)", borderRadius: "8px",
+          display: "flex", alignItems: "center", gap: "8px",
+          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.5s",
+        }}>
+          <span style={{ fontSize: "12px" }}>✓</span>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: MOSS }}>Ready for coding — routed to SmartFlow</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Agent 2: Coding Agent ────────────────────────────────────────────────────
+export function AgentCodingCard({ active, exit, variant = "compact" }: CardProps) {
+  const lines = [
+    { desc: "Office equipment — desks × 4",  gl: "7210 · Fixed Assets",    cc: "CC-101",  amt: "€2,800" },
+    { desc: "Delivery & installation",        gl: "7350 · Services",         cc: "CC-101",  amt: "€620"  },
+    { desc: "Extended warranty (2yr)",        gl: "7510 · Prepaid Expenses", cc: "CC-101",  amt: "€900"  },
+  ];
+  const visible = variant === "compact" ? lines.slice(0, 2) : lines;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Coding Agent" />
+      <CardHeader title="Auto GL coding" badge="95% precision" />
+
+      <div style={{ marginBottom: "10px", padding: "7px 10px", background: "#f0f3f2", borderRadius: "7px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontSize: "11px", color: "#777" }}>Apex Office Supplies · INV-2024-0891</span>
+        <span style={{ fontSize: "11px", fontWeight: 700, color: DARK }}>€4,320</span>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+        {visible.map(({ desc, gl, cc, amt }, i) => (
+          <div key={desc} style={{
+            padding: "8px 10px", background: "#f8f9fa", borderRadius: "7px",
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.28s ease ${i * 0.15}s`,
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
+              <span style={{ fontSize: "11px", fontWeight: 600, color: "#222" }}>{desc}</span>
+              <span style={{ fontSize: "11px", fontWeight: 700, color: DARK }}>{amt}</span>
+            </div>
+            <div style={{ display: "flex", gap: "6px" }}>
+              <span style={{ fontSize: "9.5px", padding: "1px 7px", borderRadius: "9999px", background: "rgba(47,67,68,0.08)", color: DARK, fontWeight: 600 }}>{gl}</span>
+              <span style={{ fontSize: "9.5px", padding: "1px 7px", borderRadius: "9999px", background: "rgba(171,156,109,0.12)", color: SAND, fontWeight: 600 }}>{cc}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {variant === "full" && (
+        <div style={{
+          marginTop: "10px", padding: "7px 10px",
+          background: "rgba(132,152,92,0.08)", borderRadius: "7px",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.55s",
+        }}>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: MOSS }}>✓ Coded and routed for approval</span>
+          <span style={{ fontSize: "10px", color: "#aaa" }}>Learned after 2 invoices</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Agent 3: Fraud & Risk Agent ─────────────────────────────────────────────
+export function AgentFraudRiskCard({ active, exit, variant = "compact" }: CardProps) {
+  const signals = [
+    { label: "Bank account changed 3 days ago", severity: "high",   icon: "⚠" },
+    { label: "Amount +340% vs. last 6 invoices", severity: "high",   icon: "⚠" },
+    { label: "New IBAN not in master data",      severity: "medium", icon: "ⓘ" },
+  ];
+  const visible = variant === "compact" ? signals.slice(0, 2) : signals;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Fraud & Risk Agent" />
+      <CardHeader title="Anomaly detection" badge="Pre-payment" />
+
+      {/* Risk alert banner */}
+      <div style={{
+        padding: "9px 12px", borderRadius: "9px", marginBottom: "10px",
+        background: "#fff5f5", border: "1px solid #fecaca",
+        opacity: active ? 1 : 0, transition: "opacity 0.2s ease",
+      }}>
+        <div style={{ fontSize: "11px", fontWeight: 700, color: RED, marginBottom: "2px" }}>
+          High-risk invoice detected
+        </div>
+        <div style={{ fontSize: "10.5px", color: "#b91c1c" }}>
+          Meridian Consulting · INV-9023 · €38,500
+        </div>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+        {visible.map(({ label, severity, icon }, i) => (
+          <div key={label} style={{
+            display: "flex", alignItems: "flex-start", gap: "8px",
+            padding: "7px 10px", borderRadius: "7px",
+            background: severity === "high" ? "#fff8f8" : "#fffbf0",
+            border: `1px solid ${severity === "high" ? "#fde8e8" : "#fef3c7"}`,
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.25s ease ${0.1 + i * 0.1}s`,
+          }}>
+            <span style={{ fontSize: "12px", color: severity === "high" ? RED : "#d97706", flexShrink: 0 }}>{icon}</span>
+            <span style={{ fontSize: "11px", color: "#444", lineHeight: 1.35 }}>{label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div style={{
+        display: "flex", gap: "6px",
+        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+      }}>
+        <div style={{
+          flex: 1, textAlign: "center", padding: "7px 0",
+          background: RED, borderRadius: "7px",
+          fontSize: "11px", fontWeight: 700, color: "white",
+        }}>
+          Block payment
+        </div>
+        <div style={{
+          flex: 1, textAlign: "center", padding: "7px 0",
+          background: "#f5f5f5", borderRadius: "7px",
+          fontSize: "11px", fontWeight: 700, color: "#555",
+        }}>
+          Escalate for review
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Agent 4: Copilot Agent ───────────────────────────────────────────────────
+export function AgentCopilotCard({ active, exit, variant = "compact" }: CardProps) {
+  const pending = [
+    { vendor: "TechSource Ltd",    amount: "€12,450", age: "3 days",  risk: "low"    },
+    { vendor: "Apex Office Supp.", amount: "€4,320",  age: "1 day",   risk: "low"    },
+    { vendor: "Meridian Consult.", amount: "€38,500", age: "5 days",  risk: "high"   },
+  ];
+  const visible = variant === "compact" ? pending.slice(0, 2) : pending;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Copilot Agent" />
+      <CardHeader title="Approval guidance" badge="3 pending" />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+        {visible.map(({ vendor, amount, age, risk }, i) => (
+          <div key={vendor} style={{
+            display: "flex", alignItems: "center", gap: "10px",
+            padding: "8px 10px", background: "#f8f9fa", borderRadius: "8px",
+            borderLeft: `3px solid ${risk === "high" ? RED : MOSS}`,
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.25s ease ${i * 0.12}s`,
+          }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: "11.5px", fontWeight: 600, color: "#111" }}>{vendor}</div>
+              <div style={{ fontSize: "9.5px", color: "#aaa" }}>Awaiting approval · {age} old</div>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontSize: "12px", fontWeight: 700, color: DARK }}>{amount}</div>
+              {risk === "high" && (
+                <div style={{ fontSize: "9px", fontWeight: 700, color: RED }}>⚠ Flag</div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* AI suggestion */}
+      <div style={{
+        padding: "9px 11px", borderRadius: "8px",
+        background: "rgba(47,67,68,0.05)", border: "1px solid rgba(47,67,68,0.12)",
+        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+      }}>
+        <div style={{ fontSize: "9.5px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: "4px" }}>Copilot suggests</div>
+        <div style={{ fontSize: "11px", color: "#444", lineHeight: 1.4 }}>
+          Approve TechSource & Apex. Hold Meridian — bank data mismatch flagged.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Agent 5: Supplier Agent ──────────────────────────────────────────────────
+export function AgentSupplierCard({ active, exit, variant = "compact" }: CardProps) {
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Supplier Agent" />
+      <CardHeader title="Supplier conversations" badge="24/7" />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
+        {/* Supplier message */}
+        <div style={{
+          display: "flex", alignItems: "flex-end", gap: "7px",
+          opacity: active ? 1 : 0, transition: "opacity 0.25s ease 0.05s",
+        }}>
+          <div style={{
+            width: "22px", height: "22px", borderRadius: "50%", flexShrink: 0,
+            background: SAND, display: "flex", alignItems: "center",
+            justifyContent: "center", fontSize: "8px", fontWeight: 700, color: "white",
+          }}>AC</div>
+          <div style={{
+            fontSize: "11px", lineHeight: 1.5, padding: "8px 11px",
+            borderRadius: "10px 10px 10px 3px", background: "#f4f4f2", color: "#444",
+            maxWidth: "82%",
+          }}>
+            INV-5512 — can you confirm payment status? It's 14 days overdue.
+          </div>
+        </div>
+
+        {/* AI response */}
+        <div style={{
+          display: "flex", alignItems: "flex-end", gap: "7px", flexDirection: "row-reverse",
+          opacity: active ? 1 : 0, transition: "opacity 0.25s ease 0.25s",
+        }}>
+          <div style={{
+            width: "22px", height: "22px", borderRadius: "50%", flexShrink: 0,
+            background: DARK, display: "flex", alignItems: "center",
+            justifyContent: "center", fontSize: "8px", fontWeight: 700, color: "white",
+          }}>AI</div>
+          <div style={{
+            fontSize: "11px", lineHeight: 1.5, padding: "8px 11px",
+            borderRadius: "10px 10px 3px 10px", background: DARK, color: "white",
+            maxWidth: "82%",
+          }}>
+            Hi! INV-5512 is approved and scheduled for payment on 28 Mar. You'll receive remittance by email.
+          </div>
+        </div>
+
+        {/* Resolved chip */}
+        <div style={{
+          display: "flex", justifyContent: "center",
+          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.5s",
+        }}>
+          <span style={{
+            fontSize: "10px", fontWeight: 600, padding: "4px 12px",
+            borderRadius: "9999px", background: "rgba(132,152,92,0.1)",
+            color: MOSS, border: `1px solid rgba(132,152,92,0.25)`,
+          }}>
+            ✓ Resolved automatically · 1.8s
+          </span>
+        </div>
+      </div>
+
+      {variant === "full" && (
+        <div style={{
+          marginTop: "10px", display: "flex", gap: "0",
+          borderTop: "1px solid #f0f0f0", paddingTop: "10px",
+          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.6s",
+        }}>
+          {[
+            { value: "247", label: "Queries / mo" },
+            { value: "100%", label: "Auto-resolved" },
+            { value: "1.8s", label: "Avg response" },
+          ].map(({ value, label }) => (
+            <div key={label} style={{ flex: 1, textAlign: "center" }}>
+              <div style={{ fontSize: "15px", fontWeight: 800, color: DARK }}>{value}</div>
+              <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#c0c0c0", marginTop: "2px" }}>{label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Agent 6: Payments Agent ──────────────────────────────────────────────────
+export function AgentPaymentsCard({ active, exit, variant = "compact" }: CardProps) {
+  const payments = [
+    { vendor: "TechSource Ltd",    amount: "€12,450", method: "SEPA",  status: "Sent to bank" },
+    { vendor: "Apex Office Supp.", amount: "€4,320",  method: "SEPA",  status: "Sent to bank" },
+    { vendor: "Freelance Hub",     amount: "€1,950",  method: "BACS",  status: "Queued"       },
+  ];
+  const visible = variant === "compact" ? payments.slice(0, 2) : payments;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Payments Agent" />
+      <CardHeader title="Straight-through processing" badge="Touchless" />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+        {visible.map(({ vendor, amount, method, status }, i) => (
+          <div key={vendor} style={{
+            display: "flex", alignItems: "center", gap: "10px",
+            padding: "8px 10px", background: "#f8f9fa", borderRadius: "8px",
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.25s ease ${i * 0.12}s`,
+          }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: "11.5px", fontWeight: 600, color: "#111" }}>{vendor}</div>
+              <div style={{ fontSize: "9.5px", color: "#aaa" }}>{method} · No manual steps</div>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontSize: "12px", fontWeight: 700, color: DARK }}>{amount}</div>
+              <div style={{ fontSize: "9.5px", fontWeight: 600, color: status === "Sent to bank" ? MOSS : SAND }}>{status}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Summary bar */}
+      <div style={{
+        padding: "8px 11px", borderRadius: "8px",
+        background: "rgba(132,152,92,0.08)", border: "1px solid rgba(132,152,92,0.2)",
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+      }}>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: MOSS }}>✓ Payment run complete</span>
+        <span style={{ fontSize: "10px", color: "#aaa" }}>{variant === "compact" ? "€16,770 processed" : "€18,720 processed"}</span>
+      </div>
+    </div>
+  );
+}
+
+// ─── Agent card sets for /ai hero cycling ────────────────────────────────────
+export const AGENT_HERO_CARDS: React.ComponentType<CardProps>[] = [
+  AgentCaptureCard,
+  AgentFraudRiskCard,
+  AgentSupplierCard,
+];
+
+export const AGENT_HERO_LABELS = [
+  "Capture Agent",
+  "Fraud & Risk Agent",
+  "Supplier Agent",
+];

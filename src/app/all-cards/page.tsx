@@ -15,6 +15,8 @@ import {
   PMCard0, PMCard1, PMCard2, PMFraudPreventionCard, PMDisputeCard,
   SMCard0, SMCard1, SMCard2,
   EXCard0, EXCard1, EXCard2,
+  AgentCaptureCard, AgentCodingCard, AgentFraudRiskCard,
+  AgentCopilotCard, AgentSupplierCard, AgentPaymentsCard,
 } from "@/components/CardComponents";
 
 // ─── Dimensions ───────────────────────────────────────────────────────────────
@@ -76,6 +78,17 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
       { id: "ex-reimburse", label: "Reimbursements",   Component: EXCard2 },
       { id: "sm-policy",    label: "Policy control",   Component: SMCard1 },
       { id: "sm-spend",     label: "Spend by category", Component: SMCard2 },
+    ],
+  },
+  {
+    group: "Medius Agents",
+    cards: [
+      { id: "agent-capture",  label: "Capture Agent",         Component: AgentCaptureCard  },
+      { id: "agent-coding",   label: "Coding Agent",          Component: AgentCodingCard   },
+      { id: "agent-fraud",    label: "Fraud & Risk Agent",    Component: AgentFraudRiskCard },
+      { id: "agent-copilot",  label: "Copilot Agent",         Component: AgentCopilotCard  },
+      { id: "agent-supplier", label: "Supplier Agent",        Component: AgentSupplierCard  },
+      { id: "agent-payments", label: "Payments Agent",        Component: AgentPaymentsCard  },
     ],
   },
 ];
