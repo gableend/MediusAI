@@ -176,7 +176,7 @@ export default function AIPage() {
           style={{
             position: "absolute",
             inset: 0,
-            background: `linear-gradient(to right, ${DARK} 30%, rgba(47,67,68,0.92) 44%, rgba(47,67,68,0.65) 58%, rgba(47,67,68,0.15) 78%, transparent 100%)`,
+            background: `linear-gradient(to right, ${DARK} 28%, rgba(47,67,68,0.88) 40%, rgba(47,67,68,0.42) 54%, rgba(47,67,68,0.08) 68%, transparent 82%)`,
           }}
         />
 
