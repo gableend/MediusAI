@@ -4,9 +4,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Header from "@/components/Header";
 import {
   AgentCaptureCard,
+  AgentCodingCard,
   AgentFraudRiskCard,
   AgentSupplierCard,
   AgentPOConnectCard,
+  AgentCopilotCard,
+  AgentStatementReconCard,
 } from "@/components/CardComponents";
 
 const RED  = "#da2028";
@@ -42,7 +45,7 @@ const AP_AGENTS = [
       </svg>
     ),
     label: "Invoice Coding Agent",
-    headline: "95% auto-coding precision",
+    headline: "96%+ touchless invoice processing",
     description:
       "Learns your GL coding rules after just two invoices. Applies account codes, cost centres, and routing automatically — no templates required.",
     stat: "Live after 2 invoices",
@@ -456,7 +459,7 @@ export default function AIPage() {
               {[
                 { value: "10", unit: "years", label: "of AI-native architecture" },
                 { value: "100M+", unit: "", label: "invoices in training data" },
-                { value: "95%", unit: "", label: "auto-coding precision" },
+                { value: "96%+", unit: "", label: "touchless invoice processing" },
                 { value: "24/7", unit: "", label: "autonomous supplier responses" },
               ].map(({ value, unit, label }) => (
                 <div key={label} style={{
@@ -493,10 +496,62 @@ export default function AIPage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-            {AP_AGENTS.map(({ icon, label, headline, description, stat }) => (
-              <AgentCard key={label} icon={icon} label={label} headline={headline} description={description} stat={stat} />
-            ))}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "28px" }}>
+
+            {/* Invoice Capture Agent */}
+            <div>
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Invoice Capture Agent</div>
+                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>100% touchless invoice capture</div>
+              </div>
+              <AgentCaptureCard active={true} exit={false} />
+            </div>
+
+            {/* Invoice Coding Agent */}
+            <div>
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Invoice Coding Agent</div>
+                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>96%+ touchless invoice processing</div>
+              </div>
+              <AgentCodingCard active={true} exit={false} />
+            </div>
+
+            {/* PO Connect Agent */}
+            <div>
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>PO Connect Agent</div>
+                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>Automated 3-way PO matching</div>
+              </div>
+              <AgentPOConnectCard active={true} exit={false} />
+            </div>
+
+            {/* Approvals Agent */}
+            <div>
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Approvals Agent</div>
+                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>Autonomous approval guidance</div>
+              </div>
+              <AgentCopilotCard active={true} exit={false} />
+            </div>
+
+            {/* Supplier Inquiries Agent */}
+            <div>
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Supplier Inquiries Agent</div>
+                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>24/7 autonomous supplier responses</div>
+              </div>
+              <AgentSupplierCard active={true} exit={false} />
+            </div>
+
+            {/* Statement Reconciliation Agent */}
+            <div>
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>Statement Reconciliation Agent</div>
+                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.25 }}>Automated supplier statement matching</div>
+              </div>
+              <AgentStatementReconCard active={true} exit={false} />
+            </div>
+
           </div>
         </div>
       </section>

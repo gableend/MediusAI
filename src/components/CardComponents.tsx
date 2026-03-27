@@ -1917,7 +1917,7 @@ export function AgentCodingCard({ active, exit, variant = "compact" }: CardProps
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <AgentLabel name="Invoice Coding Agent" />
-      <CardHeader title="Auto GL coding" badge="95% precision" />
+      <CardHeader title="Auto GL coding" badge="96%+ touchless" />
 
       <div style={{ marginBottom: "10px", padding: "7px 10px", background: "#f0f3f2", borderRadius: "7px", display: "flex", justifyContent: "space-between" }}>
         <span style={{ fontSize: "11px", color: "#777" }}>Apex Office Supplies · INV-2024-0891</span>
