@@ -638,7 +638,7 @@ export default function AIPage() {
       </section>
 
       {/* ── Agent Roadmap ──────────────────────────────────────────────────── */}
-      <section style={{ background: DARK, padding: "96px 32px" }}>
+      <section style={{ background: "#111e1f", padding: "96px 32px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
