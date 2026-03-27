@@ -1825,6 +1825,24 @@ export const TAB_CARDS: React.ComponentType<CardProps>[][] = [
   [EXCard0, EXCard1, EXCard2],
 ];
 
+// ─── Expense capabilities metadata ────────────────────────────────────────────
+export const EX_CAPABILITIES = [
+  {
+    id: "expense-management",
+    label: "Expense Management",
+    title: "Automated expense processing, start to finish.",
+    shortDescription: "From receipt capture to reimbursement, Medius enforces policy automatically and gets employees paid faster — without manual review.",
+    url: "https://www.medius.com/solutions/expense-management/",
+  },
+  {
+    id: "expense-cards",
+    label: "Expense Cards",
+    title: "Smart cards with built-in spend controls.",
+    shortDescription: "Issue virtual and physical cards with pre-approved limits and categories. Spend is captured and reconciled automatically — no expense reports required.",
+    url: "https://www.medius.com/solutions/",
+  },
+];
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // MEDIUS AGENTS — Six purpose-built AI agent cards
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -2440,6 +2458,12 @@ export function AgentExpenseFraudCard({ active, exit, variant = "compact" }: Car
     </div>
   );
 }
+
+// ─── Card component per Expense capability (index matches EX_CAPABILITIES) ────
+export const EX_CAPABILITY_CARDS: React.ComponentType<CardProps>[] = [
+  AgentExpenseProcessingCard,  // 0 — Expense Management
+  EXCard2,                     // 1 — Expense Cards (reimbursements)
+];
 
 // ─── Agent card sets for /ai hero cycling ────────────────────────────────────
 export const AGENT_HERO_CARDS: React.ComponentType<CardProps>[] = [
