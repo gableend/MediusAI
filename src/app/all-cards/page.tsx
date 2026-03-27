@@ -94,7 +94,7 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
       { id: "agent-stmt-recon", label: "Statement Reconciliation Agent",    Component: AgentStatementReconCard },
       { id: "agent-payments",         label: "Payment Optimization Agent",    Component: AgentPaymentsCard          },
       { id: "agent-expense-processing", label: "Expense Processing Agent",    Component: AgentExpenseProcessingCard },
-      { id: "agent-expense-fraud",      label: "Expense Fraud Detection Agent", Component: AgentExpenseFraudCard    },
+      { id: "agent-expense-fraud",      label: "Expense Card Fraud Agent",      Component: AgentExpenseFraudCard    },
     ],
   },
 ];

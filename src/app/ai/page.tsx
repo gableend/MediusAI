@@ -131,11 +131,11 @@ const EM_AGENTS = [
     stat: "96% policy compliant on first submission",
   },
   {
-    label: "Expense Fraud Detection Agent",
-    headline: "Anomaly detection across all expenses",
+    label: "Expense Card Fraud Agent",
+    headline: "Real-time card fraud prevention",
     description:
-      "Detects duplicate submissions, out-of-policy charges, and unusual spend patterns across all employee expense reports in real time.",
-    stat: "Flags before reimbursement",
+      "Detects unusual card transactions the moment they're attempted — alerting the cardholder instantly and blocking suspicious charges before they're processed.",
+    stat: "Blocks fraud before payment clears",
   },
 ];
 
@@ -655,7 +655,7 @@ export default function AIPage() {
               </div>
             </div>
 
-            {/* Expense Fraud Detection Agent */}
+            {/* Expense Card Fraud Agent */}
             <div>
               <div style={{ marginBottom: "12px" }}>
                 <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>

@@ -2463,51 +2463,80 @@ export function AgentExpenseProcessingCard({ active, exit, variant = "compact" }
   );
 }
 
-// ─── Agent 9: Expense Fraud Detection Agent ───────────────────────────────────
+// ─── Agent 9: Expense Card Fraud Agent ────────────────────────────────────────
 export function AgentExpenseFraudCard({ active, exit, variant = "compact" }: CardProps) {
-  const signals = [
-    { icon: "⚠", severity: "high",   label: "Duplicate receipt — £127 submitted twice, 3 days apart" },
-    { icon: "⚠", severity: "medium", label: "Out-of-policy — alcohol charge £89 on client entertainment" },
-    { icon: "ℹ", severity: "low",    label: "Unusual vendor — personal card transaction £340" },
-  ];
-  const visible = variant === "compact" ? signals.slice(0, 2) : signals;
-
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <AgentLabel name="Expense Fraud Detection Agent" />
-      <CardHeader title="Anomaly signals" badge="3 flagged" />
+      <AgentLabel name="Expense Card Fraud Agent" />
+      <CardHeader title="Card Fraud Prevention" badge="Real-time" />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
-        {visible.map(({ icon, severity, label }, i) => (
-          <div key={i} style={{
-            display: "flex", alignItems: "flex-start", gap: "8px",
-            padding: "7px 10px", borderRadius: "7px",
-            background: severity === "high" ? "#fff8f8" : severity === "medium" ? "#fffbf0" : "#f8f9fa",
-            border: `1px solid ${severity === "high" ? "#fde8e8" : severity === "medium" ? "#fef3c7" : "#e8ecec"}`,
-            opacity: active ? 1 : 0,
-            transition: `opacity 0.25s ease ${0.1 + i * 0.12}s`,
-          }}>
-            <span style={{ fontSize: "12px", color: severity === "high" ? RED : severity === "medium" ? "#d97706" : "#888", flexShrink: 0 }}>{icon}</span>
-            <span style={{ fontSize: "11px", color: "#444", lineHeight: 1.35 }}>{label}</span>
-          </div>
-        ))}
-      </div>
-
+      {/* Push notification — pending */}
       <div style={{
-        display: "flex", gap: "6px",
-        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+        background: "white", borderRadius: "14px",
+        boxShadow: "0 8px 28px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.07)",
+        overflow: "hidden", marginBottom: "12px",
+        opacity: active ? 1 : 0, transition: "opacity 0.35s ease 0.1s",
       }}>
         <div style={{
-          flex: 1, textAlign: "center", padding: "7px 0",
-          background: RED, borderRadius: "7px",
-          fontSize: "11px", fontWeight: 700, color: "white",
-        }}>Flag for review</div>
-        <div style={{
-          flex: 1, textAlign: "center", padding: "7px 0",
-          background: "#f5f5f5", borderRadius: "7px",
-          fontSize: "11px", fontWeight: 700, color: "#555",
-        }}>Approve clean items</div>
+          display: "flex", alignItems: "center", gap: "8px",
+          padding: "10px 12px 8px", borderBottom: "1px solid #f3f3f3",
+        }}>
+          <img src="/images/expensya-card.png" alt="" style={{ height: "32px", width: "auto" }} />
+          <span style={{ fontSize: "10px", fontWeight: 700, color: "#555", flex: 1 }}>Expense Card</span>
+          <span style={{ fontSize: "9px", color: "#aaa" }}>now</span>
+        </div>
+        <div style={{ padding: "10px 12px" }}>
+          <div style={{ fontSize: "12px", fontWeight: 700, color: "#111", marginBottom: "3px" }}>
+            Unusual transaction detected
+          </div>
+          <div style={{ fontSize: "11px", color: "#555", marginBottom: "10px", lineHeight: 1.4 }}>
+            <strong>Le Duplex Club, Paris</strong> is attempting to charge <strong>€247</strong> on card •••• 4429. Did you authorise this?
+          </div>
+          <div style={{ display: "flex", gap: "8px" }}>
+            <div style={{
+              flex: 1, textAlign: "center", padding: "7px 0",
+              background: "#f5f5f5", borderRadius: "8px",
+              fontSize: "11px", fontWeight: 700, color: "#555",
+            }}>Yes, approve</div>
+            <div style={{
+              flex: 1, textAlign: "center", padding: "7px 0",
+              background: RED, borderRadius: "8px",
+              fontSize: "11px", fontWeight: 700, color: "white",
+            }}>No, block it</div>
+          </div>
+        </div>
       </div>
+
+      {/* Full variant: resolved outcome notification */}
+      {variant === "full" && (
+        <div style={{
+          background: "white", borderRadius: "14px",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)",
+          overflow: "hidden",
+          opacity: active ? 1 : 0, transition: "opacity 0.35s ease 0.45s",
+        }}>
+          <div style={{
+            display: "flex", alignItems: "center", gap: "8px",
+            padding: "9px 12px 7px", borderBottom: "1px solid #f3f3f3",
+          }}>
+            <img src="/images/expensya-card.png" alt="" style={{ height: "28px", width: "auto" }} />
+            <span style={{ fontSize: "10px", fontWeight: 700, color: "#555", flex: 1 }}>Expense Card</span>
+            <span style={{ fontSize: "9px", color: "#aaa" }}>just now</span>
+          </div>
+          <div style={{ padding: "9px 12px", display: "flex", alignItems: "center", gap: "8px" }}>
+            <div style={{
+              width: "24px", height: "24px", borderRadius: "50%", flexShrink: 0,
+              background: "rgba(132,152,92,0.12)", display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <span style={{ fontSize: "12px", color: MOSS }}>✓</span>
+            </div>
+            <div>
+              <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>Card blocked · Transaction declined</div>
+              <div style={{ fontSize: "10px", color: "#aaa" }}>•••• 4429 temporarily frozen. Fraud case opened.</div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
