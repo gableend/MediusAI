@@ -1958,7 +1958,66 @@ export function AgentCodingCard({ active, exit, variant = "compact" }: CardProps
   );
 }
 
-// ─── Agent 3: Fraud & Risk Agent ─────────────────────────────────────────────
+// ─── Agent 3: PO Connect Agent ────────────────────────────────────────────────
+export function AgentPOConnectCard({ active, exit, variant = "compact" }: CardProps) {
+  const lines = [
+    { desc: "Office equipment — desks × 4", inv: "€2,800", po: "€2,800", gr: "€2,800", ok: true  },
+    { desc: "Delivery & installation",       inv: "€620",   po: "€580",   gr: "€580",   ok: false },
+    { desc: "Extended warranty (2yr)",       inv: "€900",   po: "€900",   gr: "€900",   ok: true  },
+  ];
+  const visible = variant === "compact" ? lines.slice(0, 2) : lines;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="PO Connect Agent" />
+      <CardHeader title="3-way PO matching" badge="Auto" />
+
+      {/* Column headers */}
+      <div style={{
+        display: "grid", gridTemplateColumns: "1fr 52px 52px 52px",
+        gap: "4px", padding: "0 4px", marginBottom: "6px",
+      }}>
+        {["Line item", "Invoice", "PO", "GR"].map(h => (
+          <div key={h} style={{ fontSize: "9px", fontWeight: 600, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.4px", textAlign: h === "Line item" ? "left" : "center" }}>{h}</div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px", marginBottom: "10px" }}>
+        {visible.map(({ desc, inv, po, gr, ok }, i) => (
+          <div key={desc} style={{
+            display: "grid", gridTemplateColumns: "1fr 52px 52px 52px",
+            gap: "4px", alignItems: "center",
+            padding: "7px 8px", borderRadius: "7px",
+            background: ok ? "#f8f9fa" : "#fff8f8",
+            border: ok ? "1px solid transparent" : `1px solid #fde8e8`,
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.25s ease ${i * 0.12}s`,
+          }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, color: "#222", lineHeight: 1.3 }}>{desc}</div>
+            {[inv, po, gr].map((val, j) => (
+              <div key={j} style={{ fontSize: "10.5px", fontWeight: 600, textAlign: "center", color: !ok && j === 1 ? RED : "#444" }}>{val}</div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div style={{
+        padding: "7px 10px", borderRadius: "7px",
+        background: "#fff5f5", border: "1px solid #fde8e8",
+        display: "flex", alignItems: "center", gap: "8px",
+        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+      }}>
+        <span style={{ fontSize: "11px", color: RED }}>⚠</span>
+        <div>
+          <div style={{ fontSize: "11px", fontWeight: 700, color: RED }}>PO variance detected</div>
+          <div style={{ fontSize: "10px", color: "#b91c1c" }}>Delivery & installation: €40 over PO — held for review</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Agent 4 (renumbered): Fraud & Risk Agent ─────────────────────────────────
 export function AgentFraudRiskCard({ active, exit, variant = "compact" }: CardProps) {
   const signals = [
     { label: "Bank account changed 3 days ago", severity: "high",   icon: "⚠" },

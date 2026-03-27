@@ -15,7 +15,7 @@ import {
   PMCard0, PMCard1, PMCard2, PMFraudPreventionCard, PMDisputeCard,
   SMCard0, SMCard1, SMCard2,
   EXCard0, EXCard1, EXCard2,
-  AgentCaptureCard, AgentCodingCard, AgentFraudRiskCard,
+  AgentCaptureCard, AgentCodingCard, AgentPOConnectCard, AgentFraudRiskCard,
   AgentCopilotCard, AgentSupplierCard, AgentPaymentsCard,
 } from "@/components/CardComponents";
 
@@ -83,12 +83,13 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
   {
     group: "Medius Agents",
     cards: [
-      { id: "agent-capture",  label: "Invoice Capture Agent",  Component: AgentCaptureCard  },
-      { id: "agent-coding",   label: "Invoice Coding Agent",   Component: AgentCodingCard   },
-      { id: "agent-fraud",    label: "Fraud & Risk Agent",    Component: AgentFraudRiskCard },
-      { id: "agent-copilot",  label: "Approvals Agent",             Component: AgentCopilotCard  },
-      { id: "agent-supplier", label: "Supplier Inquiries Agent",      Component: AgentSupplierCard  },
-      { id: "agent-payments", label: "Payment Optimization Agent",  Component: AgentPaymentsCard  },
+      { id: "agent-capture",    label: "Invoice Capture Agent",      Component: AgentCaptureCard    },
+      { id: "agent-coding",     label: "Invoice Coding Agent",       Component: AgentCodingCard     },
+      { id: "agent-po-connect", label: "PO Connect Agent",           Component: AgentPOConnectCard  },
+      { id: "agent-fraud",      label: "Fraud & Risk Agent",         Component: AgentFraudRiskCard  },
+      { id: "agent-copilot",    label: "Approvals Agent",            Component: AgentCopilotCard    },
+      { id: "agent-supplier",   label: "Supplier Inquiries Agent",   Component: AgentSupplierCard   },
+      { id: "agent-payments",   label: "Payment Optimization Agent", Component: AgentPaymentsCard   },
     ],
   },
 ];

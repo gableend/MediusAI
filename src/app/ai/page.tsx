@@ -6,6 +6,7 @@ import {
   AgentCaptureCard,
   AgentFraudRiskCard,
   AgentSupplierCard,
+  AgentPOConnectCard,
 } from "@/components/CardComponents";
 
 const RED  = "#da2028";
@@ -18,7 +19,7 @@ const HOLD = [5000, 5000, 5000];
 
 // ─── Agent data for body sections ─────────────────────────────────────────────
 
-const AGENTS = [
+const AP_AGENTS = [
   {
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -49,15 +50,16 @@ const AGENTS = [
   {
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+        <rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" strokeWidth="1.7"/>
         <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    label: "Fraud & Risk Agent",
-    headline: "Pre- and post-transaction fraud detection",
+    label: "PO Connect Agent",
+    headline: "Automated 3-way PO matching",
     description:
-      "Monitors anomalies across the entire payment lifecycle — from invoice submission through to settlement — flagging risks before money moves.",
-    stat: "Real-time alerts",
+      "Matches every invoice line against purchase orders and goods receipts automatically. Flags variances instantly and holds exceptions for review — without manual effort.",
+    stat: "Variance detection at line level",
   },
   {
     icon: (
@@ -86,6 +88,22 @@ const AGENTS = [
       "Responds to supplier invoice and payment inquiries instantly, around the clock. Fully autonomous — no human handoff needed for standard queries.",
     stat: "100% auto-resolved",
   },
+];
+
+const SM_AGENTS = [
+  {
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    label: "Fraud & Risk Agent",
+    headline: "Pre- and post-transaction fraud detection",
+    description:
+      "Monitors anomalies across the entire payment lifecycle — from invoice submission through to settlement — flagging risks before money moves.",
+    stat: "Real-time alerts",
+  },
   {
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
@@ -110,6 +128,46 @@ const BENEFITS = [
   { icon: "🛡️", title: "Continuous fraud detection",   body: "Anomaly tracking across the full invoice-to-pay lifecycle — not just at point of payment." },
   { icon: "🌱", title: "Built to grow with you",       body: "Agents learn from every transaction, continuously improving accuracy and coverage." },
 ];
+
+// ─── Shared agent card component ──────────────────────────────────────────────
+function AgentCard({ icon, label, headline, description, stat }: {
+  icon: React.ReactNode; label: string; headline: string; description: string; stat: string;
+}) {
+  return (
+    <div style={{
+      background: "#f8f9fa", border: "1px solid #e8ecec",
+      borderRadius: "16px", padding: "30px 26px",
+      display: "flex", flexDirection: "column", gap: "10px",
+    }}>
+      <div style={{
+        width: "46px", height: "46px", borderRadius: "12px",
+        background: "white", border: "1px solid #e0e8e8",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        color: DARK, marginBottom: "2px", flexShrink: 0,
+      }}>
+        {icon}
+      </div>
+      <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px" }}>
+        {label}
+      </div>
+      <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.3 }}>
+        {headline}
+      </div>
+      <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", flex: 1, margin: 0 }}>
+        {description}
+      </p>
+      <div style={{
+        display: "inline-flex", alignItems: "center", gap: "6px",
+        marginTop: "4px", padding: "4px 11px",
+        background: "rgba(132,152,92,0.1)", borderRadius: "9999px",
+        alignSelf: "flex-start",
+      }}>
+        <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS, flexShrink: 0 }} />
+        <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{stat}</span>
+      </div>
+    </div>
+  );
+}
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -161,7 +219,7 @@ export default function AIPage() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            right: "-200px",
+            right: "-230px",
             top: 0,
             height: "100%",
             width: "62%",
@@ -253,7 +311,7 @@ export default function AIPage() {
           </div>
 
           {/* ── Right: cycling agent cards ── */}
-          <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "-250px", marginTop: "30px" }}>
+          <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "-280px", marginTop: "30px" }}>
             <div style={{ position: "relative", width: "360px" }}>
 
               {/* Active label */}
@@ -403,59 +461,53 @@ export default function AIPage() {
         </div>
       </section>
 
-      {/* ── Meet the Agents ────────────────────────────────────────────────── */}
+      {/* ── Meet the Medius AP Agents ──────────────────────────────────────── */}
       <section style={{ background: "white", padding: "96px 32px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
             <div style={{ fontSize: "11px", fontWeight: 600, color: SAND, textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px" }}>
-              Purpose-built AI
+              Accounts Payable
             </div>
             <h2 style={{
               fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700,
               lineHeight: 1.1, letterSpacing: "-0.7px", color: DARK, marginBottom: "14px",
             }}>
-              Meet the Medius Agents
+              Meet the Medius AP Agents
             </h2>
             <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
-              Six specialized agents — each an expert in its domain — working in concert
-              to deliver fully autonomous invoice-to-pay processing.
+              Five specialized agents working in sequence to deliver fully autonomous invoice-to-pay processing — from first touch to final payment.
             </p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-            {AGENTS.map(({ icon, label, headline, description, stat }) => (
-              <div key={label} style={{
-                background: "#f8f9fa", border: "1px solid #e8ecec",
-                borderRadius: "16px", padding: "30px 26px",
-                display: "flex", flexDirection: "column", gap: "10px",
-              }}>
-                <div style={{
-                  width: "46px", height: "46px", borderRadius: "12px",
-                  background: "white", border: "1px solid #e0e8e8",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  color: DARK, marginBottom: "2px", flexShrink: 0,
-                }}>
-                  {icon}
-                </div>
-                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px" }}>
-                  {label}
-                </div>
-                <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.3 }}>
-                  {headline}
-                </div>
-                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", flex: 1, margin: 0 }}>
-                  {description}
-                </p>
-                <div style={{
-                  display: "inline-flex", alignItems: "center", gap: "6px",
-                  marginTop: "4px", padding: "4px 11px",
-                  background: "rgba(132,152,92,0.1)", borderRadius: "9999px",
-                  alignSelf: "flex-start",
-                }}>
-                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS, flexShrink: 0 }} />
-                  <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{stat}</span>
-                </div>
-              </div>
+            {AP_AGENTS.map(({ icon, label, headline, description, stat }) => (
+              <AgentCard key={label} icon={icon} label={label} headline={headline} description={description} stat={stat} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Spend Management Agents ────────────────────────────────────────── */}
+      <section style={{ background: "#f8f9fa", padding: "96px 32px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "56px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, color: SAND, textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px" }}>
+              Spend Management
+            </div>
+            <h2 style={{
+              fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700,
+              lineHeight: 1.1, letterSpacing: "-0.7px", color: DARK, marginBottom: "14px",
+            }}>
+              Spend Management Agents
+            </h2>
+            <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
+              Agents that extend intelligence beyond AP — protecting payments and optimizing how and when money moves.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px", maxWidth: "740px", margin: "0 auto" }}>
+            {SM_AGENTS.map(({ icon, label, headline, description, stat }) => (
+              <AgentCard key={label} icon={icon} label={label} headline={headline} description={description} stat={stat} />
             ))}
           </div>
         </div>
