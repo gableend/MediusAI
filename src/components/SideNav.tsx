@@ -75,7 +75,7 @@ export default function SideNav() {
         </nav>
       </div>
 
-      {/* Tab handle — always visible on the right edge */}
+      {/* Tab handle -- always visible on the right edge */}
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Close navigation" : "Open navigation"}
@@ -110,7 +110,7 @@ export default function SideNav() {
         )}
       </button>
 
-      {/* Backdrop — closes panel when clicking outside */}
+      {/* Backdrop -- closes panel when clicking outside */}
       {open && (
         <div
           onClick={() => setOpen(false)}

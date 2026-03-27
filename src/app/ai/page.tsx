@@ -38,7 +38,7 @@ const AP_AGENTS = [
     label: "Invoice Capture Agent",
     headline: "100% touchless invoice capture",
     description:
-      "Extracts vendor, amount, PO, and line items from any format — PDF, image, or eInvoice — trained on hundreds of millions of real invoices.",
+      "Extracts vendor, amount, PO, and line items from any format: PDF, image, or eInvoice. Trained on hundreds of millions of real invoices.",
     stat: "100M+ invoices in training data",
   },
   {
@@ -50,7 +50,7 @@ const AP_AGENTS = [
     label: "Invoice Coding Agent",
     headline: "96%+ touchless invoice processing",
     description:
-      "Learns your GL coding rules after just two invoices. Applies account codes, cost centres, and routing automatically — no templates required.",
+      "Learns your GL coding rules after just two invoices. Applies account codes, cost centres, and routing automatically, with no templates required.",
     stat: "Live after 2 invoices",
   },
   {
@@ -64,7 +64,7 @@ const AP_AGENTS = [
     label: "PO Connect Agent",
     headline: "Automated 3-way PO matching",
     description:
-      "Matches every invoice line against purchase orders and goods receipts automatically. Flags variances instantly and holds exceptions for review — without manual effort.",
+      "Matches every invoice line against purchase orders and goods receipts automatically. Flags variances instantly and holds exceptions for review without manual effort.",
     stat: "Variance detection at line level",
   },
   {
@@ -91,7 +91,7 @@ const AP_AGENTS = [
     label: "Supplier Inquiries Agent",
     headline: "24/7 autonomous supplier responses",
     description:
-      "Responds to supplier invoice and payment inquiries instantly, around the clock. Fully autonomous — no human handoff needed for standard queries.",
+      "Responds to supplier invoice and payment inquiries instantly, around the clock. Fully autonomous with no human handoff needed for standard queries.",
     stat: "100% auto-resolved",
   },
   {
@@ -105,7 +105,7 @@ const AP_AGENTS = [
     label: "Statement Reconciliation Agent",
     headline: "Automated supplier statement matching",
     description:
-      "Matches supplier statements against the AP ledger automatically — identifying matched items, variances, and missing invoices without manual effort.",
+      "Matches supplier statements against the AP ledger automatically, identifying matched items, variances, and missing invoices without manual effort.",
     stat: "Discrepancies surfaced instantly",
   },
   {
@@ -118,7 +118,7 @@ const AP_AGENTS = [
     label: "Fraud & Risk Detection Agent",
     headline: "Pre- and post-transaction fraud detection",
     description:
-      "Monitors anomalies across the entire payment lifecycle — from invoice submission through to settlement — flagging risks before money moves.",
+      "Monitors anomalies across the entire payment lifecycle from invoice submission through to settlement, flagging risks before money moves.",
     stat: "Real-time alerts",
   },
 ];
@@ -128,14 +128,14 @@ const EM_AGENTS = [
     label: "Expense Processing Agent",
     headline: "Auto-categorised expense processing",
     description:
-      "Automatically reads, categorises, and policy-checks employee expenses — from receipts to reimbursement — without manual review.",
+      "Automatically reads, categorises, and policy-checks employee expenses from receipts to reimbursement without manual review.",
     stat: "Automatically read and categorize receipts.",
   },
   {
     label: "Suspicious Expense Agent",
     headline: "AI-powered suspicious detection",
     description:
-      "Scores and categorises every transaction for suspicious behaviour — flagging unusual amounts, unexpected countries, and unknown merchants for instant review.",
+      "Scores and categorises every transaction for suspicious behaviour, flagging unusual amounts, unexpected countries, and unknown merchants for instant review.",
     stat: "AI learns from every review decision",
   },
 ];
@@ -145,7 +145,7 @@ const BENEFITS: { icon: React.ReactNode; title: string; body: string }[] = [
   { icon: <MagnifyingGlass size={28} weight="duotone" color={SAND} />,  title: "Superior control and visibility", body: "All financial data flows through a single, centralized AI-managed hub." },
   { icon: <Handshake size={28} weight="duotone" color={SAND} />,        title: "Stronger vendor relationships",   body: "On-time payments and instant query resolution improve supplier trust at scale." },
   { icon: <Drop size={28} weight="duotone" color={SAND} />,             title: "Increase liquidity",              body: "Better cash flow forecasting and early payment discount capture improve working capital." },
-  { icon: <ShieldCheck size={28} weight="duotone" color={SAND} />,      title: "Continuous fraud detection",      body: "Anomaly tracking across the full invoice-to-pay lifecycle — not just at point of payment." },
+  { icon: <ShieldCheck size={28} weight="duotone" color={SAND} />,      title: "Continuous fraud detection",      body: "Anomaly tracking across the full invoice-to-pay lifecycle, not just at point of payment." },
   { icon: <Plant size={28} weight="duotone" color={SAND} />,            title: "Built to grow with you",          body: "Agents learn from every transaction, continuously improving accuracy and coverage." },
 ];
 
@@ -257,7 +257,7 @@ export default function AIPage() {
           background: DARK,
         }}
       >
-        {/* Right-side hero photo — masked on left edge for smooth blend */}
+        {/* Right-side hero photo -- masked on left edge for smooth blend */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/homepage-hero.jpg"
@@ -286,7 +286,7 @@ export default function AIPage() {
           }}
         />
 
-        {/* Content row — left edge aligns with Medius logo (32px padding, max-w-1400) */}
+        {/* Content row -- left edge aligns with Medius logo (32px padding, max-w-1400) */}
         <div
           style={{
             position: "relative",
@@ -300,7 +300,7 @@ export default function AIPage() {
             gap: "60px",
           }}
         >
-          {/* ── Left: headline + CTAs — flush with logo left edge ── */}
+          {/* ── Left: headline + CTAs -- flush with logo left edge ── */}
           <div style={{ flex: "0 0 500px", paddingLeft: 0 }}>
             {/* Eyebrow */}
             <div style={{
@@ -521,7 +521,7 @@ export default function AIPage() {
               Meet the Medius AP Agents
             </h2>
             <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
-              AP-focused agents that enable autonomous processing and autonomous governance — with finance teams always in control.
+              AP-focused agents that enable autonomous processing and autonomous governance, with finance teams always in control.
             </p>
           </div>
 
@@ -628,7 +628,7 @@ export default function AIPage() {
               Expense Management Agents
             </h2>
             <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "460px", margin: "0 auto" }}>
-              Autonomous processing and fraud detection for employee expenses — from submission to reimbursement, without manual review.
+              Autonomous processing and fraud detection for employee expenses from submission to reimbursement, without manual review.
             </p>
           </div>
 
@@ -710,7 +710,7 @@ export default function AIPage() {
                 <span style={{ color: SAND }}>on new agents.</span>
               </h2>
               <p style={{ fontSize: "15.5px", lineHeight: 1.75, color: "rgba(255,255,255,0.65)", marginBottom: "14px" }}>
-                From procurement and supplier onboarding, to payments and expense management —
+                From procurement and supplier onboarding, to payments and expense management.
                 new agents are being built across the full Medius suite.
               </p>
               <p style={{ fontSize: "15.5px", lineHeight: 1.75, color: "rgba(255,255,255,0.65)", marginBottom: "32px" }}>
@@ -811,12 +811,12 @@ export default function AIPage() {
             </h2>
             <p style={{ fontSize: "15px", lineHeight: 1.75, color: "rgba(255,255,255,0.65)", marginBottom: "14px" }}>
               Traditional automation removes tasks. Medius Agents remove people from processes
-              entirely — freeing your team to focus on cash strategy, vendor relationships,
+              entirely, freeing your team to focus on cash strategy, vendor relationships,
               and the decisions that matter.
             </p>
             <p style={{ fontSize: "15px", lineHeight: 1.75, color: "rgba(255,255,255,0.65)", marginBottom: "32px" }}>
               When every agent learns from every transaction, the system doesn't just maintain
-              performance — it continuously improves it.
+              performance. It continuously improves it.
             </p>
             <button style={{
               background: RED, color: "white", border: `2px solid ${RED}`,
@@ -862,7 +862,7 @@ export default function AIPage() {
             Ready to put Medius Agents to work?
           </h2>
           <p style={{ fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.82)", marginBottom: "34px" }}>
-            See how our agents handle your invoice volume — from capture to payment — in a personalized demo.
+            See how our agents handle your invoice volume from capture to payment in a personalized demo.
           </p>
           <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
             <button style={{

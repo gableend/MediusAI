@@ -34,7 +34,7 @@ export function CardHeader({ title, badge }: { title: string; badge?: string }) 
 // ══════════════════════════════════════════════════════════════════════════════
 
 // ─── AP-0: Invoice capture ────────────────────────────────────────────────────
-// Compact (560px): vertical stack — no grid, wider rows, clean icons
+// Compact (560px): vertical stack -- no grid, wider rows, clean icons
 // Full (360px):    2-col grid + summary footer
 export function APCard0({ active, exit, variant = "compact" }: CardProps) {
   const formats = [
@@ -48,7 +48,7 @@ export function APCard0({ active, exit, variant = "compact" }: CardProps) {
       <CardHeader title="Treat every invoice equally" badge="Any format" />
 
       {variant === "compact" ? (
-        /* ── Compact: vertical stack — 3 items only ── */
+        /* ── Compact: vertical stack -- 3 items only ── */
         <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
           {formats.slice(0, 3).map(({ type, abbr, source, delay }) => (
             <div key={type} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "6px 12px", background: "#f8f9fa", borderRadius: "8px" }}>
@@ -385,7 +385,7 @@ export function APApprovalCard({ active, exit, variant = "compact" }: CardProps)
   const allExchanges = [
     {
       q: "Tell me about this supplier",
-      a: "Dell Inc. — 47 invoices, avg. $3,850. No disputes ✓",
+      a: "Dell Inc.: 47 invoices, avg. $3,850. No disputes ✓",
       delay: 0.1,
     },
     {
@@ -428,7 +428,7 @@ export function APApprovalCard({ active, exit, variant = "compact" }: CardProps)
         ))}
       </div>
 
-      {/* Human action buttons — mirrors real Medius UI */}
+      {/* Human action buttons -- mirrors real Medius UI */}
       {variant === "full" && (
         <div style={{ display: "flex", gap: "6px" }}>
           <div style={{ flex: 1, padding: "7px 4px", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "7px", textAlign: "center", fontSize: "11px", fontWeight: 600, color: "#16a34a" }}>
@@ -454,14 +454,14 @@ export function APSupplierCard({ active, exit, variant = "compact" }: CardProps)
     {
       from: "supplier",
       sender: "ap@acmecorp.com",
-      subject: "Payment status — INV-4821",
+      subject: "Payment status: INV-4821",
       preview: "Hi, could you confirm when INV-4821 will be paid?",
       delay: 0,
     },
     {
       from: "ai",
       sender: "Medius AI",
-      subject: "Re: Payment status — INV-4821",
+      subject: "Re: Payment status: INV-4821",
       preview: "Payment scheduled Apr 5 via ACH. Status: Approved ✓",
       delay: 0.3,
     },
@@ -730,7 +730,7 @@ export function PMCard2({ active, exit, variant = "compact" }: CardProps) {
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <CardHeader title="Cash Flow Visibility" badge="Live" />
       <div style={{ marginBottom: "14px" }}>
-        <div style={{ fontSize: "10px", color: "#aaa", marginBottom: "6px" }}>DPO trend — last 6 months</div>
+        <div style={{ fontSize: "10px", color: "#aaa", marginBottom: "6px" }}>DPO trend: last 6 months</div>
         <div style={{ display: "flex", alignItems: "flex-end", gap: "5px", height: "48px" }}>
           {bars.map(({ label, h }, i) => (
             <div key={label} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "3px" }}>
@@ -771,7 +771,7 @@ export function PMFraudPreventionCard({ active, exit, variant = "compact" }: Car
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <CardHeader title="Card Fraud Prevention" badge="Real-time" />
 
-      {/* Push notification — pending */}
+      {/* Push notification -- pending */}
       <div style={{
         background: "white", borderRadius: "14px",
         boxShadow: "0 8px 28px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.07)",
@@ -826,7 +826,7 @@ export function PMDisputeCard({ active, exit, variant = "compact" }: CardProps) 
   const allDisputes = [
     { desc: "Software subscription renewal", employee: "Sarah K.", amount: "$149", status: "Investigating", statusColor: "#e07b00", step: 2 },
     { desc: "Hotel room upgrade charge",      employee: "James R.", amount: "$320", status: "Awaiting docs",  statusColor: "#e07b00", step: 1 },
-    { desc: "Team lunch — duplicate charge",  employee: "Mike T.",  amount: "$89",  status: "Resolved",      statusColor: "#5a8a5a", step: 3 },
+    { desc: "Team lunch: duplicate charge",  employee: "Mike T.",  amount: "$89",  status: "Resolved",      statusColor: "#5a8a5a", step: 3 },
   ];
   const disputes = variant === "compact" ? allDisputes.slice(0, 2) : allDisputes;
   const steps = ["Flagged", "Docs requested", "Resolved"];
@@ -898,7 +898,7 @@ export function SMCard0({ active, exit, variant = "compact" }: CardProps) {
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <CardHeader title="Budget vs Actual — Q1 2025" />
+      <CardHeader title="Budget vs Actual: Q1 2025" />
       <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "10px" }}>
         {depts.map(({ name, budget, actual, pct, over }) => (
           <div key={name}>
@@ -920,7 +920,7 @@ export function SMCard0({ active, exit, variant = "compact" }: CardProps) {
         ))}
       </div>
       <div style={{ padding: "8px 12px", background: "#fff5f5", borderRadius: "8px", fontSize: "11px", color: RED, fontWeight: 600 }}>
-        ⚠ Operations is 14% over budget — approval required
+        ⚠ Operations is 14% over budget -- approval required
       </div>
     </div>
   );
@@ -983,7 +983,7 @@ export function SMCard2({ active, exit, variant = "compact" }: CardProps) {
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
-      <CardHeader title="Spend by Category — YTD" badge="Live" />
+      <CardHeader title="Spend by Category: YTD" badge="Live" />
       <div style={{ display: "flex", flexDirection: "column", gap: "9px", marginBottom: "12px" }}>
         {categories.map(({ name, amount, pct, color }) => (
           <div key={name} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -1073,7 +1073,7 @@ export function EXCard1({ active, exit, variant = "compact" }: CardProps) {
     { label: "Receipt attached",         ok: true,  delay: 0 },
     { label: "Within daily hotel limit", ok: true,  delay: 0.12 },
     { label: "Meal within $75 limit",    ok: true,  delay: 0.24 },
-    { label: "Airfare — economy class",  ok: true,  delay: 0.36 },
+    { label: "Airfare: economy class",  ok: true,  delay: 0.36 },
     { label: "Manager pre-approval",     ok: false, delay: 0.48 },
   ];
   const checks = variant === "compact" ? allChecks.slice(0, 4) : allChecks;
@@ -1231,7 +1231,7 @@ export function SMIntelligentIntakeCard({ active, exit, variant = "compact" }: C
             </div>
           </div>
 
-          {/* Extraction row — full only */}
+          {/* Extraction row -- full only */}
           {variant === "full" && (
             <div style={{
               background: "#f0f4ff", borderRadius: "7px", padding: "6px 9px",
@@ -1268,7 +1268,7 @@ export function SMIntelligentIntakeCard({ active, exit, variant = "compact" }: C
               Re: Bank detail update request
             </div>
             <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.65)" }}>
-              Done — sort code 12-34-56, Acc. ••••4321 updated from today ✓
+              Done: sort code 12-34-56, Acc. ••••4321 updated from today ✓
             </div>
           </div>
         </div>
@@ -1326,7 +1326,7 @@ export function APSupplierOnboardingCard({ active, exit, variant = "compact" }: 
         </div>
       </div>
 
-      {/* 3-step progress bar — full variant only */}
+      {/* 3-step progress bar -- full variant only */}
       {variant !== "compact" && (
         <div style={{ display: "flex", alignItems: "center", marginBottom: "12px" }}>
           {steps.map(({ label, done }, i) => (
@@ -1380,7 +1380,7 @@ export function APSupplierOnboardingCard({ active, exit, variant = "compact" }: 
         ))}
       </div>
 
-      {/* Stat tiles — full only */}
+      {/* Stat tiles -- full only */}
       {variant === "full" && (
         <div style={{ display: "flex", gap: "8px" }}>
           {[
@@ -1431,7 +1431,7 @@ export function APAnalyticsCard({ active, exit, variant = "compact" }: CardProps
       <div style={{ marginBottom: variant === "full" ? "12px" : 0 }}>
         {variant === "full" && (
           <div style={{ fontSize: "9px", fontWeight: 600, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "8px" }}>
-            Invoice processing — last 30 days
+            Invoice processing: last 30 days
           </div>
         )}
         <div style={{ display: "flex", flexDirection: "column", gap: variant === "compact" ? "6px" : "8px" }}>
@@ -1453,7 +1453,7 @@ export function APAnalyticsCard({ active, exit, variant = "compact" }: CardProps
         </div>
       </div>
 
-      {/* Fire Station callout — full only */}
+      {/* Fire Station callout -- full only */}
       {variant === "full" && (
         <div style={{
           display: "flex", alignItems: "center", gap: "10px",
@@ -1492,7 +1492,7 @@ export function SMSourcingCard({ active, exit, variant = "compact" }: CardProps)
         background: "#f8f9fa", borderRadius: "8px", padding: "8px 12px", marginBottom: "10px",
       }}>
         <div>
-          <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>Q3 IT Equipment — Round 2 of 2</div>
+          <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>Q3 IT Equipment: Round 2 of 2</div>
           <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>3 suppliers · Responses scored</div>
         </div>
         <span style={{ fontSize: "10px", fontWeight: 600, color: "#2563eb", background: "#e3eef8", borderRadius: "100px", padding: "2px 8px" }}>
@@ -1529,7 +1529,7 @@ export function SMSourcingCard({ active, exit, variant = "compact" }: CardProps)
         ))}
       </div>
 
-      {/* Savings callout — full only */}
+      {/* Savings callout -- full only */}
       {variant === "full" && (
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -1587,10 +1587,10 @@ export function SMContractCard({ active, exit, variant = "compact" }: CardProps)
         opacity: active ? 1 : 0, transition: "opacity 0.4s ease 0.45s",
         marginBottom: variant === "full" ? "10px" : 0,
       }}>
-        ⏰ Microsoft EA renewal in 14 days — action required
+        ⏰ Microsoft EA renewal in 14 days -- action required
       </div>
 
-      {/* Stat tiles — full only */}
+      {/* Stat tiles -- full only */}
       {variant === "full" && (
         <div style={{ display: "flex", gap: "8px" }}>
           {[
@@ -1641,7 +1641,7 @@ export function SMProcurementCard({ active, exit, variant = "compact" }: CardPro
           </svg>
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>IT Equipment — 4 items</div>
+          <div style={{ fontSize: "11px", fontWeight: 700, color: "#111" }}>IT Equipment: 4 items</div>
           <div style={{ fontSize: "9px", color: "#aaa", marginTop: "1px" }}>Req-4421 · $12,450 · Dell Technologies</div>
         </div>
       </div>
@@ -1667,7 +1667,7 @@ export function SMProcurementCard({ active, exit, variant = "compact" }: CardPro
         ))}
       </div>
 
-      {/* Spend tiles — full only */}
+      {/* Spend tiles -- full only */}
       {variant === "full" && (
         <div style={{ display: "flex", gap: "8px" }}>
           {[
@@ -1757,7 +1757,7 @@ export function SMContractIntakeCard({ active, exit, variant = "compact" }: Card
         ✓ Classified · stored in repository · renewal alert set
       </div>
 
-      {/* Stat tiles — full only */}
+      {/* Stat tiles -- full only */}
       {variant === "full" && (
         <div style={{ display: "flex", gap: "8px" }}>
           {[
@@ -1777,46 +1777,46 @@ export function SMContractIntakeCard({ active, exit, variant = "compact" }: Card
 
 // ─── AP Capabilities metadata ──────────────────────────────────────────────────
 export const AP_CAPABILITIES = [
-  { id: "invoice-capture",          label: "Invoice capture",          title: "No invoice left behind.",                shortDescription: "Every format, every channel — captured and digitised automatically, with zero manual keying.",                                              url: "https://www.medius.com/solutions/medius-accounts-payable-automation/invoice-capture/" },
+  { id: "invoice-capture",          label: "Invoice capture",          title: "No invoice left behind.",                shortDescription: "Every format, every channel -- captured and digitised automatically, with zero manual keying.",                                              url: "https://www.medius.com/solutions/medius-accounts-payable-automation/invoice-capture/" },
   { id: "invoice-automation",       label: "Invoice automation",       title: "From inbox to approved, automatically.", shortDescription: "Matching, coding, and routing handled end-to-end so your team only touches genuine exceptions.",                                         url: "https://www.medius.com/solutions/medius-accounts-payable-automation/invoice-automation/" },
   { id: "ai-approvals",             label: "AI-assisted approvals",    title: "Smarter approvals, faster decisions.",   shortDescription: "AI recommends the right action on every invoice so approvers act in seconds, not days.",                                                url: "https://www.medius.com/solutions/medius-copilot/" },
   { id: "fraud-risk",               label: "Fraud & risk detection",   title: "Stop fraud before it costs you.",        shortDescription: "Real-time anomaly detection flags suspicious invoices before a single payment leaves your account.",                                    url: "https://www.medius.com/solutions/fraud-risk-detection/" },
-  { id: "straight-through-payments",label: "Payment automation",       title: "Approved invoices pay themselves.",      shortDescription: "Once approved, invoices flow directly to payment — no manual runs, no missed due dates.",                                              url: "https://www.medius.com/solutions/medius-payments/" },
-  { id: "invoicing-compliance",      label: "e-Invoicing & compliance",  title: "Comply globally, automatically.",        shortDescription: "Stay ahead of e-invoicing mandates, VAT rules, and archiving requirements across 15+ countries — handled by Medius, not your team.",    url: "https://www.medius.com/solutions/medius-accounts-payable-automation/compliance/" },
-  { id: "supplier-conversations",   label: "Supplier conversations",   title: "Handle supplier queries at scale.",      shortDescription: "AI answers routine supplier questions automatically — invoice status, payment dates, disputes — 24/7.",                                url: "https://www.medius.com/solutions/supplier-conversations/" },
+  { id: "straight-through-payments",label: "Payment automation",       title: "Approved invoices pay themselves.",      shortDescription: "Once approved, invoices flow directly to payment -- no manual runs, no missed due dates.",                                              url: "https://www.medius.com/solutions/medius-payments/" },
+  { id: "invoicing-compliance",      label: "e-Invoicing & compliance",  title: "Comply globally, automatically.",        shortDescription: "Stay ahead of e-invoicing mandates, VAT rules, and archiving requirements across 15+ countries -- handled by Medius, not your team.",    url: "https://www.medius.com/solutions/medius-accounts-payable-automation/compliance/" },
+  { id: "supplier-conversations",   label: "Supplier conversations",   title: "Handle supplier queries at scale.",      shortDescription: "AI answers routine supplier questions automatically -- invoice status, payment dates, disputes -- 24/7.",                                url: "https://www.medius.com/solutions/supplier-conversations/" },
   { id: "statement-reconciliation", label: "Statement reconciliation", title: "Reconcile in minutes, not days.",        shortDescription: "AI matches every supplier statement against your ledger and surfaces every discrepancy instantly.",                                    url: "https://www.medius.com/solutions/medius-accounts-payable-automation/statement-reconciliation/" },
-  { id: "erp-integrations",         label: "ERP integrations",         title: "Your ERP, connected in days.",           shortDescription: "50+ pre-built connectors to SAP, Oracle, Dynamics, NetSuite and more — maintained by Medius, not you.",                              url: "https://www.medius.com/solutions/medius-connect/" },
+  { id: "erp-integrations",         label: "ERP integrations",         title: "Your ERP, connected in days.",           shortDescription: "50+ pre-built connectors to SAP, Oracle, Dynamics, NetSuite and more -- maintained by Medius, not you.",                              url: "https://www.medius.com/solutions/medius-connect/" },
   { id: "analytics",                label: "Analytics",                title: "From reactive to predictive.",           shortDescription: "Real-time dashboards surface touchless rates, bottlenecks, and cash flow insights so your team acts on facts, not gut feel.",            url: "https://www.medius.com/solutions/medius-analytics/" },
 ];
 
 // ─── Card component per AP capability (index matches AP_CAPABILITIES) ──────────
 export const AP_CAPABILITY_CARDS: React.ComponentType<CardProps>[] = [
-  APCard0,          // 0 — Invoice capture
-  APAutoFlowCard,   // 1 — Invoice automation
-  APApprovalCard,   // 2 — AI-assisted approvals
-  APCard2,          // 3 — Fraud & risk detection
-  PMCard0,          // 4 — Payment automation
-  APCard3,          // 5 — e-Invoicing
-  APSupplierCard,   // 6 — Supplier conversations
-  APReconCard,      // 7 — Statement reconciliation
-  APCard1,          // 8 — ERP integrations
-  APAnalyticsCard,  // 9 — Analytics
+  APCard0,          // 0 -- Invoice capture
+  APAutoFlowCard,   // 1 -- Invoice automation
+  APApprovalCard,   // 2 -- AI-assisted approvals
+  APCard2,          // 3 -- Fraud & risk detection
+  PMCard0,          // 4 -- Payment automation
+  APCard3,          // 5 -- e-Invoicing
+  APSupplierCard,   // 6 -- Supplier conversations
+  APReconCard,      // 7 -- Statement reconciliation
+  APCard1,          // 8 -- ERP integrations
+  APAnalyticsCard,  // 9 -- Analytics
 ];
 
 // ─── Spend Management capabilities metadata ───────────────────────────────────
 export const SM_CAPABILITIES = [
-  { id: "sourcing",             label: "Sourcing",             title: "Win better deals, faster.",             shortDescription: "Run RFX events, quick quotes, and eAuctions with automated supplier scoring — cut sourcing cycles by 17% and deliver 1.9× greater savings.",   url: "https://www.medius.com/solutions/medius-sourcing/" },
-  { id: "contract-management", label: "Contract Management",   title: "Every contract, always in control.",     shortDescription: "Centralise contracts, automate renewal alerts, and cut lapsed agreements by 39% — so you never miss a deadline or a renegotiation window.",   url: "https://www.medius.com/solutions/medius-contract-management/" },
+  { id: "sourcing",             label: "Sourcing",             title: "Win better deals, faster.",             shortDescription: "Run RFX events, quick quotes, and eAuctions with automated supplier scoring -- cut sourcing cycles by 17% and deliver 1.9× greater savings.",   url: "https://www.medius.com/solutions/medius-sourcing/" },
+  { id: "contract-management", label: "Contract Management",   title: "Every contract, always in control.",     shortDescription: "Centralise contracts, automate renewal alerts, and cut lapsed agreements by 39% -- so you never miss a deadline or a renegotiation window.",   url: "https://www.medius.com/solutions/medius-contract-management/" },
   { id: "supplier-onboarding", label: "Supplier Onboarding",   title: "Ready to trade from day one.",           shortDescription: "Suppliers self-serve their own data through guided forms. Registry checks, bank validation, and compliance rules run automatically.",            url: "https://www.medius.com/solutions/supplier-onboarding/" },
-  { id: "procurement",         label: "Procurement",           title: "Spend that stays on policy.",           shortDescription: "A consumer-style buying experience with hard budget controls, catalogue punchouts, and automatic PO matching — maverick spend eliminated.",    url: "https://www.medius.com/solutions/medius-procurement-solutions/" },
+  { id: "procurement",         label: "Procurement",           title: "Spend that stays on policy.",           shortDescription: "A consumer-style buying experience with hard budget controls, catalogue punchouts, and automatic PO matching -- maverick spend eliminated.",    url: "https://www.medius.com/solutions/medius-procurement-solutions/" },
 ];
 
 // ─── Card component per SM capability (index matches SM_CAPABILITIES) ──────────
 export const SM_CAPABILITY_CARDS: React.ComponentType<CardProps>[] = [
-  SMSourcingCard,          // 0 — Sourcing
-  SMContractCard,          // 1 — Contract Management
-  APSupplierOnboardingCard,// 2 — Supplier Onboarding
-  SMProcurementCard,       // 3 — Procurement
+  SMSourcingCard,          // 0 -- Sourcing
+  SMContractCard,          // 1 -- Contract Management
+  APSupplierOnboardingCard,// 2 -- Supplier Onboarding
+  SMProcurementCard,       // 3 -- Procurement
 ];
 
 // ─── Card sets for Spend / Expenses carousels ────────────────────────────────
@@ -1831,20 +1831,20 @@ export const EX_CAPABILITIES = [
     id: "expense-management",
     label: "Expense Management",
     title: "Automated expense processing, start to finish.",
-    shortDescription: "From receipt capture to reimbursement, Medius enforces policy automatically and gets employees paid faster — without manual review.",
+    shortDescription: "From receipt capture to reimbursement, Medius enforces policy automatically and gets employees paid faster -- without manual review.",
     url: "https://www.medius.com/solutions/expense-management/",
   },
   {
     id: "expense-cards",
     label: "Expense Cards",
     title: "Smart cards with built-in spend controls.",
-    shortDescription: "Issue virtual and physical cards with pre-approved limits and categories. Spend is captured and reconciled automatically — no expense reports required.",
+    shortDescription: "Issue virtual and physical cards with pre-approved limits and categories. Spend is captured and reconciled automatically -- no expense reports required.",
     url: "https://www.medius.com/solutions/",
   },
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// MEDIUS AGENTS — Six purpose-built AI agent cards
+// MEDIUS AGENTS -- Six purpose-built AI agent cards
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const MOSS  = "#84985c";
@@ -1940,7 +1940,7 @@ export function AgentCaptureCard({ active, exit, variant = "compact" }: CardProp
 // ─── Agent 2: Invoice Coding Agent ───────────────────────────────────────────
 export function AgentCodingCard({ active, exit, variant = "compact" }: CardProps) {
   const lines = [
-    { desc: "Office equipment — desks × 4",  gl: "7210 · Fixed Assets",    cc: "CC-101",  amt: "€2,800" },
+    { desc: "Office equipment: desks × 4",  gl: "7210 · Fixed Assets",    cc: "CC-101",  amt: "€2,800" },
     { desc: "Delivery & installation",        gl: "7350 · Services",         cc: "CC-101",  amt: "€620"  },
     { desc: "Extended warranty (2yr)",        gl: "7510 · Prepaid Expenses", cc: "CC-101",  amt: "€900"  },
   ];
@@ -2223,7 +2223,7 @@ export function AgentCopilotCard({ active, exit, variant = "compact" }: CardProp
       }}>
         <div style={{ fontSize: "9.5px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: "3px" }}>Copilot suggests</div>
         <div style={{ fontSize: "11px", color: "#444", lineHeight: 1.4 }}>
-          Approve TechSource & Apex. Hold Meridian — bank data mismatch flagged.
+          Approve TechSource & Apex. Hold Meridian -- bank data mismatch flagged.
         </div>
       </div>
     </div>
@@ -2242,7 +2242,7 @@ export function AgentSupplierCard({ active, exit, variant = "compact" }: CardPro
           <div style={{ display: "flex", alignItems: "flex-end", gap: "7px", opacity: active ? 1 : 0, transition: "opacity 0.25s ease 0.05s" }}>
             <div style={{ width: "22px", height: "22px", borderRadius: "50%", flexShrink: 0, background: SAND, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "8px", fontWeight: 700, color: "white" }}>AC</div>
             <div style={{ fontSize: "11px", lineHeight: 1.5, padding: "8px 11px", borderRadius: "10px 10px 10px 3px", background: "#f4f4f2", color: "#444", maxWidth: "82%" }}>
-              INV-5512 — can you confirm payment status? It's 14 days overdue.
+              INV-5512: can you confirm payment status? It's 14 days overdue.
             </div>
           </div>
           {/* AI response */}
@@ -2282,7 +2282,7 @@ export function AgentSupplierCard({ active, exit, variant = "compact" }: CardPro
             borderRadius: "10px 10px 10px 3px", background: "#f4f4f2", color: "#444",
             maxWidth: "82%",
           }}>
-            INV-5512 — can you confirm payment status? It's 14 days overdue.
+            INV-5512: can you confirm payment status? It's 14 days overdue.
           </div>
         </div>
 
@@ -2334,7 +2334,7 @@ export function AgentSupplierCard({ active, exit, variant = "compact" }: CardPro
             borderRadius: "10px 10px 10px 3px", background: "#f4f4f2", color: "#444",
             maxWidth: "82%",
           }}>
-            Thanks — can I get a copy of the remittance advice?
+            Thanks. Can I get a copy of the remittance advice?
           </div>
         </div>
 
@@ -2365,7 +2365,7 @@ export function AgentStatementReconCard({ active, exit, variant = "compact" }: C
   const items = [
     { ref: "INV-2024-0891", supplierAmt: "€4,320", ledgerAmt: "€4,320", status: "matched" },
     { ref: "INV-2024-0744", supplierAmt: "€1,850", ledgerAmt: "€1,750", status: "variance" },
-    { ref: "INV-2024-0612", supplierAmt: "€920",   ledgerAmt: "—",      status: "missing"  },
+    { ref: "INV-2024-0612", supplierAmt: "€920",   ledgerAmt: "-",      status: "missing"  },
   ];
   const visible = variant === "compact" ? items.slice(0, 2) : items;
 
@@ -2448,7 +2448,7 @@ export function AgentPaymentsCard({ active, exit, variant = "compact" }: CardPro
     {
       type: "Avoid overdue risk",
       value: "3 invoices",
-      detail: "4,220 EUR at risk — Global Metals overdue 2 days",
+      detail: "4,220 EUR at risk -- Global Metals overdue 2 days",
       urgency: "Pay within 48 hours",
       valueColor: RED,
       bg: "#fff8f8",
@@ -2547,10 +2547,10 @@ export function AgentPaymentsCard({ active, exit, variant = "compact" }: CardPro
 // ─── Agent 8: Expense Processing Agent ───────────────────────────────────────
 export function AgentExpenseProcessingCard({ active, exit, variant = "compact" }: CardProps) {
   const items = [
-    { desc: "Hotel — London, Nov 12",    cat: "Travel & Entertainment", amt: "£420", ok: true  },
-    { desc: "Taxi — Heathrow, Nov 12",   cat: "Travel",                 amt: "£48",  ok: true  },
-    { desc: "Team Lunch — Soho",         cat: "Meals & Entertainment",  amt: "£127", ok: false },
-    { desc: "Software — Annual licence", cat: "IT & Software",          amt: "£699", ok: true  },
+    { desc: "Hotel: London, Nov 12",    cat: "Travel & Entertainment", amt: "£420", ok: true  },
+    { desc: "Taxi: Heathrow, Nov 12",   cat: "Travel",                 amt: "£48",  ok: true  },
+    { desc: "Team Lunch: Soho",         cat: "Meals & Entertainment",  amt: "£127", ok: false },
+    { desc: "Software: Annual licence", cat: "IT & Software",          amt: "£699", ok: true  },
   ];
   const visible = variant === "compact" ? items.slice(0, 2) : items;
 
@@ -2614,7 +2614,7 @@ export function AgentExpenseFraudCard({ active, exit, variant = "compact" }: Car
           <div style={{ padding: "8px 12px" }}>
             <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#111", marginBottom: "3px" }}>Unusual transaction detected</div>
             <div style={{ fontSize: "10.5px", color: "#555", marginBottom: "8px", lineHeight: 1.4 }}>
-              <strong>Le Duplex Club, Paris</strong> — <strong>€247</strong> on card •••• 4429. Did you authorise this?
+              <strong>Le Duplex Club, Paris</strong>: <strong>€247</strong> on card •••• 4429. Did you authorise this?
             </div>
             <div style={{ display: "flex", gap: "8px" }}>
               <div style={{ flex: 1, textAlign: "center", padding: "6px 0", background: "#f5f5f5", borderRadius: "8px", fontSize: "11px", fontWeight: 700, color: "#555" }}>Yes, approve</div>
@@ -2631,7 +2631,7 @@ export function AgentExpenseFraudCard({ active, exit, variant = "compact" }: Car
       <AgentLabel name="Expense Card Fraud Agent" />
       <CardHeader title="Card Fraud Prevention" badge="Real-time" />
 
-      {/* Push notification — pending */}
+      {/* Push notification -- pending */}
       <div style={{
         background: "white", borderRadius: "14px",
         boxShadow: "0 8px 28px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.07)",
@@ -2771,8 +2771,8 @@ export function AgentSuspiciousExpenseCard({ active, exit, variant = "compact" }
 
 // ─── Card component per Expense capability (index matches EX_CAPABILITIES) ────
 export const EX_CAPABILITY_CARDS: React.ComponentType<CardProps>[] = [
-  AgentExpenseProcessingCard,  // 0 — Expense Management
-  EXCard2,                     // 1 — Expense Cards (reimbursements)
+  AgentExpenseProcessingCard,  // 0 -- Expense Management
+  EXCard2,                     // 1 -- Expense Cards (reimbursements)
 ];
 
 // ─── Agent card sets for /ai hero cycling ────────────────────────────────────
@@ -2789,7 +2789,7 @@ export const AGENT_HERO_LABELS = [
 ];
 
 // ══════════════════════════════════════════════════════════════════════════════
-// ROADMAP AGENT CARDS — Coming Soon workflow cards
+// ROADMAP AGENT CARDS -- Coming Soon workflow cards
 // ══════════════════════════════════════════════════════════════════════════════
 
 interface RoadmapConfig {
@@ -2797,7 +2797,7 @@ interface RoadmapConfig {
   steps: string[];
 }
 
-// ── Self-contained 240×240px square card — no .ap-card dependency ─────────────
+// ── Self-contained 240×240px square card -- no .ap-card dependency ─────────────
 function RoadmapAgentCardInner({ config, active }: { config: RoadmapConfig } & CardProps) {
   const { label, steps } = config;
   return (

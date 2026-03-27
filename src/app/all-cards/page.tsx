@@ -40,7 +40,7 @@ type CardEntry = {
 
 const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
   {
-    group: "AP Automation — Capability Cards",
+    group: "AP Automation: Capability Cards",
     cards: [
       { id: "invoice-capture",          label: "Invoice capture",          Component: APCard0 },
       { id: "invoice-automation",       label: "Invoice automation",       Component: APAutoFlowCard },
@@ -311,7 +311,7 @@ export default function AllCardsPage() {
         boxShadow: "0 2px 12px rgba(0,0,0,0.25)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-          {/* Medius logo — links back to homepage */}
+          {/* Medius logo -- links back to homepage */}
           <Link href="/" style={{ flexShrink: 0 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -364,7 +364,7 @@ export default function AllCardsPage() {
       {/* ── Content ── */}
       <div style={{ maxWidth: "1300px", margin: "0 auto", padding: "40px 40px 80px" }}>
 
-        {/* ── Square section (full variant) — listed first ── */}
+        {/* ── Square section (full variant) -- listed first ── */}
         <div style={{ marginBottom: "60px" }}>
           <VariantHeader variant="full" onDownloadAll={full.downloadAll} progress={full.progress} />
 
@@ -418,7 +418,7 @@ export default function AllCardsPage() {
 
       {/* ── CSS overrides for both render modes ── */}
       <style>{`
-        /* Compact: 560×240px — matches hero detail-panel dimensions */
+        /* Compact: 560×240px -- matches hero detail-panel dimensions */
         .all-cards-compact .ap-card {
           position: static !important;
           width: ${CARD_W_COMPACT}px !important;

@@ -30,7 +30,7 @@ const TABS = [
     label: "Spend Management",
     headline: "Total visibility across every dollar spent",
     description:
-      "From procurement through T&E, Medius gives finance leaders a single, unified view of company spend. Built-in policy controls prevent budget overruns before they happen — so you spend less time chasing receipts and more time steering the business.",
+      "From procurement through T&E, Medius gives finance leaders a single, unified view of company spend. Built-in policy controls prevent budget overruns before they happen, so you spend less time chasing receipts and more time steering the business.",
     stats: [
       { value: "100%",   label: "spend visibility across categories" },
       { value: "40%",    label: "reduction in maverick spend" },
@@ -42,7 +42,7 @@ const TABS = [
     label: "Expenses",
     headline: "Reimburse employees faster, with less friction.",
     description:
-      "Medius automates expense capture, policy enforcement, and reimbursement — so employees get paid quickly and finance teams stay in control. From receipt snap to approval, every step is guided, compliant, and audit-ready.",
+      "Medius automates expense capture, policy enforcement, and reimbursement, so employees get paid quickly and finance teams stay in control. From receipt snap to approval, every step is guided, compliant, and audit-ready.",
     stats: [
       { value: "80%",    label: "reduction in manual expense processing" },
       { value: "2 days", label: "average reimbursement time" },
@@ -65,7 +65,7 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-// ─── Card stage — mounts fresh on each tab switch via key prop ────────────────
+// ─── Card stage -- mounts fresh on each tab switch via key prop ────────────────
 function CardStage({ tabIndex }: { tabIndex: number }) {
   const [activeCard, setActiveCard] = useState<number>(-1);
   const [exitCard,   setExitCard]   = useState<number>(-1);
@@ -207,7 +207,7 @@ export default function ProductTabsSection() {
             /* ── AP Automation: two-row layout ── */
             <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
 
-              {/* Row 1 — headline + description, full width */}
+              {/* Row 1 -- headline + description, full width */}
               <div style={{ padding: "44px 48px 32px", borderBottom: "1px solid #f0f0f0" }}>
                 <span style={{
                   display: "block", marginBottom: "14px",
@@ -281,10 +281,10 @@ export default function ProductTabsSection() {
                 </div>
               </div>
 
-              {/* Row 2 — capability nav (left) + detail card (right) */}
+              {/* Row 2 -- capability nav (left) + detail card (right) */}
               <div style={{ display: "flex", flex: 1 }}>
 
-                {/* Left — capability list */}
+                {/* Left -- capability list */}
                 <div style={{
                   flex: "0 0 38%",
                   padding: "24px 0 32px 48px",
@@ -321,7 +321,7 @@ export default function ProductTabsSection() {
                   ))}
                 </div>
 
-                {/* Right — detail panel */}
+                {/* Right -- detail panel */}
                 <div style={{
                   flex: 1, padding: "32px 48px 40px",
                   display: "flex", flexDirection: "column",
@@ -369,7 +369,7 @@ export default function ProductTabsSection() {
               return (
                 <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
 
-                  {/* Row 1 — headline + description */}
+                  {/* Row 1 -- headline + description */}
                   <div style={{ padding: "44px 48px 32px", borderBottom: "1px solid #f0f0f0" }}>
                     <span style={{
                       display: "block", marginBottom: "14px",
@@ -425,10 +425,10 @@ export default function ProductTabsSection() {
                     </div>
                   </div>
 
-                  {/* Row 2 — capability nav (left) + detail card (right) */}
+                  {/* Row 2 -- capability nav (left) + detail card (right) */}
                   <div style={{ display: "flex", flex: 1 }}>
 
-                    {/* Left — capability list */}
+                    {/* Left -- capability list */}
                     <div style={{
                       flex: "0 0 38%", padding: "24px 0 32px 48px",
                       borderRight: "1px solid #f0f0f0",
@@ -463,7 +463,7 @@ export default function ProductTabsSection() {
                       ))}
                     </div>
 
-                    {/* Right — detail panel */}
+                    {/* Right -- detail panel */}
                     <div style={{
                       flex: 1, padding: "32px 48px 40px",
                       display: "flex", flexDirection: "column",
@@ -513,7 +513,7 @@ export default function ProductTabsSection() {
               return (
                 <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
 
-                  {/* Row 1 — headline + description */}
+                  {/* Row 1 -- headline + description */}
                   <div style={{ padding: "44px 48px 32px", borderBottom: "1px solid #f0f0f0" }}>
                     <span style={{
                       display: "block", marginBottom: "14px",
@@ -569,10 +569,10 @@ export default function ProductTabsSection() {
                     </div>
                   </div>
 
-                  {/* Row 2 — capability nav (left) + detail card (right) */}
+                  {/* Row 2 -- capability nav (left) + detail card (right) */}
                   <div style={{ display: "flex", flex: 1 }}>
 
-                    {/* Left — capability list */}
+                    {/* Left -- capability list */}
                     <div style={{
                       flex: "0 0 38%", padding: "24px 0 32px 48px",
                       borderRight: "1px solid #f0f0f0",
@@ -607,7 +607,7 @@ export default function ProductTabsSection() {
                       ))}
                     </div>
 
-                    {/* Right — detail panel */}
+                    {/* Right -- detail panel */}
                     <div style={{
                       flex: 1, padding: "32px 48px 40px",
                       display: "flex", flexDirection: "column",

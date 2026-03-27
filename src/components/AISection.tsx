@@ -10,7 +10,7 @@ const CARDS = [
   { title: "Invoice Capture Agent",           detail: "PDF, EDI, XML & paper captured touchlessly",      accent: "#6b8c8c", icon: "⬇" },
   { title: "Invoice Coding Agent",            detail: "GL coded · cost centre assigned · routed",        accent: "#4a7c7c", icon: "⇄" },
   { title: "Approvals Agent",                 detail: "INV-5512 · $4,200 · approved in 4 mins",          accent: "#16a34a", icon: "✓" },
-  { title: "Fraud & Risk Detection Agent",    detail: "Bank account mismatch — INV-7743 held",           accent: RED,       icon: "⚠" },
+  { title: "Fraud & Risk Detection Agent",    detail: "Bank account mismatch. INV-7743 held",           accent: RED,       icon: "⚠" },
   { title: "Statement Reconciliation Agent",  detail: "14 supplier statements matched automatically",    accent: "#ab9c6d", icon: "◎" },
   { title: "Supplier Inquiries Agent",        detail: "Auto-response sent · INV-4821 status confirmed",  accent: DARK,      icon: "↩" },
 ];
@@ -113,7 +113,7 @@ export default function AISection() {
           pointerEvents: "none",
         }} />
 
-        {/* Cards — stacked column, top-right, scroll-triggered */}
+        {/* Cards -- stacked column, top-right, scroll-triggered */}
         <div style={{
           position: "absolute",
           top: "32px",

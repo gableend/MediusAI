@@ -17,7 +17,7 @@ const LOGOS = [
   { name: "JJ Taylor",         src: "https://www.medius.com/media/rltfwhbh/jj-taylor.png?rmode=max&width=150&height=0" },
 ];
 
-// Duplicate for seamless infinite loop — first set scrolls off, second set
+// Duplicate for seamless infinite loop -- first set scrolls off, second set
 // is already in position. CSS animation loops at exactly -50% translateX.
 const TRACK = [...LOGOS, ...LOGOS];
 
@@ -46,7 +46,7 @@ export default function CustomerLogoBar() {
         Trusted by 3,000+ companies worldwide
       </p>
 
-      {/* Marquee wrapper — fade edges with a mask */}
+      {/* Marquee wrapper -- fade edges with a mask */}
       <div
         style={{
           position: "relative",

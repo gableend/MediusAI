@@ -26,7 +26,7 @@ const DIMENSIONS = [
       {
         q: "How do you track your live cash and payment position?",
         options: [
-          { level: 1, text: "We check multiple bank portals manually — no single view exists" },
+          { level: 1, text: "We check multiple bank portals manually. No single view exists." },
           { level: 2, text: "We have centralized reporting, but data can lag by a day or more" },
           { level: 3, text: "Real-time dashboard shows all payment and cash positions in one place" },
         ],
@@ -34,7 +34,7 @@ const DIMENSIONS = [
       {
         q: "How are payment approvals managed?",
         options: [
-          { level: 1, text: "Informally — approvals often happen after payments are already initiated" },
+          { level: 1, text: "Informally, approvals often happen after payments are already initiated" },
           { level: 2, text: "Approval hierarchies exist, but are enforced manually via email" },
           { level: 3, text: "System-enforced with role-based controls and a full, instant audit trail" },
         ],
@@ -44,7 +44,7 @@ const DIMENSIONS = [
         options: [
           { level: 1, text: "It takes significant effort, pulling data from multiple disconnected systems" },
           { level: 2, text: "We can produce one, but it takes time and may have gaps" },
-          { level: 3, text: "Audit trails are always available instantly — continuously and automatically maintained" },
+          { level: 3, text: "Audit trails are always available instantly, continuously and automatically maintained" },
         ],
       },
     ],
@@ -65,15 +65,15 @@ const DIMENSIONS = [
         options: [
           { level: 1, text: "Built manually from spreadsheets and uploaded to bank portals by hand" },
           { level: 2, text: "Generated from our ERP, but manual upload steps remain" },
-          { level: 3, text: "Automatically created and sent directly to banks — no manual steps" },
+          { level: 3, text: "Automatically created and sent directly to banks with no manual steps" },
         ],
       },
       {
         q: "How do you handle payment reconciliation?",
         options: [
-          { level: 1, text: "Manually matched on spreadsheets — slow, error-prone, and resource-intensive" },
+          { level: 1, text: "Manually matched on spreadsheets: slow, error-prone, and resource-intensive" },
           { level: 2, text: "Periodic reconciliation with structured review, but largely still manual" },
-          { level: 3, text: "System-matched automatically — only genuine exceptions need human attention" },
+          { level: 3, text: "System-matched automatically. Only genuine exceptions need human attention." },
         ],
       },
       {
@@ -101,7 +101,7 @@ const DIMENSIONS = [
       {
         q: "How do you verify supplier bank account changes?",
         options: [
-          { level: 1, text: "Email confirmation only — no automated verification or system control" },
+          { level: 1, text: "Email confirmation only, with no automated verification or system control" },
           { level: 2, text: "Manual approval process, but no automated system validation" },
           { level: 3, text: "Bank changes trigger automated verification workflows with multi-party sign-off" },
         ],
@@ -109,7 +109,7 @@ const DIMENSIONS = [
       {
         q: "How do you detect duplicate or fraudulent payments?",
         options: [
-          { level: 1, text: "We rely on staff vigilance — no automated controls in place" },
+          { level: 1, text: "We rely on staff vigilance with no automated controls in place" },
           { level: 2, text: "Some duplicate checks exist in our ERP, but blind spots remain" },
           { level: 3, text: "AI-powered detection flags anomalies in real time, before payments execute" },
         ],
@@ -117,7 +117,7 @@ const DIMENSIONS = [
       {
         q: "How are unusual or suspicious transactions handled?",
         options: [
-          { level: 1, text: "Typically discovered after the fact — during reconciliation or audit" },
+          { level: 1, text: "Typically discovered after the fact, during reconciliation or audit" },
           { level: 2, text: "Review checkpoints exist, but detection is reactive rather than preventive" },
           { level: 3, text: "Unusual transactions are automatically blocked and investigated before payment" },
         ],
@@ -142,7 +142,7 @@ const PROFILES: { min: number; max: number; label: string; tagline: string; desc
     min: 1.7, max: 2.3,
     label: "Developing",
     tagline: "Processes are defined but inconsistently enforced.",
-    description: "You have structured processes and ERP integration, but manual touchpoints, delayed data, and reactive risk controls still create exposure. The foundations are there — now it's about automating execution and closing the control gaps.",
+    description: "You have structured processes and ERP integration, but manual touchpoints, delayed data, and reactive risk controls still create exposure. The foundations are there. Now it's about automating execution and closing the control gaps.",
     actions: [
       "Automate bank submission and reconciliation end-to-end",
       "Move from manual to real-time cash visibility",
@@ -608,7 +608,7 @@ export default function PaymentMaturityPage() {
               Are inefficient vendor payments costing you more than money?
             </h2>
             <p style={{ fontSize: "15px", color: "rgba(47,67,68,0.72)", lineHeight: 1.7, margin: "0 0 28px", maxWidth: "700px" }}>
-              The Ardent Partners <em>Pulse of B2B Payments</em> report reveals the state of enterprise payment operations — and how to turn efficiency into real bottom-line impact.
+              The Ardent Partners <em>Pulse of B2B Payments</em> report reveals the state of enterprise payment operations and how to turn efficiency into real bottom-line impact.
             </p>
             <a
               href="https://www.medius.com/resources/guides-reports/ardent-partners-pulse-on-b2b-payments-in-2024/"

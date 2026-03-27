@@ -228,7 +228,7 @@ export default function HeroConcept2Page() {
     <main>
       <Header />
 
-      {/* ─── Hero (locked — shared with hero-concept-1) ─── */}
+      {/* ─── Hero (locked -- shared with hero-concept-1) ─── */}
       <section
         className="relative w-full h-[640px] flex items-center overflow-hidden bg-[#2f4344]"
       >
@@ -381,7 +381,7 @@ export default function HeroConcept2Page() {
       <AISection />
 
       {/* ─────────────────────────────────────────────────────────────────
-          SECTIONS BELOW — hero-concept-2 variant
+          SECTIONS BELOW -- hero-concept-2 variant
           Add your new sections here
       ───────────────────────────────────────────────────────────────── */}
 
