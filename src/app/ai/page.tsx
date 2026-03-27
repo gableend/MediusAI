@@ -161,7 +161,7 @@ export default function AIPage() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            right: "-100px",
+            right: "-200px",
             top: 0,
             height: "100%",
             width: "58%",
@@ -176,7 +176,7 @@ export default function AIPage() {
           style={{
             position: "absolute",
             inset: 0,
-            background: `linear-gradient(to right, ${DARK} 38%, rgba(47,67,68,0.82) 52%, rgba(47,67,68,0.35) 70%, transparent 100%)`,
+            background: `linear-gradient(to right, ${DARK} 30%, rgba(47,67,68,0.92) 44%, rgba(47,67,68,0.65) 58%, rgba(47,67,68,0.15) 78%, transparent 100%)`,
           }}
         />
 
@@ -205,7 +205,7 @@ export default function AIPage() {
             }}>
               <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: SAND, flexShrink: 0 }} />
               <span style={{ fontSize: "10.5px", fontWeight: 600, letterSpacing: "1.1px", textTransform: "uppercase", color: SAND }}>
-                AI Innovation
+                Trusted AI
               </span>
             </div>
 
