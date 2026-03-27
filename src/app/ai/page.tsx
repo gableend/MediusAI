@@ -14,6 +14,7 @@ import {
   AgentExpenseProcessingCard,
   AgentSuspiciousExpenseCard,
 } from "@/components/CardComponents";
+import AgentEcosystemDiagram from "@/components/AgentEcosystemDiagram";
 
 const RED  = "#da2028";
 const DARK = "#2f4344";
@@ -504,6 +505,27 @@ export default function AIPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Agent Ecosystem Diagram ──────────────────────────────────────── */}
+      <section style={{ background: "white", padding: "96px 32px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "56px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 600, color: SAND, textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px" }}>
+              The Medius Agent Ecosystem
+            </div>
+            <h2 style={{
+              fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700,
+              lineHeight: 1.1, letterSpacing: "-0.7px", color: DARK, marginBottom: "14px",
+            }}>
+              Agents across every spend process
+            </h2>
+            <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
+              AI agents work across sourcing, procurement, invoicing, payments and expenses, while finance and procurement teams stay in full control.
+            </p>
+          </div>
+          <AgentEcosystemDiagram />
         </div>
       </section>
 
