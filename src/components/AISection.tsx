@@ -70,7 +70,7 @@ export default function AISection() {
             boxShadow: "0 4px 16px rgba(218,32,40,0.35)",
           }}
         >
-          See how it works
+          Explore Medius Agents
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
