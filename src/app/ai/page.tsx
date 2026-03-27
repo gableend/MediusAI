@@ -10,6 +10,8 @@ import {
   AgentPOConnectCard,
   AgentCopilotCard,
   AgentStatementReconCard,
+  AgentExpenseProcessingCard,
+  AgentExpenseFraudCard,
 } from "@/components/CardComponents";
 
 const RED  = "#da2028";
@@ -120,20 +122,20 @@ const AP_AGENTS = [
   },
 ];
 
-const SM_AGENTS = [
+const EM_AGENTS = [
   {
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.7"/>
-        <path d="M2 10h20" stroke="currentColor" strokeWidth="1.7"/>
-        <path d="M6 15h4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
-      </svg>
-    ),
-    label: "Payment Optimization Agent",
-    headline: "Straight-through payment processing",
+    label: "Expense Processing Agent",
+    headline: "Auto-categorised expense processing",
     description:
-      "Extends AP automation all the way to settlement. Auto-approves trusted vendor payments and initiates bank transfers — fully touchless.",
-    stat: "From approval to bank, automatically",
+      "Automatically reads, categorises, and policy-checks employee expenses — from receipts to reimbursement — without manual review.",
+    stat: "96% policy compliant on first submission",
+  },
+  {
+    label: "Expense Fraud Detection Agent",
+    headline: "Anomaly detection across all expenses",
+    description:
+      "Detects duplicate submissions, out-of-policy charges, and unusual spend patterns across all employee expense reports in real time.",
+    stat: "Flags before reimbursement",
   },
 ];
 
@@ -611,28 +613,70 @@ export default function AIPage() {
         </div>
       </section>
 
-      {/* ── Spend Management Agents ────────────────────────────────────────── */}
+      {/* ── Expense Management Agents ──────────────────────────────────────── */}
       <section style={{ background: "#f8f9fa", padding: "96px 32px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
             <div style={{ fontSize: "11px", fontWeight: 600, color: SAND, textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px" }}>
-              Spend Management
+              Expense Management
             </div>
             <h2 style={{
               fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700,
               lineHeight: 1.1, letterSpacing: "-0.7px", color: DARK, marginBottom: "14px",
             }}>
-              Spend Management Agents
+              Expense Management Agents
             </h2>
             <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
-              Extends intelligence beyond AP — automating how and when money moves from approval all the way to settlement.
+              Autonomous processing and fraud detection for employee expenses — from submission to reimbursement, without manual review.
             </p>
           </div>
 
-          <div style={{ maxWidth: "400px", margin: "0 auto" }}>
-            {SM_AGENTS.map(({ icon, label, headline, description, stat }) => (
-              <AgentCard key={label} icon={icon} label={label} headline={headline} description={description} stat={stat} />
-            ))}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", maxWidth: "900px", margin: "0 auto" }}>
+
+            {/* Expense Processing Agent */}
+            <div>
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>
+                  {EM_AGENTS[0].label}
+                </div>
+                <div style={{ fontSize: "17px", fontWeight: 700, color: DARK, lineHeight: 1.25, marginBottom: "8px" }}>
+                  {EM_AGENTS[0].headline}
+                </div>
+                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: "0 0 10px" }}>
+                  {EM_AGENTS[0].description}
+                </p>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: "9999px", background: "rgba(132,152,92,0.10)", border: "1px solid rgba(132,152,92,0.22)" }}>
+                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS }} />
+                  <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{EM_AGENTS[0].stat}</span>
+                </div>
+              </div>
+              <div style={{ position: "relative", height: "290px" }}>
+                <AgentExpenseProcessingCard active={true} exit={false} />
+              </div>
+            </div>
+
+            {/* Expense Fraud Detection Agent */}
+            <div>
+              <div style={{ marginBottom: "12px" }}>
+                <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>
+                  {EM_AGENTS[1].label}
+                </div>
+                <div style={{ fontSize: "17px", fontWeight: 700, color: DARK, lineHeight: 1.25, marginBottom: "8px" }}>
+                  {EM_AGENTS[1].headline}
+                </div>
+                <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: "0 0 10px" }}>
+                  {EM_AGENTS[1].description}
+                </p>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "4px 12px", borderRadius: "9999px", background: "rgba(132,152,92,0.10)", border: "1px solid rgba(132,152,92,0.22)" }}>
+                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: MOSS }} />
+                  <span style={{ fontSize: "11px", fontWeight: 600, color: DARK }}>{EM_AGENTS[1].stat}</span>
+                </div>
+              </div>
+              <div style={{ position: "relative", height: "290px" }}>
+                <AgentExpenseFraudCard active={true} exit={false} />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

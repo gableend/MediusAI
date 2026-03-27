@@ -2338,6 +2338,109 @@ export function AgentPaymentsCard({ active, exit, variant = "compact" }: CardPro
   );
 }
 
+// ─── Agent 8: Expense Processing Agent ───────────────────────────────────────
+export function AgentExpenseProcessingCard({ active, exit, variant = "compact" }: CardProps) {
+  const items = [
+    { desc: "Hotel — London, Nov 12",    cat: "Travel & Entertainment", amt: "£420", ok: true  },
+    { desc: "Taxi — Heathrow, Nov 12",   cat: "Travel",                 amt: "£48",  ok: true  },
+    { desc: "Team Lunch — Soho",         cat: "Meals & Entertainment",  amt: "£127", ok: false },
+    { desc: "Software — Annual licence", cat: "IT & Software",          amt: "£699", ok: true  },
+  ];
+  const visible = variant === "compact" ? items.slice(0, 3) : items;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Expense Processing Agent" />
+      <CardHeader title="Auto-categorisation" badge="96% compliant" />
+
+      <div style={{ marginBottom: "8px", padding: "7px 10px", background: "#f0f3f2", borderRadius: "7px", display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontSize: "11px", color: "#777" }}>Sarah Chen · Q1 Expenses</span>
+        <span style={{ fontSize: "11px", fontWeight: 700, color: DARK }}>£1,294</span>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+        {visible.map(({ desc, cat, amt, ok }, i) => (
+          <div key={desc} style={{
+            padding: "7px 10px", background: "#f8f9fa", borderRadius: "7px",
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.28s ease ${i * 0.12}s`,
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "3px" }}>
+              <span style={{ fontSize: "11px", fontWeight: 600, color: "#222" }}>{desc}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                <span style={{ fontSize: "11px", fontWeight: 700, color: DARK }}>{amt}</span>
+                <span style={{ fontSize: "11px", color: ok ? "#16a34a" : "#d97706" }}>{ok ? "✓" : "⚠"}</span>
+              </div>
+            </div>
+            <span style={{ fontSize: "9.5px", padding: "1px 7px", borderRadius: "9999px", background: "rgba(47,67,68,0.08)", color: DARK, fontWeight: 600 }}>{cat}</span>
+          </div>
+        ))}
+      </div>
+
+      {variant === "full" && (
+        <div style={{
+          marginTop: "8px", padding: "7px 10px",
+          background: "rgba(217,119,6,0.08)", borderRadius: "7px",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.5s",
+        }}>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#d97706" }}>⚠ 1 item flagged for approval</span>
+          <span style={{ fontSize: "10px", color: "#aaa" }}>3 items auto-approved</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Agent 9: Expense Fraud Detection Agent ───────────────────────────────────
+export function AgentExpenseFraudCard({ active, exit, variant = "compact" }: CardProps) {
+  const signals = [
+    { icon: "⚠", severity: "high",   label: "Duplicate receipt — £127 submitted twice, 3 days apart" },
+    { icon: "⚠", severity: "medium", label: "Out-of-policy — alcohol charge £89 on client entertainment" },
+    { icon: "ℹ", severity: "low",    label: "Unusual vendor — personal card transaction £340" },
+  ];
+  const visible = variant === "compact" ? signals.slice(0, 2) : signals;
+
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      <AgentLabel name="Expense Fraud Detection Agent" />
+      <CardHeader title="Anomaly signals" badge="3 flagged" />
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+        {visible.map(({ icon, severity, label }, i) => (
+          <div key={i} style={{
+            display: "flex", alignItems: "flex-start", gap: "8px",
+            padding: "7px 10px", borderRadius: "7px",
+            background: severity === "high" ? "#fff8f8" : severity === "medium" ? "#fffbf0" : "#f8f9fa",
+            border: `1px solid ${severity === "high" ? "#fde8e8" : severity === "medium" ? "#fef3c7" : "#e8ecec"}`,
+            opacity: active ? 1 : 0,
+            transition: `opacity 0.25s ease ${0.1 + i * 0.12}s`,
+          }}>
+            <span style={{ fontSize: "12px", color: severity === "high" ? RED : severity === "medium" ? "#d97706" : "#888", flexShrink: 0 }}>{icon}</span>
+            <span style={{ fontSize: "11px", color: "#444", lineHeight: 1.35 }}>{label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div style={{
+        display: "flex", gap: "6px",
+        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+      }}>
+        <div style={{
+          flex: 1, textAlign: "center", padding: "7px 0",
+          background: RED, borderRadius: "7px",
+          fontSize: "11px", fontWeight: 700, color: "white",
+        }}>Flag for review</div>
+        <div style={{
+          flex: 1, textAlign: "center", padding: "7px 0",
+          background: "#f5f5f5", borderRadius: "7px",
+          fontSize: "11px", fontWeight: 700, color: "#555",
+        }}>Approve clean items</div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Agent card sets for /ai hero cycling ────────────────────────────────────
 export const AGENT_HERO_CARDS: React.ComponentType<CardProps>[] = [
   AgentCaptureCard,
