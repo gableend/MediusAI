@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { Lightning, MagnifyingGlass, Handshake, Drop, ShieldCheck, Plant } from "@phosphor-icons/react";
 import Header from "@/components/Header";
 import {
   AgentCaptureCard,
@@ -139,13 +140,13 @@ const EM_AGENTS = [
   },
 ];
 
-const BENEFITS = [
-  { icon: "⚡", title: "Move faster and smarter",      body: "Algorithms apply coding and routing instantly, without fatigue or bottlenecks." },
-  { icon: "🔍", title: "Superior control and visibility", body: "All financial data flows through a single, centralized AI-managed hub." },
-  { icon: "🤝", title: "Stronger vendor relationships", body: "On-time payments and instant query resolution improve supplier trust at scale." },
-  { icon: "💧", title: "Increase liquidity",            body: "Better cash flow forecasting and early payment discount capture improve working capital." },
-  { icon: "🛡️", title: "Continuous fraud detection",   body: "Anomaly tracking across the full invoice-to-pay lifecycle — not just at point of payment." },
-  { icon: "🌱", title: "Built to grow with you",       body: "Agents learn from every transaction, continuously improving accuracy and coverage." },
+const BENEFITS: { icon: React.ReactNode; title: string; body: string }[] = [
+  { icon: <Lightning size={28} weight="duotone" color={SAND} />,        title: "Move faster and smarter",        body: "Algorithms apply coding and routing instantly, without fatigue or bottlenecks." },
+  { icon: <MagnifyingGlass size={28} weight="duotone" color={SAND} />,  title: "Superior control and visibility", body: "All financial data flows through a single, centralized AI-managed hub." },
+  { icon: <Handshake size={28} weight="duotone" color={SAND} />,        title: "Stronger vendor relationships",   body: "On-time payments and instant query resolution improve supplier trust at scale." },
+  { icon: <Drop size={28} weight="duotone" color={SAND} />,             title: "Increase liquidity",              body: "Better cash flow forecasting and early payment discount capture improve working capital." },
+  { icon: <ShieldCheck size={28} weight="duotone" color={SAND} />,      title: "Continuous fraud detection",      body: "Anomaly tracking across the full invoice-to-pay lifecycle — not just at point of payment." },
+  { icon: <Plant size={28} weight="duotone" color={SAND} />,            title: "Built to grow with you",          body: "Agents learn from every transaction, continuously improving accuracy and coverage." },
 ];
 
 // ─── Shared agent card component ──────────────────────────────────────────────
@@ -782,7 +783,7 @@ export default function AIPage() {
                 padding: "28px 24px", background: "white",
                 border: "1px solid #e8ecec", borderRadius: "14px",
               }}>
-                <div style={{ fontSize: "24px", marginBottom: "12px" }}>{icon}</div>
+                <div style={{ marginBottom: "12px" }}>{icon}</div>
                 <div style={{ fontSize: "15px", fontWeight: 700, color: DARK, marginBottom: "8px" }}>{title}</div>
                 <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#5a7070", margin: 0 }}>{body}</p>
               </div>
