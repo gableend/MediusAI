@@ -1883,7 +1883,7 @@ export function AgentCaptureCard({ active, exit, variant = "compact" }: CardProp
       <AgentLabel name="Invoice Capture Agent" />
       <CardHeader title="Any format, zero exceptions" badge="100% touchless" />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "7px", marginBottom: "12px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
         {visible.map(({ abbr, type, source, delay }) => (
           <div key={abbr} style={{
             display: "flex", alignItems: "center", gap: "10px",
@@ -1905,18 +1905,6 @@ export function AgentCaptureCard({ active, exit, variant = "compact" }: CardProp
           </div>
         ))}
       </div>
-
-      {variant === "full" && (
-        <div style={{
-          padding: "8px 12px", borderRadius: "8px",
-          background: "rgba(132,152,92,0.08)", border: "1px solid rgba(132,152,92,0.18)",
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.52s",
-        }}>
-          <span style={{ fontSize: "11px", fontWeight: 600, color: MOSS }}>✓ 4 formats captured — routed to coding</span>
-          <span style={{ fontSize: "10px", color: "#aaa" }}>0 exceptions</span>
-        </div>
-      )}
     </div>
   );
 }
@@ -2062,7 +2050,7 @@ export function AgentFraudRiskCard({ active, exit, variant = "compact" }: CardPr
 
       {/* Risk alert banner */}
       <div style={{
-        padding: "9px 12px", borderRadius: "9px", marginBottom: "10px",
+        padding: "7px 10px", borderRadius: "8px", marginBottom: "8px",
         background: "#fff5f5", border: "1px solid #fecaca",
         opacity: active ? 1 : 0, transition: "opacity 0.2s ease",
       }}>
@@ -2074,11 +2062,11 @@ export function AgentFraudRiskCard({ active, exit, variant = "compact" }: CardPr
         </div>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px", marginBottom: "10px" }}>
         {visible.map(({ label, severity, icon }, i) => (
           <div key={label} style={{
             display: "flex", alignItems: "flex-start", gap: "8px",
-            padding: "7px 10px", borderRadius: "7px",
+            padding: "6px 10px", borderRadius: "7px",
             background: severity === "high" ? "#fff8f8" : "#fffbf0",
             border: `1px solid ${severity === "high" ? "#fde8e8" : "#fef3c7"}`,
             opacity: active ? 1 : 0,
@@ -2095,14 +2083,14 @@ export function AgentFraudRiskCard({ active, exit, variant = "compact" }: CardPr
         opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
       }}>
         <div style={{
-          flex: 1, textAlign: "center", padding: "7px 0",
+          flex: 1, textAlign: "center", padding: "6px 0",
           background: RED, borderRadius: "7px",
           fontSize: "11px", fontWeight: 700, color: "white",
         }}>
           Block payment
         </div>
         <div style={{
-          flex: 1, textAlign: "center", padding: "7px 0",
+          flex: 1, textAlign: "center", padding: "6px 0",
           background: "#f5f5f5", borderRadius: "7px",
           fontSize: "11px", fontWeight: 700, color: "#555",
         }}>
@@ -2127,11 +2115,11 @@ export function AgentCopilotCard({ active, exit, variant = "compact" }: CardProp
       <AgentLabel name="Approvals Agent" />
       <CardHeader title="Approval guidance" badge="3 pending" />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px", marginBottom: "8px" }}>
         {visible.map(({ vendor, amount, age, risk }, i) => (
           <div key={vendor} style={{
             display: "flex", alignItems: "center", gap: "10px",
-            padding: "8px 10px", background: "#f8f9fa", borderRadius: "8px",
+            padding: "6px 10px", background: "#f8f9fa", borderRadius: "8px",
             borderLeft: `3px solid ${risk === "high" ? RED : MOSS}`,
             opacity: active ? 1 : 0,
             transition: `opacity 0.25s ease ${i * 0.12}s`,
@@ -2152,11 +2140,11 @@ export function AgentCopilotCard({ active, exit, variant = "compact" }: CardProp
 
       {/* AI suggestion */}
       <div style={{
-        padding: "9px 11px", borderRadius: "8px",
+        padding: "8px 10px", borderRadius: "8px",
         background: "rgba(47,67,68,0.05)", border: "1px solid rgba(47,67,68,0.12)",
         opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
       }}>
-        <div style={{ fontSize: "9.5px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: "4px" }}>Copilot suggests</div>
+        <div style={{ fontSize: "9.5px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: "3px" }}>Copilot suggests</div>
         <div style={{ fontSize: "11px", color: "#444", lineHeight: 1.4 }}>
           Approve TechSource & Apex. Hold Meridian — bank data mismatch flagged.
         </div>
@@ -2224,26 +2212,44 @@ export function AgentSupplierCard({ active, exit, variant = "compact" }: CardPro
             ✓ Resolved automatically · 1.8s
           </span>
         </div>
-      </div>
 
-      {variant === "full" && (
+        {/* Second exchange */}
         <div style={{
-          marginTop: "10px", display: "flex", gap: "0",
-          borderTop: "1px solid #f0f0f0", paddingTop: "10px",
-          opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.6s",
+          display: "flex", alignItems: "flex-end", gap: "7px",
+          opacity: active ? 1 : 0, transition: "opacity 0.25s ease 0.65s",
         }}>
-          {[
-            { value: "247", label: "Queries / mo" },
-            { value: "100%", label: "Auto-resolved" },
-            { value: "1.8s", label: "Avg response" },
-          ].map(({ value, label }) => (
-            <div key={label} style={{ flex: 1, textAlign: "center" }}>
-              <div style={{ fontSize: "15px", fontWeight: 800, color: DARK }}>{value}</div>
-              <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#c0c0c0", marginTop: "2px" }}>{label}</div>
-            </div>
-          ))}
+          <div style={{
+            width: "22px", height: "22px", borderRadius: "50%", flexShrink: 0,
+            background: SAND, display: "flex", alignItems: "center",
+            justifyContent: "center", fontSize: "8px", fontWeight: 700, color: "white",
+          }}>AC</div>
+          <div style={{
+            fontSize: "11px", lineHeight: 1.5, padding: "8px 11px",
+            borderRadius: "10px 10px 10px 3px", background: "#f4f4f2", color: "#444",
+            maxWidth: "82%",
+          }}>
+            Thanks — can I get a copy of the remittance advice?
+          </div>
         </div>
-      )}
+
+        <div style={{
+          display: "flex", alignItems: "flex-end", gap: "7px", flexDirection: "row-reverse",
+          opacity: active ? 1 : 0, transition: "opacity 0.25s ease 0.85s",
+        }}>
+          <div style={{
+            width: "22px", height: "22px", borderRadius: "50%", flexShrink: 0,
+            background: DARK, display: "flex", alignItems: "center",
+            justifyContent: "center", fontSize: "8px", fontWeight: 700, color: "white",
+          }}>AI</div>
+          <div style={{
+            fontSize: "11px", lineHeight: 1.5, padding: "8px 11px",
+            borderRadius: "10px 10px 3px 10px", background: DARK, color: "white",
+            maxWidth: "82%",
+          }}>
+            Sent to your registered email now.
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -2321,47 +2327,83 @@ export function AgentStatementReconCard({ active, exit, variant = "compact" }: C
 
 // ─── Agent 7: Payment Optimization Agent ──────────────────────────────────────
 export function AgentPaymentsCard({ active, exit, variant = "compact" }: CardProps) {
-  const payments = [
-    { vendor: "TechSource Ltd",    amount: "€12,450", method: "SEPA",  status: "Sent to bank" },
-    { vendor: "Apex Office Supp.", amount: "€4,320",  method: "SEPA",  status: "Sent to bank" },
-    { vendor: "Freelance Hub",     amount: "€1,950",  method: "BACS",  status: "Queued"       },
+  const opportunities = [
+    {
+      type: "Early payment discounts",
+      value: "5,500 EUR",
+      detail: "2 invoices with active 2/10 net-30 windows",
+      urgency: "Expires in 24 hours",
+      valueColor: MOSS,
+      bg: "rgba(132,152,92,0.06)",
+      border: "rgba(132,152,92,0.18)",
+      urgencyColor: "#d97706",
+      delay: 0.15,
+    },
+    {
+      type: "Avoid overdue risk",
+      value: "3 invoices",
+      detail: "4,220 EUR at risk — Global Metals overdue 2 days",
+      urgency: "Pay within 48 hours",
+      valueColor: RED,
+      bg: "#fff8f8",
+      border: "#fde8e8",
+      urgencyColor: RED,
+      delay: 0.27,
+    },
   ];
-  const visible = variant === "compact" ? payments.slice(0, 2) : payments;
 
   return (
     <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
       <AgentLabel name="Payment Optimization Agent" />
-      <CardHeader title="Straight-through processing" badge="Touchless" />
+      <CardHeader title="AI payment insights" badge="95% confidence" />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
-        {visible.map(({ vendor, amount, method, status }, i) => (
-          <div key={vendor} style={{
-            display: "flex", alignItems: "center", gap: "10px",
-            padding: "8px 10px", background: "#f8f9fa", borderRadius: "8px",
-            opacity: active ? 1 : 0,
-            transition: `opacity 0.25s ease ${i * 0.12}s`,
-          }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: "11.5px", fontWeight: 600, color: "#111" }}>{vendor}</div>
-              <div style={{ fontSize: "9.5px", color: "#aaa" }}>{method} · No manual steps</div>
-            </div>
-            <div style={{ textAlign: "right" }}>
-              <div style={{ fontSize: "12px", fontWeight: 700, color: DARK }}>{amount}</div>
-              <div style={{ fontSize: "9.5px", fontWeight: 600, color: status === "Sent to bank" ? MOSS : SAND }}>{status}</div>
-            </div>
-          </div>
-        ))}
+      {/* Net financial impact */}
+      <div style={{
+        padding: "8px 11px", borderRadius: "8px", marginBottom: "8px",
+        background: "rgba(132,152,92,0.07)", border: "1px solid rgba(132,152,92,0.18)",
+        opacity: active ? 1 : 0, transition: "opacity 0.2s ease",
+      }}>
+        <div style={{ fontSize: "9px", fontWeight: 600, color: "#aaa", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "3px" }}>
+          Net financial impact vs. pay all today
+        </div>
+        <div style={{ fontSize: "18px", fontWeight: 800, color: MOSS, letterSpacing: "-0.5px", marginBottom: "2px" }}>
+          +9,820 EUR
+        </div>
+        <div style={{ fontSize: "9.5px", color: "#888" }}>
+          5,500 EUR discounts · 7,520 EUR cash preserved · −3,200 EUR early
+        </div>
       </div>
 
-      {/* Summary bar */}
+      {/* DPO bar */}
       <div style={{
-        padding: "8px 11px", borderRadius: "8px",
-        background: "rgba(132,152,92,0.08)", border: "1px solid rgba(132,152,92,0.2)",
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.4s",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "6px 10px", background: "#f8f9fa", borderRadius: "7px", marginBottom: "8px",
+        opacity: active ? 1 : 0, transition: "opacity 0.25s ease 0.1s",
       }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: MOSS }}>✓ Payment run complete</span>
-        <span style={{ fontSize: "10px", color: "#aaa" }}>{variant === "compact" ? "€16,770 processed" : "€18,720 processed"}</span>
+        <span style={{ fontSize: "10px", fontWeight: 600, color: "#777" }}>Days payable outstanding</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span style={{ fontSize: "10px", color: "#aaa" }}>32d →</span>
+          <span style={{ fontSize: "11px", fontWeight: 700, color: MOSS }}>36.2d</span>
+          <span style={{ fontSize: "9px", fontWeight: 600, color: MOSS, background: "rgba(132,152,92,0.1)", padding: "1px 5px", borderRadius: "4px" }}>+4.2</span>
+        </div>
+      </div>
+
+      {/* Opportunities */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+        {opportunities.map(({ type, value, detail, urgency, valueColor, bg, border, urgencyColor, delay }, i) => (
+          <div key={type} style={{
+            padding: "7px 10px", borderRadius: "8px",
+            background: bg, border: `1px solid ${border}`,
+            opacity: active ? 1 : 0, transition: `opacity 0.25s ease ${delay}s`,
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "2px" }}>
+              <span style={{ fontSize: "10.5px", fontWeight: 600, color: "#333" }}>{type}</span>
+              <span style={{ fontSize: "11px", fontWeight: 700, color: valueColor, flexShrink: 0, marginLeft: "8px" }}>{value}</span>
+            </div>
+            <div style={{ fontSize: "9.5px", color: "#888", marginBottom: "3px" }}>{detail}</div>
+            <span style={{ fontSize: "9px", fontWeight: 600, color: urgencyColor, background: i === 0 ? "rgba(217,119,6,0.08)" : "rgba(218,32,40,0.07)", padding: "1px 7px", borderRadius: "9999px" }}>{urgency}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -2382,15 +2424,15 @@ export function AgentExpenseProcessingCard({ active, exit, variant = "compact" }
       <AgentLabel name="Expense Processing Agent" />
       <CardHeader title="Auto-categorisation" badge="96% compliant" />
 
-      <div style={{ marginBottom: "8px", padding: "7px 10px", background: "#f0f3f2", borderRadius: "7px", display: "flex", justifyContent: "space-between" }}>
+      <div style={{ marginBottom: "6px", padding: "6px 10px", background: "#f0f3f2", borderRadius: "7px", display: "flex", justifyContent: "space-between" }}>
         <span style={{ fontSize: "11px", color: "#777" }}>Sarah Chen · Q1 Expenses</span>
         <span style={{ fontSize: "11px", fontWeight: 700, color: DARK }}>£1,294</span>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
         {visible.map(({ desc, cat, amt, ok }, i) => (
           <div key={desc} style={{
-            padding: "7px 10px", background: "#f8f9fa", borderRadius: "7px",
+            padding: "6px 9px", background: "#f8f9fa", borderRadius: "7px",
             opacity: active ? 1 : 0,
             transition: `opacity 0.28s ease ${i * 0.12}s`,
           }}>
@@ -2408,7 +2450,7 @@ export function AgentExpenseProcessingCard({ active, exit, variant = "compact" }
 
       {variant === "full" && (
         <div style={{
-          marginTop: "8px", padding: "7px 10px",
+          marginTop: "6px", padding: "6px 10px",
           background: "rgba(217,119,6,0.08)", borderRadius: "7px",
           display: "flex", justifyContent: "space-between", alignItems: "center",
           opacity: active ? 1 : 0, transition: "opacity 0.3s ease 0.5s",
