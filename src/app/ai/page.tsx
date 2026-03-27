@@ -182,7 +182,7 @@ export default function AIPage() {
           }}
         />
 
-        {/* Content row */}
+        {/* Content row — left edge aligns with Medius logo (32px padding, max-w-1400) */}
         <div
           style={{
             position: "relative",
@@ -196,8 +196,8 @@ export default function AIPage() {
             gap: "60px",
           }}
         >
-          {/* ── Left: headline + CTAs ── */}
-          <div style={{ flex: "0 0 500px" }}>
+          {/* ── Left: headline + CTAs — flush with logo left edge ── */}
+          <div style={{ flex: "0 0 500px", paddingLeft: 0 }}>
             {/* Eyebrow */}
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "7px",
@@ -253,7 +253,7 @@ export default function AIPage() {
           </div>
 
           {/* ── Right: cycling agent cards ── */}
-          <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "-200px" }}>
+          <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "-250px", marginTop: "30px" }}>
             <div style={{ position: "relative", width: "360px" }}>
 
               {/* Active label */}
