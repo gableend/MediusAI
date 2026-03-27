@@ -2690,3 +2690,154 @@ export const AGENT_HERO_LABELS = [
   "Fraud & Risk Agent",
   "Supplier Inquiries Agent",
 ];
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ROADMAP AGENT CARDS — Coming Soon workflow cards
+// ══════════════════════════════════════════════════════════════════════════════
+
+interface RoadmapConfig {
+  label: string;
+  headline: string;
+  steps: string[];
+}
+
+function RoadmapAgentCardInner({
+  config, active, exit, variant = "full",
+}: { config: RoadmapConfig } & CardProps) {
+  const { label, headline, steps } = config;
+
+  const badge = (
+    <span style={{
+      display: "inline-block",
+      fontSize: "9px", fontWeight: 700,
+      padding: "2px 9px", borderRadius: "9999px",
+      background: "rgba(171,156,109,0.12)", color: SAND,
+      border: "1px solid rgba(171,156,109,0.28)",
+      textTransform: "uppercase" as const, letterSpacing: "0.6px",
+    }}>Coming Soon</span>
+  );
+
+  // ── Compact: badge + title + horizontal step flow ──────────────────────────
+  if (variant === "compact") {
+    return (
+      <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+          {badge}
+          <span style={{ fontSize: "13px", fontWeight: 700, color: DARK }}>{label}</span>
+        </div>
+        <p style={{ fontSize: "12px", color: "#6b8585", margin: "0 0 16px", lineHeight: 1.45 }}>{headline}</p>
+
+        {/* Horizontal steps */}
+        <div style={{ display: "flex", alignItems: "stretch", gap: "0" }}>
+          {steps.map((step, i) => (
+            <div key={step} style={{ display: "flex", alignItems: "center", flex: i < steps.length - 1 ? "1 1 0" : "1 1 0" }}>
+              <div style={{
+                flex: 1,
+                background: "#f4f7f6", borderRadius: "10px",
+                padding: "11px 12px", border: "1px solid rgba(47,67,68,0.07)",
+              }}>
+                <div style={{ fontSize: "9px", fontWeight: 700, color: SAND, marginBottom: "4px" }}>0{i + 1}</div>
+                <div style={{ fontSize: "12px", fontWeight: 600, color: DARK, lineHeight: 1.3 }}>{step}</div>
+              </div>
+              {i < steps.length - 1 && (
+                <div style={{
+                  flexShrink: 0, width: "28px",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: "14px", color: SAND, fontWeight: 700,
+                }}>→</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // ── Full: badge + title/headline + vertical step flow ─────────────────────
+  return (
+    <div className={`ap-card ${active ? "ap-card--on" : ""} ${exit ? "ap-card--exit" : ""}`}>
+      {/* Badge */}
+      <div style={{ marginBottom: "14px" }}>{badge}</div>
+
+      {/* Title + headline */}
+      <div style={{ marginBottom: "22px" }}>
+        <div style={{ fontSize: "17px", fontWeight: 700, color: DARK, lineHeight: 1.2, marginBottom: "5px" }}>
+          {label}
+        </div>
+        <div style={{ fontSize: "12px", color: "#6b8585", lineHeight: 1.5 }}>{headline}</div>
+      </div>
+
+      {/* Vertical steps */}
+      <div>
+        {steps.map((step, i) => (
+          <div key={step}>
+            <div style={{
+              display: "flex", alignItems: "center", gap: "12px",
+              background: "#f4f7f6", borderRadius: "10px",
+              padding: "11px 14px", border: "1px solid rgba(47,67,68,0.07)",
+            }}>
+              <div style={{
+                width: "26px", height: "26px", borderRadius: "7px", flexShrink: 0,
+                background: DARK, display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <span style={{ fontSize: "10px", fontWeight: 700, color: SAND }}>0{i + 1}</span>
+              </div>
+              <span style={{ fontSize: "13px", fontWeight: 600, color: DARK, lineHeight: 1.3 }}>{step}</span>
+            </div>
+            {i < steps.length - 1 && (
+              <div style={{ display: "flex", justifyContent: "flex-start", paddingLeft: "26px", margin: "4px 0" }}>
+                <div style={{
+                  width: "2px", height: "18px", marginLeft: "12px",
+                  background: "linear-gradient(to bottom, rgba(171,156,109,0.5), rgba(171,156,109,0.1))",
+                  borderRadius: "2px",
+                }} />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function makeRoadmapCard(config: RoadmapConfig): React.ComponentType<CardProps> {
+  return function RoadmapCard({ active, exit, variant }: CardProps) {
+    return <RoadmapAgentCardInner config={config} active={active} exit={exit} variant={variant} />;
+  };
+}
+
+export const RoadmapProcurementCard = makeRoadmapCard({
+  label: "Procurement Agent",
+  headline: "Automated PO lifecycle management",
+  steps: ["Receive purchase request", "Validate budget & policy", "Create & route PO"],
+});
+
+export const RoadmapSupplierOnboardingCard = makeRoadmapCard({
+  label: "Supplier Onboarding Agent",
+  headline: "Zero-touch supplier activation",
+  steps: ["Ingest from email", "Extract & validate", "Update master data"],
+});
+
+export const RoadmapTravelCard = makeRoadmapCard({
+  label: "Travel Booking Agent",
+  headline: "Policy-compliant travel, end to end",
+  steps: ["Submit travel request", "Find compliant options", "Book & reconcile"],
+});
+
+export const RoadmapContractCard = makeRoadmapCard({
+  label: "Contract Intelligence Agent",
+  headline: "Automated contract analysis",
+  steps: ["Upload contract", "Extract key obligations", "Flag risks & renewals"],
+});
+
+export const RoadmapCashFlowCard = makeRoadmapCard({
+  label: "Cash Flow Forecasting Agent",
+  headline: "Continuous working capital optimisation",
+  steps: ["Ingest payment data", "Analyse timing patterns", "Forecast & alert"],
+});
+
+export const RoadmapExpenseManagementCard = makeRoadmapCard({
+  label: "Expense Management Agent",
+  headline: "End-to-end expense automation",
+  steps: ["Capture receipts", "Code & policy-check", "Approve & reimburse"],
+});

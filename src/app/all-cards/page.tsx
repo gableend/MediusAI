@@ -19,6 +19,8 @@ import {
   AgentCaptureCard, AgentCodingCard, AgentPOConnectCard, AgentFraudRiskCard,
   AgentCopilotCard, AgentSupplierCard, AgentStatementReconCard, AgentPaymentsCard,
   AgentExpenseProcessingCard, AgentExpenseFraudCard,
+  RoadmapProcurementCard, RoadmapSupplierOnboardingCard, RoadmapTravelCard,
+  RoadmapContractCard, RoadmapCashFlowCard, RoadmapExpenseManagementCard,
 } from "@/components/CardComponents";
 
 // ─── Dimensions ───────────────────────────────────────────────────────────────
@@ -95,6 +97,17 @@ const CARD_GROUPS: { group: string; cards: CardEntry[] }[] = [
       { id: "agent-payments",         label: "Payment Optimization Agent",    Component: AgentPaymentsCard          },
       { id: "agent-expense-processing", label: "Expense Processing Agent",    Component: AgentExpenseProcessingCard },
       { id: "agent-expense-fraud",      label: "Expense Card Fraud Agent",      Component: AgentExpenseFraudCard    },
+    ],
+  },
+  {
+    group: "Roadmap Agents",
+    cards: [
+      { id: "roadmap-procurement",         label: "Procurement Agent",           Component: RoadmapProcurementCard         },
+      { id: "roadmap-supplier-onboarding", label: "Supplier Onboarding Agent",   Component: RoadmapSupplierOnboardingCard  },
+      { id: "roadmap-travel",              label: "Travel Booking Agent",         Component: RoadmapTravelCard              },
+      { id: "roadmap-contract",            label: "Contract Intelligence Agent",  Component: RoadmapContractCard            },
+      { id: "roadmap-cashflow",            label: "Cash Flow Forecasting Agent",  Component: RoadmapCashFlowCard            },
+      { id: "roadmap-expense-mgmt",        label: "Expense Management Agent",     Component: RoadmapExpenseManagementCard   },
     ],
   },
 ];
