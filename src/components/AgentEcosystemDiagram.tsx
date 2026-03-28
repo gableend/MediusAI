@@ -47,7 +47,7 @@ export default function AgentEcosystemDiagram() {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
-  // Arrow arcs between consecutive domains (Reduced gap to 14 so the lines actually draw)
+  // Arrow arcs between consecutive domains
   const arrowArcs = domains.map((d, i) => {
     const next = domains[(i + 1) % domains.length];
     let startA = d.angle + 14;
@@ -71,14 +71,11 @@ export default function AgentEcosystemDiagram() {
           <marker id="arrowHead" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
             <path d="M0,0 L6,2.5 L0,5" fill="#8a9a9a" />
           </marker>
-          {/* Centre radial gradient - Asymmetrical offset for animation */}
-          <radialGradient id="centreGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
-            <stop offset="0%"   stopColor="#0a0a0a" />
-            <stop offset="55%"  stopColor="#1a0c0e" />
-            <stop offset="78%"  stopColor="#8b1a1f" />
-            <stop offset="92%"  stopColor={RED} />
-            <stop offset="100%" stopColor={RED} />
-          </radialGradient>
+          {/* Centre linear gradient - Left to right (0 degrees) */}
+          <linearGradient id="centreGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stopColor={RED} />
+            <stop offset="100%" stopColor="#222222" /> {/* Charcoal */}
+          </linearGradient>
           {/* Curved text path: arc across the TOP */}
           <path
             id="outerTextArc"
@@ -92,32 +89,33 @@ export default function AgentEcosystemDiagram() {
         <circle cx={CX} cy={CY} r={RED_R} fill="none" stroke={RED} strokeWidth="3.5" />
         {/* ── Inner cream fill ─────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f3ede1" />
-        {/* ── Centre dark circle with animation ────────────────────────────── */}
+        {/* ── Rotating Gradient Background ────────────────────────────── */}
         <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)">
+          {/* Sped up to 6s to better match the snappy feel of the video */}
           <animateTransform
             attributeName="transform"
             type="rotate"
             from={`0 ${CX} ${CY}`}
             to={`360 ${CX} ${CY}`}
-            dur="12s"
+            dur="6s"
             repeatCount="indefinite"
           />
         </circle>
 
-        {/* Inner static cap to keep the text background perfectly black */}
-        <circle cx={CX} cy={CY} r={CENTRE_R * 0.55} fill="#0c0c0c" />
+        {/* Inner static cap (Solid White) - Creates the border effect */}
+        <circle cx={CX} cy={CY} r={CENTRE_R - 14} fill="#ffffff" />
         {/* ── Centre text ──────────────────────────────────────────────────── */}
         <text
           x={CX} y={CY - 12}
           textAnchor="middle"
-          style={{ fontSize: "15px", fontWeight: 700, fill: "white", fontFamily: "Poppins, sans-serif" }}
+          style={{ fontSize: "15px", fontWeight: 700, fill: DARK, fontFamily: "Poppins, sans-serif" }}
         >
           Agents executing
         </text>
         <text
           x={CX} y={CY + 10}
           textAnchor="middle"
-          style={{ fontSize: "15px", fontWeight: 700, fill: "white", fontFamily: "Poppins, sans-serif" }}
+          style={{ fontSize: "15px", fontWeight: 700, fill: DARK, fontFamily: "Poppins, sans-serif" }}
         >
           across the system
         </text>
