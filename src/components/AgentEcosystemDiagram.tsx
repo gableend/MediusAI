@@ -53,7 +53,7 @@ export default function AgentEcosystemDiagram() {
     0,   // 1: Contracts -> Suppliers
     0,   // 2: Suppliers -> Procurement
    -4,   // 3: Procurement -> Invoicing
-    4,   // 4: Invoicing -> AP
+    0,   // 4: Invoicing -> AP
     0,   // 5: AP -> Payments
     0,   // 6: Payments -> Expenses
    -4    // 7: Expenses -> Sourcing
