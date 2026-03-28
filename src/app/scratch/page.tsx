@@ -3,6 +3,7 @@
 import AgentEcosystemDiagram from "@/components/AgentEcosystemDiagram";
 
 const DARK = "#2f4344";
+const RED  = "#da2028";
 const SAND = "#ab9c6d";
 
 export default function ScratchPage() {
@@ -23,13 +24,14 @@ export default function ScratchPage() {
               The Medius Agent Ecosystem
             </div>
             <h2 style={{
-              fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700,
-              lineHeight: 1.1, letterSpacing: "-0.7px", color: DARK, marginBottom: "14px",
+              fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 800,
+              lineHeight: 1.15, letterSpacing: "-0.5px", color: DARK, marginBottom: "14px",
             }}>
-              Agents across every spend process
+              With Medius{" "}
+              <span style={{ color: RED }}>spend runs as a system</span>
             </h2>
-            <p style={{ fontSize: "16px", lineHeight: 1.7, color: "#5a7070", maxWidth: "540px", margin: "0 auto" }}>
-              AI agents work across sourcing, procurement, invoicing, payments and expenses, while finance and procurement teams stay in full control.
+            <p style={{ fontSize: "17px", lineHeight: 1.7, color: "#6b7280", maxWidth: "560px", margin: "0 auto" }}>
+              Autonomous by design. Finance teams stay in control.
             </p>
           </div>
           <AgentEcosystemDiagram />
