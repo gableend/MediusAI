@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-const RED = "#da2028";
+const RED  = "#da2028";
 const DARK = "#2f4344";
 // ── Geometry helpers ────────────────────────────────────────────────────────
 const CX = 300;
@@ -33,12 +33,12 @@ const domains = DOMAIN_LABELS.map((label, i) => ({
   label,
   angle: -90 + i * 45,
 }));
-// Adjusted Radii
-const LABEL_R   = 165;
-const ARROW_R   = 165;
-const OUTER_R   = 280;
-const RED_R     = 232;
-const CENTRE_R  = 108;
+// Adjusted Radii to prevent overlap
+const LABEL_R   = 165;  // Moved text slightly inward
+const ARROW_R   = 205;  // Moved arrows further outward to orbit the text cleanly
+const OUTER_R   = 280;  // Outer grey ring
+const RED_R     = 232;  // Red circle border
+const CENTRE_R  = 108;  // Centre dark circle
 // Adjusted text arc radius slightly inward to account for font height
 const TEXT_ARC_R = 254;
 export default function AgentEcosystemDiagram() {
@@ -47,6 +47,10 @@ export default function AgentEcosystemDiagram() {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
+  // New constants for the orbiting "Agent Nodes" (literal agents)
+  // We place the orbit just outside the solid central cap.
+  const NODE_ORBIT_R = CENTRE_R * 0.6; // Approx 65px radius
+  const NODE_SIZE    = 3.5;           // "tiny" nodes
   // Shift values (in degrees) to "slide" specific arrows away from the longer text labels
   const arrowShifts = [
     4,   // 0: Sourcing -> Contracts
@@ -58,14 +62,12 @@ export default function AgentEcosystemDiagram() {
     0,   // 6: Payments -> Expenses
    -4    // 7: Expenses -> Sourcing
   ];
-  // Arrow arcs between consecutive domains
+  // Arrow arcs between consecutive domains (widened the gap to 16 degrees)
   const arrowArcs = domains.map((d, i) => {
     const next = domains[(i + 1) % domains.length];
     const shift = arrowShifts[i];
-
-    let startA = d.angle + 14 + shift;
-    let endA   = next.angle - 14 + shift;
-
+    let startA = d.angle + 16 + shift;
+    let endA   = next.angle - 16 + shift;
     if (endA < startA) endA += 360;
     return { startA, endA, idx: i };
   });
@@ -85,16 +87,14 @@ export default function AgentEcosystemDiagram() {
           <marker id="arrowHead" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
             <path d="M0,0 L6,2.5 L0,5" fill="#8a9a9a" />
           </marker>
-          {/* Centre linear gradient - Restored perfectly */}
-          <linearGradient id="centreGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-            <stop offset="0%" stopColor={RED} />
-            <stop offset="100%" stopColor="#222222" /> {/* Charcoal */}
-          </linearGradient>
-          {/* Linear red-to-charcoal gradient for AP circle */}
-          <linearGradient id="apGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-             <stop offset="0%" stopColor={RED} />
-             <stop offset="100%" stopColor="#222222" />
-          </linearGradient>
+          {/* Centre radial gradient (STATIC - will not shift) */}
+          <radialGradient id="centreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stopColor="#0a0a0a" />
+            <stop offset="55%"  stopColor="#1a0c0e" />
+            <stop offset="78%"  stopColor="#8b1a1f" />
+            <stop offset="92%"  stopColor={RED} />
+            <stop offset="100%" stopColor={RED} />
+          </radialGradient>
           {/* Curved text path: arc across the TOP */}
           <path
             id="outerTextArc"
@@ -108,40 +108,46 @@ export default function AgentEcosystemDiagram() {
         <circle cx={CX} cy={CY} r={RED_R} fill="none" stroke={RED} strokeWidth="3.5" />
         {/* ── Inner cream fill ─────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f3ede1" />
-        {/* ── Rotating Gradient Background (Restored) ──────────────────────── */}
-        <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)">
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            from={`0 ${CX} ${CY}`}
-            to={`360 ${CX} ${CY}`}
-            dur="6s"
-            repeatCount="indefinite"
-          />
-        </circle>
-
-        {/* Inner static cap (Solid White) - Restores the sweeping border */}
-        <circle cx={CX} cy={CY} r={CENTRE_R - 14} fill="#ffffff" />
-        {/* ── Centre text (Shifted down) ───────────────────────────────────── */}
+        {/* ── Centre dark circle (Static Background) ───────────────────────── */}
+        <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)" />
+        <circle cx={CX} cy={CY} r={CENTRE_R * 0.55} fill="#0c0c0c" />
+        {/* -- NEW: Orbiting Agent Nodes (Literal Agents) -- */}
+        {/* Layered above the background circles, but below the center text.
+            We use <g> with simple fade-in transition identical to diagram elements. */}
+        <g style={{ opacity: visible ? 1 : 0, transition: `opacity 0.6s ease 0.4s` }}>
+          {/* Agent 1 - Pure White, faster relentless turn */}
+          <circle cx={CX + NODE_ORBIT_R} cy={CY} r={NODE_SIZE} fill="white" opacity="0.7">
+            <animateTransform attributeName="transform" type="rotate" from={`0 ${CX} ${CY}`} to={`360 ${CX} ${CY}`} dur="22s" repeatCount="indefinite" />
+          </circle>
+          {/* Agent 2 - Lighter "energy red" (soft pink), slower Relativistic churn, offset starting position */}
+          <circle cx={CX + NODE_ORBIT_R} cy={CY} r={NODE_SIZE} fill="#ffcccc" opacity="0.6" transform={`rotate(120 ${CX} ${CY})`}>
+            <animateTransform attributeName="transform" type="rotate" from={`120 ${CX} ${CY}`} to={`480 ${CX} ${CY}`} dur="28s" repeatCount="indefinite" />
+          </circle>
+          {/* Agent 3 - Pure White, different relentless speed, offset 2 */}
+          <circle cx={CX + NODE_ORBIT_R} cy={CY} r={NODE_SIZE} fill="white" opacity="0.7" transform={`rotate(240 ${CX} ${CY})`}>
+            <animateTransform attributeName="transform" type="rotate" from={`240 ${CX} ${CY}`} to={`600 ${CX} ${CY}`} dur="25s" repeatCount="indefinite" />
+          </circle>
+        </g>
+        {/* ── Centre text (Layered ABOVE the orbiting nodes for legibility) ── */}
         <text
-          x={CX} y={CY - 5}
+          x={CX} y={CY - 12}
           textAnchor="middle"
-          style={{ fontSize: "15px", fontWeight: 700, fill: DARK, fontFamily: "Poppins, sans-serif" }}
+          style={{ fontSize: "15px", fontWeight: 700, fill: "white", fontFamily: "Poppins, sans-serif" }}
         >
           Agents executing
         </text>
         <text
-          x={CX} y={CY + 17}
+          x={CX} y={CY + 10}
           textAnchor="middle"
-          style={{ fontSize: "15px", fontWeight: 700, fill: DARK, fontFamily: "Poppins, sans-serif" }}
+          style={{ fontSize: "15px", fontWeight: 700, fill: "white", fontFamily: "Poppins, sans-serif" }}
         >
           across the system
         </text>
-        {/* ── Curved outer text ───────────────────────────────────────────── */}
+        {/* ── Curved outer text (STATIC) ──────────────────────────────────── */}
         <text
           style={{
             fontSize: "16.5px",
-            fontWeight: 700,
+            fontWeight: 600,
             fill: DARK,
             fontFamily: "Poppins, sans-serif",
             letterSpacing: "1.5px",
@@ -152,7 +158,7 @@ export default function AgentEcosystemDiagram() {
             Finance and Procurement define and control
           </textPath>
         </text>
-        {/* ── Arrow arcs between domains ───────────────────────────────────── */}
+        {/* ── Arrow arcs between domains (STATIC) ──────────────────────────── */}
         {arrowArcs.map(({ startA, endA, idx }) => (
           <path
             key={`arc-${idx}`}
@@ -167,62 +173,28 @@ export default function AgentEcosystemDiagram() {
             }}
           />
         ))}
-        {/* ── 8 domain labels (equally spaced) ────────────────────────────── */}
+        {/* ── 8 domain labels (equally spaced - STATIC) ───────────────────── */}
         {domains.map(({ label, angle }, i) => {
           const isAP = label === "AP";
-          const tx = CX + LABEL_R * Math.cos(toRad(angle));
-          const ty = CY + LABEL_R * Math.sin(toRad(angle));
-
-          if (isAP) {
-            return (
-              <g key={label}>
-                {/* 1. Pulsing Outer Ring (Creates the subtle glow effect without flashing) */}
-                <circle cx={tx} cy={ty} r="22" fill={RED} opacity="0">
-                  <animate attributeName="r" values="22; 28; 22" dur="4s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.4; 0; 0.4" dur="4s" repeatCount="indefinite" />
-                </circle>
-
-                {/* 2. Solid Inner Orb (Stays perfectly still) */}
-                <circle cx={tx} cy={ty} r="22" fill="url(#apGrad)" />
-
-                {/* AP text */}
-                <text
-                  x={tx} y={ty}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: 700,
-                    fill: "white",
-                    fontFamily: "Poppins, sans-serif",
-                    opacity: visible ? 1 : 0,
-                    transition: `opacity 0.4s ease ${0.2 + i * 0.08}s`,
-                  }}
-                >
-                  {label}
-                </text>
-              </g>
-            );
-          } else {
-            return (
-              <text
-                key={label}
-                x={tx} y={ty}
-                textAnchor="middle"
-                dominantBaseline="central"
-                style={{
-                  fontSize: "15px",
-                  fontWeight: 700,
-                  fill: DARK,
-                  fontFamily: "Poppins, sans-serif",
-                  opacity: visible ? 1 : 0,
-                  transition: `opacity 0.4s ease ${0.2 + i * 0.08}s`,
-                }}
-              >
-                {label}
-              </text>
-            );
-          }
+          return (
+            <text
+              key={label}
+              x={ptx(LABEL_R, angle)}
+              y={pty(LABEL_R, angle)}
+              textAnchor="middle"
+              dominantBaseline="central"
+              style={{
+                fontSize: isAP ? "16px" : "15px",
+                fontWeight: 700,
+                fill: DARK,
+                fontFamily: "Poppins, sans-serif",
+                opacity: visible ? 1 : 0,
+                transition: `opacity 0.4s ease ${0.2 + i * 0.08}s`,
+              }}
+            >
+              {label}
+            </text>
+          );
         })}
       </svg>
     </div>
