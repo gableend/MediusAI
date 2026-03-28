@@ -71,7 +71,7 @@ export default function AgentEcosystemDiagram() {
   });
   // Orbiting Dots Setup
   // Reduced from 102 to 100 so they sit perfectly tight inside the active ring.
-  const NODE_ORBIT_R = 100;
+  const NODE_ORBIT_R = 101;
   const NODE_SIZE    = 4;
   return (
     <div
