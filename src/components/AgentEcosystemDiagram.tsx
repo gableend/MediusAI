@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-const RED = "#da2028";
+// Define Colors
+const RED  = "#da2028";
 const DARK = "#2f4344";
 // ── Geometry helpers ────────────────────────────────────────────────────────
 const CX = 300;
@@ -34,11 +35,11 @@ const domains = DOMAIN_LABELS.map((label, i) => ({
   angle: -90 + i * 45,
 }));
 // Adjusted Radii
-const LABEL_R   = 165;  // Text radius
-const ARROW_R   = 165;  // Matched to LABEL_R so arrows intersect the text line
-const OUTER_R   = 280;  // Outer grey ring
-const RED_R     = 232;  // Red circle border
-const CENTRE_R  = 108;  // Centre dark circle
+const LABEL_R   = 165;
+const ARROW_R   = 165;
+const OUTER_R   = 280;
+const RED_R     = 232;
+const CENTRE_R  = 108;
 // Adjusted text arc radius slightly inward to account for font height
 const TEXT_ARC_R = 254;
 export default function AgentEcosystemDiagram() {
@@ -47,7 +48,8 @@ export default function AgentEcosystemDiagram() {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
-  // Shift values (in degrees) to "slide" specific arrows away from the longer text labels
+  // Use the specific shift values to "slide" the arrows clockwise/counter-clockwise.
+  // This balances the gaps without changing the arrow lengths.
   const arrowShifts = [
     4,   // 0: Sourcing -> Contracts
     0,   // 1: Contracts -> Suppliers
@@ -63,6 +65,9 @@ export default function AgentEcosystemDiagram() {
     const next = domains[(i + 1) % domains.length];
     const shift = arrowShifts[i];
 
+    // start: d.angle + 14 + shift
+    // end: next.angle - 14 + shift
+    // This maintains a length of next.angle - d.angle - 28 = 45 - 28 = 17 degrees.
     let startA = d.angle + 14 + shift;
     let endA   = next.angle - 14 + shift;
 
@@ -85,10 +90,18 @@ export default function AgentEcosystemDiagram() {
           <marker id="arrowHead" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
             <path d="M0,0 L6,2.5 L0,5" fill="#8a9a9a" />
           </marker>
-          {/* Centre linear gradient - Left to right (0 degrees) */}
-          <linearGradient id="centreGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-            <stop offset="0%" stopColor={RED} />
-            <stop offset="100%" stopColor="#222222" /> {/* Charcoal */}
+          {/* Centre radial gradient - keep as is */}
+          <radialGradient id="centreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stopColor="#0a0a0a" />
+            <stop offset="55%"  stopColor="#1a0c0e" />
+            <stop offset="78%"  stopColor="#8b1a1f" />
+            <stop offset="92%"  stopColor={RED} />
+            <stop offset="100%" stopColor={RED} />
+          </radialGradient>
+          {/* New linear red-to-charcoal gradient for AP circle */}
+          <linearGradient id="apGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+             <stop offset="0%" stopColor={RED} />
+             <stop offset="100%" stopColor="#222222" />
           </linearGradient>
           {/* Curved text path: arc across the TOP */}
           <path
@@ -96,6 +109,36 @@ export default function AgentEcosystemDiagram() {
             d={`M ${CX - TEXT_ARC_R},${CY} A ${TEXT_ARC_R},${TEXT_ARC_R} 0 0,1 ${CX + TEXT_ARC_R},${CY}`}
             fill="none"
           />
+
+          {/* Subtle pulse filter for Agents gradient circle */}
+          <filter id="agentsSubtlePulseFilter">
+            <feMerge>
+              <feMergeNode in="SourceGraphic" />
+              <feMergeNode in="pulseGlow" />
+            </feMerge>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blur" />
+            <feFlood floodColor={RED} floodOpacity="0.3" result="flood" />
+            <feComposite in="flood" in2="blur" operator="in" result="pulseGlow" />
+             <feComponentTransfer in="pulseGlow">
+                 <feFuncA type="linear" slope="0.6">
+                      <animate attributeName="slope" values="0.6;0.1;0.6" dur="3s" repeatCount="indefinite" />
+                 </feFuncA>
+             </feComponentTransfer>
+          </filter>
+
+          {/* Specific glow filter for the AP circle */}
+          <filter id="apGlowFilter">
+              <feMerge>
+                  <feMergeNode in="SourceGraphic" />
+                  <feMergeNode in="blurGlow" />
+              </feMerge>
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+              <feComponentTransfer in="blur">
+                   <feFuncA type="linear" slope="1">
+                        <animate attributeName="slope" values="1;0;1" dur="2s" repeatCount="indefinite" />
+                   </feFuncA>
+              </feComponentTransfer>
+          </filter>
         </defs>
         {/* ── Outer grey ring ──────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={OUTER_R} fill="#e2e4e4" />
@@ -103,32 +146,21 @@ export default function AgentEcosystemDiagram() {
         <circle cx={CX} cy={CY} r={RED_R} fill="none" stroke={RED} strokeWidth="3.5" />
         {/* ── Inner cream fill ─────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f3ede1" />
-        {/* ── Rotating Gradient Background ────────────────────────────── */}
-        <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)">
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            from={`0 ${CX} ${CY}`}
-            to={`360 ${CX} ${CY}`}
-            dur="6s"
-            repeatCount="indefinite"
-          />
-        </circle>
-
-        {/* Inner static cap (Solid White) */}
-        <circle cx={CX} cy={CY} r={CENTRE_R - 14} fill="#ffffff" />
-        {/* ── Centre text (Shifted down by 7px) ───────────────────────────── */}
+        {/* ── Centre dark circle with subtle pulse ─────────────────────────── */}
+        <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)" filter="url(#agentsSubtlePulseFilter)" />
+        <circle cx={CX} cy={CY} r={CENTRE_R * 0.55} fill="#0c0c0c" />
+        {/* ── Centre text ──────────────────────────────────────────────────── */}
         <text
-          x={CX} y={CY - 5}
+          x={CX} y={CY - 6}
           textAnchor="middle"
-          style={{ fontSize: "15px", fontWeight: 700, fill: DARK, fontFamily: "Poppins, sans-serif" }}
+          style={{ fontSize: "15px", fontWeight: 700, fill: "white", fontFamily: "Poppins, sans-serif" }}
         >
           Agents executing
         </text>
         <text
-          x={CX} y={CY + 17}
+          x={CX} y={CY + 18}
           textAnchor="middle"
-          style={{ fontSize: "15px", fontWeight: 700, fill: DARK, fontFamily: "Poppins, sans-serif" }}
+          style={{ fontSize: "15px", fontWeight: 700, fill: "white", fontFamily: "Poppins, sans-serif" }}
         >
           across the system
         </text>
@@ -136,7 +168,7 @@ export default function AgentEcosystemDiagram() {
         <text
           style={{
             fontSize: "16.5px",
-            fontWeight: 700, // Updated from 600 to 700 to bold the text
+            fontWeight: 700,
             fill: DARK,
             fontFamily: "Poppins, sans-serif",
             letterSpacing: "1.5px",
@@ -165,25 +197,59 @@ export default function AgentEcosystemDiagram() {
         {/* ── 8 domain labels (equally spaced) ────────────────────────────── */}
         {domains.map(({ label, angle }, i) => {
           const isAP = label === "AP";
-          return (
-            <text
-              key={label}
-              x={ptx(LABEL_R, angle)}
-              y={pty(LABEL_R, angle)}
-              textAnchor="middle"
-              dominantBaseline="central"
-              style={{
-                fontSize: isAP ? "16px" : "15px",
-                fontWeight: 700,
-                fill: DARK,
-                fontFamily: "Poppins, sans-serif",
-                opacity: visible ? 1 : 0,
-                transition: `opacity 0.4s ease ${0.2 + i * 0.08}s`,
-              }}
-            >
-              {label}
-            </text>
-          );
+          const tx = CX + LABEL_R * Math.cos(toRad(angle));
+          const ty = CY + LABEL_R * Math.sin(toRad(angle));
+
+          if (isAP) {
+               return (
+                    <g key={label}>
+                        {/* Pulsing gradient circle for AP with scale animation */}
+                        <circle
+                             cx={tx} cy={ty}
+                             r="22"
+                             fill="url(#apGrad)"
+                             filter="url(#apGlowFilter)"
+                        >
+                             <animate attributeName="r" values="22;24;22" dur="2s" repeatCount="indefinite" />
+                        </circle>
+                         {/* AP text is bold and white to contrast the background */}
+                        <text
+                             x={tx} y={ty}
+                             textAnchor="middle"
+                             dominantBaseline="central"
+                             style={{
+                                 fontSize: "16px",
+                                 fontWeight: 700,
+                                 fill: "white",
+                                 fontFamily: "Poppins, sans-serif",
+                                 opacity: visible ? 1 : 0,
+                                 transition: `opacity 0.4s ease ${0.2 + i * 0.08}s`,
+                             }}
+                        >
+                             {label}
+                        </text>
+                    </g>
+               );
+          } else {
+               return (
+                    <text
+                        key={label}
+                        x={tx} y={ty}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        style={{
+                            fontSize: "15px",
+                            fontWeight: 700,
+                            fill: DARK,
+                            fontFamily: "Poppins, sans-serif",
+                            opacity: visible ? 1 : 0,
+                            transition: `opacity 0.4s ease ${0.2 + i * 0.08}s`,
+                        }}
+                    >
+                        {label}
+                    </text>
+               );
+          }
         })}
       </svg>
     </div>
