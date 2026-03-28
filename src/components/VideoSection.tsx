@@ -42,7 +42,7 @@ export default function VideoSection() {
         <div
           style={{
             textAlign: "center",
-            marginBottom: "52px",
+            marginBottom: "39px",
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(24px)",
             transition: visible ? "opacity 0.6s ease, transform 0.6s ease" : "none",
