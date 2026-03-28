@@ -33,9 +33,9 @@ const domains = DOMAIN_LABELS.map((label, i) => ({
   label,
   angle: -90 + i * 45,
 }));
-// Adjusted Radii
+// Restored Perfect Radii
 const LABEL_R   = 165;
-const ARROW_R   = 165;
+const ARROW_R   = 165;  // Matched to LABEL_R so arrows intersect the text line cleanly
 const OUTER_R   = 280;
 const RED_R     = 232;
 const CENTRE_R  = 108;
@@ -47,7 +47,7 @@ export default function AgentEcosystemDiagram() {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
-  // Shift values (in degrees) to "slide" specific arrows away from the longer text labels
+  // RESTORED: Shift values to slide arrows away from the longer text labels
   const arrowShifts = [
     4,   // 0: Sourcing -> Contracts
     0,   // 1: Contracts -> Suppliers
@@ -58,7 +58,7 @@ export default function AgentEcosystemDiagram() {
     0,   // 6: Payments -> Expenses
    -4    // 7: Expenses -> Sourcing
   ];
-  // Arrow arcs between consecutive domains
+  // RESTORED: Arrow arcs using the 14-degree gap and precise shifts
   const arrowArcs = domains.map((d, i) => {
     const next = domains[(i + 1) % domains.length];
     const shift = arrowShifts[i];
@@ -69,6 +69,10 @@ export default function AgentEcosystemDiagram() {
     if (endA < startA) endA += 360;
     return { startA, endA, idx: i };
   });
+  // Single Orbiting Dot Setup
+  // CENTRE_R is 108. Placing the orbit at 102 puts it nicely near the outer edge of the sweeping ring.
+  const NODE_ORBIT_R = 102;
+  const NODE_SIZE    = 4;
   return (
     <div
       style={{
@@ -85,12 +89,12 @@ export default function AgentEcosystemDiagram() {
           <marker id="arrowHead" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
             <path d="M0,0 L6,2.5 L0,5" fill="#8a9a9a" />
           </marker>
-          {/* Centre linear gradient - Restored perfectly */}
+          {/* Sweeping Center Ring Gradient */}
           <linearGradient id="centreGrad" x1="0%" y1="50%" x2="100%" y2="50%">
             <stop offset="0%" stopColor={RED} />
-            <stop offset="100%" stopColor="#222222" /> {/* Charcoal */}
+            <stop offset="100%" stopColor="#222222" />
           </linearGradient>
-          {/* Linear red-to-charcoal gradient for AP circle */}
+          {/* AP Node Gradient */}
           <linearGradient id="apGrad" x1="0%" y1="50%" x2="100%" y2="50%">
              <stop offset="0%" stopColor={RED} />
              <stop offset="100%" stopColor="#222222" />
@@ -108,7 +112,7 @@ export default function AgentEcosystemDiagram() {
         <circle cx={CX} cy={CY} r={RED_R} fill="none" stroke={RED} strokeWidth="3.5" />
         {/* ── Inner cream fill ─────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f3ede1" />
-        {/* ── Rotating Gradient Background (Restored) ──────────────────────── */}
+        {/* ── Rotating Gradient Background (The Sweeping Ring) ─────────────── */}
         <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)">
           <animateTransform
             attributeName="transform"
@@ -120,9 +124,22 @@ export default function AgentEcosystemDiagram() {
           />
         </circle>
 
-        {/* Inner static cap (Solid White) - Restores the sweeping border */}
+        {/* Inner static cap (Solid White) - Creates the border effect */}
         <circle cx={CX} cy={CY} r={CENTRE_R - 14} fill="#ffffff" />
-        {/* ── Centre text (Shifted down) ───────────────────────────────────── */}
+        {/* ── Orbiting Agent Node ─────────────────────────────────────────── */}
+        <g style={{ opacity: visible ? 1 : 0, transition: `opacity 0.6s ease 0.4s` }}>
+          <circle cx={CX + NODE_ORBIT_R} cy={CY} r={NODE_SIZE} fill="white" opacity="0.9">
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from={`0 ${CX} ${CY}`}
+              to={`360 ${CX} ${CY}`}
+              dur="12s"
+              repeatCount="indefinite"
+            />
+          </circle>
+        </g>
+        {/* ── RESTORED: Center text (Shifted down for visual balance) ──────── */}
         <text
           x={CX} y={CY - 5}
           textAnchor="middle"
@@ -137,7 +154,7 @@ export default function AgentEcosystemDiagram() {
         >
           across the system
         </text>
-        {/* ── Curved outer text ───────────────────────────────────────────── */}
+        {/* ── RESTORED: Curved outer text (Bolded) ────────────────────────── */}
         <text
           style={{
             fontSize: "16.5px",
@@ -176,13 +193,13 @@ export default function AgentEcosystemDiagram() {
           if (isAP) {
             return (
               <g key={label}>
-                {/* 1. Pulsing Outer Ring (Creates the subtle glow effect without flashing) */}
+                {/* 1. Pulsing Outer Ring (Subtle fade/expand, no flashing) */}
                 <circle cx={tx} cy={ty} r="22" fill={RED} opacity="0">
-                  <animate attributeName="r" values="22; 28; 22" dur="4s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.4; 0; 0.4" dur="4s" repeatCount="indefinite" />
+                  <animate attributeName="r" values="22; 32; 22" dur="3s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.3; 0; 0.3" dur="3s" repeatCount="indefinite" />
                 </circle>
 
-                {/* 2. Solid Inner Orb (Stays perfectly still) */}
+                {/* 2. Solid Inner Orb (Static gradient) */}
                 <circle cx={tx} cy={ty} r="22" fill="url(#apGrad)" />
 
                 {/* AP text */}
