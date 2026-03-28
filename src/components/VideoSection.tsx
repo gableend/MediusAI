@@ -1,12 +1,12 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import AgentEcosystemDiagram from "@/components/AgentEcosystemDiagram";
 
 const DARK = "#2f4344";
 const RED  = "#da2028";
 
 export default function VideoSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -75,7 +75,7 @@ export default function VideoSection() {
           </p>
         </div>
 
-        {/* ── Video ── */}
+        {/* ── Agent Ecosystem Diagram ── */}
         <div
           style={{
             opacity: visible ? 1 : 0,
@@ -83,23 +83,7 @@ export default function VideoSection() {
             transition: visible ? "opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s" : "none",
           }}
         >
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            style={{
-              width: "100%",
-              height: "auto",
-              display: "block",
-              transform: "translateZ(0)",
-              backfaceVisibility: "hidden",
-            }}
-          >
-            <source src="/video/Product_Vision  -  VIDEO.mp4" type="video/mp4" />
-          </video>
+          <AgentEcosystemDiagram />
         </div>
 
       </div>
