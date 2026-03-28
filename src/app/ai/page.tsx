@@ -660,7 +660,7 @@ export default function AIPage() {
             {/* Expense Processing Agent */}
             <div style={{ display: "flex", flexDirection: "column" }}>
               {/* Text */}
-              <div style={{ marginBottom: "20px" }}>
+              <div style={{ marginBottom: "20px", maxWidth: "360px" }}>
                 <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>
                   {EM_AGENTS[0].label}
                 </div>
@@ -687,7 +687,7 @@ export default function AIPage() {
             {/* Suspicious Expense Agent */}
             <div style={{ display: "flex", flexDirection: "column" }}>
               {/* Text */}
-              <div style={{ marginBottom: "20px" }}>
+              <div style={{ marginBottom: "20px", maxWidth: "360px" }}>
                 <div style={{ fontSize: "10px", fontWeight: 700, color: SAND, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "5px" }}>
                   {EM_AGENTS[1].label}
                 </div>
