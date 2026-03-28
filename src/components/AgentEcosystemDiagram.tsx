@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-const RED  = "#da2028";
+const RED = "#da2028";
 const DARK = "#2f4344";
 // ── Geometry helpers ────────────────────────────────────────────────────────
 const CX = 300;
@@ -33,9 +33,9 @@ const domains = DOMAIN_LABELS.map((label, i) => ({
   label,
   angle: -90 + i * 45,
 }));
-// Adjusted Radii to prevent overlap
-const LABEL_R   = 165;  // Moved text slightly inward
-const ARROW_R   = 205;  // Moved arrows further outward to orbit the text cleanly
+// Adjusted Radii
+const LABEL_R   = 165;  // Text radius
+const ARROW_R   = 165;  // Matched to LABEL_R so arrows intersect the text line
 const OUTER_R   = 280;  // Outer grey ring
 const RED_R     = 232;  // Red circle border
 const CENTRE_R  = 108;  // Centre dark circle
@@ -47,11 +47,11 @@ export default function AgentEcosystemDiagram() {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
-  // Arrow arcs between consecutive domains (widened the gap to 16 degrees)
+  // Arrow arcs between consecutive domains (widened the gap to 22 degrees to clear text)
   const arrowArcs = domains.map((d, i) => {
     const next = domains[(i + 1) % domains.length];
-    let startA = d.angle + 16;
-    let endA   = next.angle - 16;
+    let startA = d.angle + 22;
+    let endA   = next.angle - 22;
     if (endA < startA) endA += 360;
     return { startA, endA, idx: i };
   });
