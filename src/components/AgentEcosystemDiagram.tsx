@@ -69,9 +69,9 @@ export default function AgentEcosystemDiagram() {
     if (endA < startA) endA += 360;
     return { startA, endA, idx: i };
   });
-  // Single Orbiting Dot Setup
-  // CENTRE_R is 108. Placing the orbit at 102 puts it nicely near the outer edge of the sweeping ring.
-  const NODE_ORBIT_R = 102;
+  // Orbiting Dots Setup
+  // Reduced from 102 to 100 so they sit perfectly tight inside the active ring.
+  const NODE_ORBIT_R = 100;
   const NODE_SIZE    = 4;
   return (
     <div
@@ -126,17 +126,19 @@ export default function AgentEcosystemDiagram() {
 
         {/* Inner static cap (Solid White) - Creates the border effect */}
         <circle cx={CX} cy={CY} r={CENTRE_R - 14} fill="#ffffff" />
-        {/* ── Orbiting Agent Node ─────────────────────────────────────────── */}
+        {/* ── Orbiting Agent Nodes (Three dots on the exact same path) ────── */}
         <g style={{ opacity: visible ? 1 : 0, transition: `opacity 0.6s ease 0.4s` }}>
+          {/* Dot 1 */}
           <circle cx={CX + NODE_ORBIT_R} cy={CY} r={NODE_SIZE} fill="white" opacity="0.9">
-            <animateTransform
-              attributeName="transform"
-              type="rotate"
-              from={`0 ${CX} ${CY}`}
-              to={`360 ${CX} ${CY}`}
-              dur="12s"
-              repeatCount="indefinite"
-            />
+            <animateTransform attributeName="transform" type="rotate" from={`0 ${CX} ${CY}`} to={`360 ${CX} ${CY}`} dur="12s" repeatCount="indefinite" />
+          </circle>
+          {/* Dot 2 - Starts at 120 degrees, slightly slower */}
+          <circle cx={CX + NODE_ORBIT_R} cy={CY} r={NODE_SIZE} fill="white" opacity="0.9">
+            <animateTransform attributeName="transform" type="rotate" from={`120 ${CX} ${CY}`} to={`480 ${CX} ${CY}`} dur="15s" repeatCount="indefinite" />
+          </circle>
+          {/* Dot 3 - Starts at 240 degrees, even slower */}
+          <circle cx={CX + NODE_ORBIT_R} cy={CY} r={NODE_SIZE} fill="white" opacity="0.9">
+            <animateTransform attributeName="transform" type="rotate" from={`240 ${CX} ${CY}`} to={`600 ${CX} ${CY}`} dur="18s" repeatCount="indefinite" />
           </circle>
         </g>
         {/* ── RESTORED: Center text (Shifted down for visual balance) ──────── */}
