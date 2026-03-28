@@ -178,8 +178,8 @@ export default function AgentEcosystemDiagram() {
               <g key={label}>
                 {/* 1. Pulsing Outer Ring (Creates the subtle glow effect without flashing) */}
                 <circle cx={tx} cy={ty} r="22" fill={RED} opacity="0">
-                  <animate attributeName="r" values="22; 32; 22" dur="3s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.4; 0; 0.4" dur="3s" repeatCount="indefinite" />
+                  <animate attributeName="r" values="22; 28; 22" dur="4s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.4; 0; 0.4" dur="4s" repeatCount="indefinite" />
                 </circle>
 
                 {/* 2. Solid Inner Orb (Stays perfectly still) */}
