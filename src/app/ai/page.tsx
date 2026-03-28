@@ -129,7 +129,7 @@ const EM_AGENTS = [
     label: "Expense Processing Agent",
     headline: "Auto-processed expenses",
     description:
-      "Automatically processes expenses from receipt to reimbursement. Categorised, policy-checked, ready for approval.",
+      "Handles expenses from receipt to reimbursement. Categorised, policy-checked, ready for approval.",
     stat: "Receipts processed automatically",
   },
   {
