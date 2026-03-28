@@ -1,19 +1,14 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
-
 const RED  = "#da2028";
 const DARK = "#2f4344";
-
 // ── Geometry helpers ────────────────────────────────────────────────────────
 const CX = 300;
 const CY = 300;
 const SIZE = 600;
-
 const toRad = (d: number) => (d * Math.PI) / 180;
 const ptx = (r: number, deg: number) => CX + r * Math.cos(toRad(deg));
 const pty = (r: number, deg: number) => CY + r * Math.sin(toRad(deg));
-
 function arcPath(r: number, startDeg: number, endDeg: number) {
   const x1 = ptx(r, startDeg), y1 = pty(r, startDeg);
   const x2 = ptx(r, endDeg),   y2 = pty(r, endDeg);
@@ -22,10 +17,8 @@ function arcPath(r: number, startDeg: number, endDeg: number) {
   const dir = sweep > 0 ? 1 : 0;
   return `M ${x1} ${y1} A ${r} ${r} 0 ${large} ${dir} ${x2} ${y2}`;
 }
-
 // ── 8 domains equally spaced (45 deg apart), starting from top ──────────
 // -90 deg = 12 o'clock in SVG coordinates
-// Order: Sourcing > Contracts > Suppliers > Procurement > Invoicing > AP > Payments > Expenses
 const DOMAIN_LABELS = [
   "Sourcing",
   "Contracts",
@@ -36,38 +29,32 @@ const DOMAIN_LABELS = [
   "Payments",
   "Expenses",
 ];
-
 const domains = DOMAIN_LABELS.map((label, i) => ({
   label,
   angle: -90 + i * 45,
 }));
-
-const LABEL_R   = 175;  // radius for label placement (cream ring)
-const ARROW_R   = 185;  // arrow arcs on a wider path intersecting midpoint of labels
-const OUTER_R   = 280;  // outer grey ring
-const RED_R     = 232;  // red circle border
-const CENTRE_R  = 108;  // centre dark circle
-
-// Text arc radius: midpoint of the grey ring (between RED_R and OUTER_R)
-const TEXT_ARC_R = (RED_R + OUTER_R) / 2;  // 256
-
+// Adjusted Radii to prevent overlap
+const LABEL_R   = 165;  // Moved text slightly inward
+const ARROW_R   = 205;  // Moved arrows further outward to orbit the text cleanly
+const OUTER_R   = 280;  // Outer grey ring
+const RED_R     = 232;  // Red circle border
+const CENTRE_R  = 108;  // Centre dark circle
+// Adjusted text arc radius slightly inward to account for font height
+const TEXT_ARC_R = 254;
 export default function AgentEcosystemDiagram() {
   const [visible, setVisible] = useState(false);
-
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
-
-  // Arrow arcs between consecutive domains
+  // Arrow arcs between consecutive domains (widened the gap to 16 degrees)
   const arrowArcs = domains.map((d, i) => {
     const next = domains[(i + 1) % domains.length];
-    let startA = d.angle + 12;
-    let endA   = next.angle - 12;
+    let startA = d.angle + 16;
+    let endA   = next.angle - 16;
     if (endA < startA) endA += 360;
     return { startA, endA, idx: i };
   });
-
   return (
     <div
       style={{
@@ -84,7 +71,6 @@ export default function AgentEcosystemDiagram() {
           <marker id="arrowHead" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
             <path d="M0,0 L6,2.5 L0,5" fill="#8a9a9a" />
           </marker>
-
           {/* Centre radial gradient */}
           <radialGradient id="centreGrad" cx="50%" cy="50%" r="50%">
             <stop offset="0%"   stopColor="#0a0a0a" />
@@ -93,28 +79,22 @@ export default function AgentEcosystemDiagram() {
             <stop offset="92%"  stopColor={RED} />
             <stop offset="100%" stopColor={RED} />
           </radialGradient>
-
-          {/* Curved text path: arc across the TOP, using mid-grey-ring radius */}
+          {/* Curved text path: arc across the TOP */}
           <path
             id="outerTextArc"
             d={`M ${CX - TEXT_ARC_R},${CY} A ${TEXT_ARC_R},${TEXT_ARC_R} 0 0,1 ${CX + TEXT_ARC_R},${CY}`}
             fill="none"
           />
         </defs>
-
         {/* ── Outer grey ring ──────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={OUTER_R} fill="#e2e4e4" />
-
         {/* ── Red border ring ──────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={RED_R} fill="none" stroke={RED} strokeWidth="3.5" />
-
         {/* ── Inner cream fill ─────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f3ede1" />
-
         {/* ── Centre dark circle ───────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)" />
         <circle cx={CX} cy={CY} r={CENTRE_R * 0.55} fill="#0c0c0c" />
-
         {/* ── Centre text ──────────────────────────────────────────────────── */}
         <text
           x={CX} y={CY - 12}
@@ -130,8 +110,7 @@ export default function AgentEcosystemDiagram() {
         >
           across the system
         </text>
-
-        {/* ── Curved outer text (top arc, centred in grey ring) ───────────── */}
+        {/* ── Curved outer text ───────────────────────────────────────────── */}
         <text
           style={{
             fontSize: "16.5px",
@@ -139,13 +118,13 @@ export default function AgentEcosystemDiagram() {
             fill: DARK,
             fontFamily: "Poppins, sans-serif",
             letterSpacing: "1.5px",
+            dominantBaseline: "central", // Forces vertical centering on the path
           }}
         >
           <textPath href="#outerTextArc" startOffset="50%" textAnchor="middle">
             Finance and Procurement define and control
           </textPath>
         </text>
-
         {/* ── Arrow arcs between domains ───────────────────────────────────── */}
         {arrowArcs.map(({ startA, endA, idx }) => (
           <path
@@ -161,7 +140,6 @@ export default function AgentEcosystemDiagram() {
             }}
           />
         ))}
-
         {/* ── 8 domain labels (equally spaced) ────────────────────────────── */}
         {domains.map(({ label, angle }, i) => {
           const isAP = label === "AP";
