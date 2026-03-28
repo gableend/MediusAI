@@ -47,11 +47,11 @@ export default function AgentEcosystemDiagram() {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
-  // Arrow arcs between consecutive domains (widened the gap to 22 degrees to clear text)
+  // Arrow arcs between consecutive domains (Reduced gap to 14 so the lines actually draw)
   const arrowArcs = domains.map((d, i) => {
     const next = domains[(i + 1) % domains.length];
-    let startA = d.angle + 22;
-    let endA   = next.angle - 22;
+    let startA = d.angle + 14;
+    let endA   = next.angle - 14;
     if (endA < startA) endA += 360;
     return { startA, endA, idx: i };
   });
@@ -71,8 +71,8 @@ export default function AgentEcosystemDiagram() {
           <marker id="arrowHead" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
             <path d="M0,0 L6,2.5 L0,5" fill="#8a9a9a" />
           </marker>
-          {/* Centre radial gradient */}
-          <radialGradient id="centreGrad" cx="50%" cy="50%" r="50%">
+          {/* Centre radial gradient - Asymmetrical offset for animation */}
+          <radialGradient id="centreGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
             <stop offset="0%"   stopColor="#0a0a0a" />
             <stop offset="55%"  stopColor="#1a0c0e" />
             <stop offset="78%"  stopColor="#8b1a1f" />
@@ -92,8 +92,19 @@ export default function AgentEcosystemDiagram() {
         <circle cx={CX} cy={CY} r={RED_R} fill="none" stroke={RED} strokeWidth="3.5" />
         {/* ── Inner cream fill ─────────────────────────────────────────────── */}
         <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f3ede1" />
-        {/* ── Centre dark circle ───────────────────────────────────────────── */}
-        <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)" />
+        {/* ── Centre dark circle with animation ────────────────────────────── */}
+        <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from={`0 ${CX} ${CY}`}
+            to={`360 ${CX} ${CY}`}
+            dur="12s"
+            repeatCount="indefinite"
+          />
+        </circle>
+
+        {/* Inner static cap to keep the text background perfectly black */}
         <circle cx={CX} cy={CY} r={CENTRE_R * 0.55} fill="#0c0c0c" />
         {/* ── Centre text ──────────────────────────────────────────────────── */}
         <text
@@ -118,7 +129,7 @@ export default function AgentEcosystemDiagram() {
             fill: DARK,
             fontFamily: "Poppins, sans-serif",
             letterSpacing: "1.5px",
-            dominantBaseline: "central", // Forces vertical centering on the path
+            dominantBaseline: "central",
           }}
         >
           <textPath href="#outerTextArc" startOffset="50%" textAnchor="middle">
