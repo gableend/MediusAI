@@ -47,11 +47,26 @@ export default function AgentEcosystemDiagram() {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
+  // Shift values (in degrees) to "slide" specific arrows away from the longer text labels
+  // Positive = slide clockwise, Negative = slide counter-clockwise
+  const arrowShifts = [
+    4,   // 0: Sourcing -> Contracts (slide right, away from Sourcing)
+    0,   // 1: Contracts -> Suppliers
+    0,   // 2: Suppliers -> Procurement
+   -4,   // 3: Procurement -> Invoicing (slide left, away from Invoicing)
+    4,   // 4: Invoicing -> AP (slide right, away from Invoicing)
+    0,   // 5: AP -> Payments
+    0,   // 6: Payments -> Expenses
+   -4    // 7: Expenses -> Sourcing (slide left, away from Sourcing)
+  ];
   // Arrow arcs between consecutive domains
   const arrowArcs = domains.map((d, i) => {
     const next = domains[(i + 1) % domains.length];
-    let startA = d.angle + 14;
-    let endA   = next.angle - 14;
+    const shift = arrowShifts[i];
+
+    let startA = d.angle + 14 + shift;
+    let endA   = next.angle - 14 + shift;
+
     if (endA < startA) endA += 360;
     return { startA, endA, idx: i };
   });
