@@ -48,16 +48,15 @@ export default function AgentEcosystemDiagram() {
     return () => clearTimeout(t);
   }, []);
   // Shift values (in degrees) to "slide" specific arrows away from the longer text labels
-  // Positive = slide clockwise, Negative = slide counter-clockwise
   const arrowShifts = [
-    4,   // 0: Sourcing -> Contracts (slide right, away from Sourcing)
+    4,   // 0: Sourcing -> Contracts
     0,   // 1: Contracts -> Suppliers
     0,   // 2: Suppliers -> Procurement
-   -4,   // 3: Procurement -> Invoicing (slide left, away from Invoicing)
-    4,   // 4: Invoicing -> AP (slide right, away from Invoicing)
+   -4,   // 3: Procurement -> Invoicing
+    4,   // 4: Invoicing -> AP
     0,   // 5: AP -> Payments
     0,   // 6: Payments -> Expenses
-   -4    // 7: Expenses -> Sourcing (slide left, away from Sourcing)
+   -4    // 7: Expenses -> Sourcing
   ];
   // Arrow arcs between consecutive domains
   const arrowArcs = domains.map((d, i) => {
@@ -106,7 +105,6 @@ export default function AgentEcosystemDiagram() {
         <circle cx={CX} cy={CY} r={RED_R - 2} fill="#f3ede1" />
         {/* ── Rotating Gradient Background ────────────────────────────── */}
         <circle cx={CX} cy={CY} r={CENTRE_R} fill="url(#centreGrad)">
-          {/* Sped up to 6s to better match the snappy feel of the video */}
           <animateTransform
             attributeName="transform"
             type="rotate"
@@ -117,18 +115,18 @@ export default function AgentEcosystemDiagram() {
           />
         </circle>
 
-        {/* Inner static cap (Solid White) - Creates the border effect */}
+        {/* Inner static cap (Solid White) */}
         <circle cx={CX} cy={CY} r={CENTRE_R - 14} fill="#ffffff" />
-        {/* ── Centre text ──────────────────────────────────────────────────── */}
+        {/* ── Centre text (Shifted down by 7px) ───────────────────────────── */}
         <text
-          x={CX} y={CY - 12}
+          x={CX} y={CY - 5}
           textAnchor="middle"
           style={{ fontSize: "15px", fontWeight: 700, fill: DARK, fontFamily: "Poppins, sans-serif" }}
         >
           Agents executing
         </text>
         <text
-          x={CX} y={CY + 10}
+          x={CX} y={CY + 17}
           textAnchor="middle"
           style={{ fontSize: "15px", fontWeight: 700, fill: DARK, fontFamily: "Poppins, sans-serif" }}
         >
@@ -138,7 +136,7 @@ export default function AgentEcosystemDiagram() {
         <text
           style={{
             fontSize: "16.5px",
-            fontWeight: 600,
+            fontWeight: 700, // Updated from 600 to 700 to bold the text
             fill: DARK,
             fontFamily: "Poppins, sans-serif",
             letterSpacing: "1.5px",
