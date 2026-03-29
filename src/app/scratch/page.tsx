@@ -2,16 +2,22 @@
 
 import { useEffect, useState } from "react";
 import AgentEcosystemDiagram from "@/components/AgentEcosystemDiagram";
-import { VideoCamera } from "@phosphor-icons/react";
+import { VideoCamera, FileText } from "@phosphor-icons/react";
 
 const DARK = "#2f4344";
 const RED  = "#da2028";
 const SAND = "#ab9c6d";
 
 const AP_CASE_STUDIES = [
-  { name: "Briggs Equipment", href: "https://www.medius.com/resources/case-studies/briggs-equipment-ap-automation/" },
-  { name: "WD-40", href: "https://www.medius.com/resources/case-studies/wd-40-video/" },
-  { name: "Chadwell Supply", href: "https://www.medius.com/resources/case-studies/chadwell-supply-video/" },
+  { name: "Briggs Equipment", href: "https://www.medius.com/resources/case-studies/briggs-equipment-ap-automation/", type: "video" as const },
+  { name: "WD-40", href: "https://www.medius.com/resources/case-studies/wd-40-video/", type: "video" as const },
+  { name: "Chadwell Supply", href: "https://www.medius.com/resources/case-studies/chadwell-supply-video/", type: "video" as const },
+];
+
+const SPEND_CASE_STUDIES = [
+  { name: "WWF", href: "https://www.medius.com/resources/case-studies/wwf-automates-procurement-processes-and-enhances-reporting/", type: "video" as const },
+  { name: "Procure4", href: "https://www.medius.com/lps/procure4-on-making-cost-reductions-driving-efficiencies-and-getting-better-control1/", type: "video" as const },
+  { name: "Nissan", href: "https://www.medius.com/resources/case-studies/nissan-source-to-pay/", type: "article" as const },
 ];
 
 export default function ScratchPage() {
@@ -116,14 +122,37 @@ export default function ScratchPage() {
                 transition: "opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s",
               }}
             >
-              <div style={{ fontSize: "32px", fontWeight: 800, color: DARK, lineHeight: 1, letterSpacing: "-1px" }}>
-                {STAT_CARDS[1].stat}
+              <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.2, marginBottom: "4px" }}>
+                Optimize spend
               </div>
-              <div style={{ fontSize: "13px", fontWeight: 600, color: DARK, marginTop: "6px", lineHeight: 1.3 }}>
-                {STAT_CARDS[1].label}
+              <div style={{ fontSize: "11px", color: "#8a9a9a", marginBottom: "14px", lineHeight: 1.4 }}>
+                From Sourcing to Expenses
               </div>
-              <div style={{ fontSize: "12px", color: "#8a9a9a", marginTop: "2px" }}>
-                {STAT_CARDS[1].sublabel}
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                {SPEND_CASE_STUDIES.map((cs) => (
+                  <a
+                    key={cs.name}
+                    href={cs.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      color: DARK,
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    {cs.type === "video" ? (
+                      <VideoCamera size={16} weight="fill" color={RED} />
+                    ) : (
+                      <FileText size={16} weight="fill" color={RED} />
+                    )}
+                    {cs.name}
+                  </a>
+                ))}
               </div>
             </div>
 
