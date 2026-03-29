@@ -20,6 +20,28 @@ const SPEND_CASE_STUDIES = [
   { name: "Nissan", href: "https://www.medius.com/resources/case-studies/nissan-source-to-pay/", type: "article" as const },
 ];
 
+const CARD_WIDTH = 185;
+
+const cardBase: React.CSSProperties = {
+  position: "absolute",
+  background: "white",
+  borderRadius: "14px",
+  padding: "20px 22px",
+  boxShadow: "0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
+  zIndex: 2,
+  width: `${CARD_WIDTH}px`,
+};
+
+const linkStyle: React.CSSProperties = {
+  fontSize: "12px",
+  fontWeight: 600,
+  color: DARK,
+  textDecoration: "none",
+  display: "flex",
+  alignItems: "center",
+  gap: "6px",
+};
+
 export default function ScratchPage() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -37,7 +59,7 @@ export default function ScratchPage() {
       </div>
 
       {/* Diagram section */}
-      <section style={{ padding: "80px 32px" }}>
+      <section style={{ padding: "80px 32px", overflow: "visible" }}>
         <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "48px" }}>
             <div style={{ fontSize: "11px", fontWeight: 600, color: SAND, textTransform: "uppercase", letterSpacing: "1.2px", marginBottom: "12px" }}>
@@ -55,104 +77,80 @@ export default function ScratchPage() {
             </p>
           </div>
 
-          {/* Diagram with overlay stat cards */}
+          {/* Diagram with flanking stat cards */}
           <div style={{ position: "relative", maxWidth: "700px", margin: "0 auto" }}>
 
-            {/* Left card - top left corner */}
+            {/* Left card */}
             <div
               style={{
-                position: "absolute",
-                top: "28px",
-                left: "-10px",
-                background: "white",
-                borderRadius: "14px",
-                padding: "20px 24px",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
-                zIndex: 2,
-                minWidth: "150px",
+                ...cardBase,
+                top: "40px",
+                left: `-${CARD_WIDTH + 30}px`,
                 opacity: visible ? 1 : 0,
-                transform: visible ? "translateX(0)" : "translateX(-20px)",
-                transition: "opacity 0.6s ease, transform 0.6s ease",
+                transform: visible ? "translateY(0)" : "translateY(-24px)",
+                transition: "opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s",
               }}
             >
-              <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.2, marginBottom: "4px" }}>
+              <div style={{ fontSize: "15px", fontWeight: 700, color: DARK, lineHeight: 1.2, marginBottom: "4px" }}>
                 Achieve AP excellence
               </div>
               <div style={{ fontSize: "11px", color: "#8a9a9a", marginBottom: "14px", lineHeight: 1.4 }}>
                 See how teams transform AP
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
                 {AP_CASE_STUDIES.map((cs) => (
-                  <a
-                    key={cs.name}
-                    href={cs.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      color: DARK,
-                      textDecoration: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
-                    <VideoCamera size={16} weight="fill" color={RED} />
+                  <a key={cs.name} href={cs.href} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                    <VideoCamera size={16} weight="fill" color={RED} style={{ flexShrink: 0 }} />
                     {cs.name}
                   </a>
                 ))}
               </div>
+              <div style={{ borderTop: "1px solid #eee", paddingTop: "12px" }}>
+                <div style={{ fontSize: "24px", fontWeight: 800, color: RED, lineHeight: 1, letterSpacing: "-0.5px" }}>
+                  97%
+                </div>
+                <div style={{ fontSize: "11px", color: "#8a9a9a", marginTop: "3px", lineHeight: 1.3 }}>
+                  Auto-match rate on invoice lines
+                </div>
+              </div>
             </div>
 
-            {/* Right card - top right corner */}
+            {/* Right card */}
             <div
               style={{
-                position: "absolute",
-                top: "28px",
-                right: "-10px",
-                background: "white",
-                borderRadius: "14px",
-                padding: "20px 24px",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
-                zIndex: 2,
-                minWidth: "150px",
+                ...cardBase,
+                top: "40px",
+                right: `-${CARD_WIDTH + 30}px`,
                 opacity: visible ? 1 : 0,
-                transform: visible ? "translateX(0)" : "translateX(20px)",
-                transition: "opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s",
+                transform: visible ? "translateY(0)" : "translateY(-24px)",
+                transition: "opacity 0.6s ease 0.45s, transform 0.6s ease 0.45s",
               }}
             >
-              <div style={{ fontSize: "16px", fontWeight: 700, color: DARK, lineHeight: 1.2, marginBottom: "4px" }}>
+              <div style={{ fontSize: "15px", fontWeight: 700, color: DARK, lineHeight: 1.2, marginBottom: "4px" }}>
                 Optimize spend
               </div>
               <div style={{ fontSize: "11px", color: "#8a9a9a", marginBottom: "14px", lineHeight: 1.4 }}>
                 From Sourcing to Expenses
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
                 {SPEND_CASE_STUDIES.map((cs) => (
-                  <a
-                    key={cs.name}
-                    href={cs.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      color: DARK,
-                      textDecoration: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
+                  <a key={cs.name} href={cs.href} target="_blank" rel="noopener noreferrer" style={linkStyle}>
                     {cs.type === "video" ? (
-                      <VideoCamera size={16} weight="fill" color={RED} />
+                      <VideoCamera size={16} weight="fill" color={RED} style={{ flexShrink: 0 }} />
                     ) : (
-                      <FileText size={16} weight="fill" color={RED} />
+                      <FileText size={16} weight="fill" color={RED} style={{ flexShrink: 0 }} />
                     )}
                     {cs.name}
                   </a>
                 ))}
+              </div>
+              <div style={{ borderTop: "1px solid #eee", paddingTop: "12px" }}>
+                <div style={{ fontSize: "24px", fontWeight: 800, color: RED, lineHeight: 1, letterSpacing: "-0.5px" }}>
+                  4x
+                </div>
+                <div style={{ fontSize: "11px", color: "#8a9a9a", marginTop: "3px", lineHeight: 1.3 }}>
+                  Faster approvals vs manual routing
+                </div>
               </div>
             </div>
 
