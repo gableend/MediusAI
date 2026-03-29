@@ -73,8 +73,34 @@ export default function ScratchPage() {
               <div style={{ fontSize: "13px", fontWeight: 600, color: DARK, marginTop: "6px", lineHeight: 1.3 }}>
                 {STAT_CARDS[0].label}
               </div>
-              <div style={{ fontSize: "12px", color: "#8a9a9a", marginTop: "2px" }}>
+              <div style={{ fontSize: "12px", color: "#8a9a9a", marginTop: "2px", marginBottom: "12px" }}>
                 {STAT_CARDS[0].sublabel}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                {[
+                  { name: "Briggs Equipment", href: "https://www.medius.com/resources/case-studies/briggs-equipment-ap-automation/" },
+                  { name: "WD-40", href: "https://www.medius.com/resources/case-studies/wd-40-video/" },
+                  { name: "Chadwell Supply", href: "https://www.medius.com/resources/case-studies/chadwell-supply-video/" },
+                ].map((cs) => (
+                  <a
+                    key={cs.name}
+                    href={cs.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 600,
+                      color: RED,
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <span style={{ fontSize: "14px", lineHeight: 1 }}>&#9654;</span>
+                    {cs.name}
+                  </a>
+                ))}
               </div>
             </div>
 
