@@ -1,12 +1,24 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import AgentEcosystemDiagram from "@/components/AgentEcosystemDiagram";
 
 const DARK = "#2f4344";
 const RED  = "#da2028";
 const SAND = "#ab9c6d";
 
+const STAT_CARDS = [
+  { stat: "97%", label: "Auto-match rate", sublabel: "on invoice lines" },
+  { stat: "4x", label: "Faster approvals", sublabel: "vs manual routing" },
+];
+
 export default function ScratchPage() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 600);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <main style={{ fontFamily: "Poppins, sans-serif", background: "white", minHeight: "100vh" }}>
       {/* Simple header */}
@@ -34,7 +46,68 @@ export default function ScratchPage() {
               Autonomous by design. Finance teams stay in control.
             </p>
           </div>
-          <AgentEcosystemDiagram />
+
+          {/* Diagram with overlay stat cards */}
+          <div style={{ position: "relative", maxWidth: "700px", margin: "0 auto" }}>
+
+            {/* Left card - top left corner */}
+            <div
+              style={{
+                position: "absolute",
+                top: "28px",
+                left: "-10px",
+                background: "white",
+                borderRadius: "14px",
+                padding: "20px 24px",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
+                zIndex: 2,
+                minWidth: "150px",
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateX(0)" : "translateX(-20px)",
+                transition: "opacity 0.6s ease, transform 0.6s ease",
+              }}
+            >
+              <div style={{ fontSize: "32px", fontWeight: 800, color: DARK, lineHeight: 1, letterSpacing: "-1px" }}>
+                {STAT_CARDS[0].stat}
+              </div>
+              <div style={{ fontSize: "13px", fontWeight: 600, color: DARK, marginTop: "6px", lineHeight: 1.3 }}>
+                {STAT_CARDS[0].label}
+              </div>
+              <div style={{ fontSize: "12px", color: "#8a9a9a", marginTop: "2px" }}>
+                {STAT_CARDS[0].sublabel}
+              </div>
+            </div>
+
+            {/* Right card - top right corner */}
+            <div
+              style={{
+                position: "absolute",
+                top: "28px",
+                right: "-10px",
+                background: "white",
+                borderRadius: "14px",
+                padding: "20px 24px",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
+                zIndex: 2,
+                minWidth: "150px",
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateX(0)" : "translateX(20px)",
+                transition: "opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s",
+              }}
+            >
+              <div style={{ fontSize: "32px", fontWeight: 800, color: DARK, lineHeight: 1, letterSpacing: "-1px" }}>
+                {STAT_CARDS[1].stat}
+              </div>
+              <div style={{ fontSize: "13px", fontWeight: 600, color: DARK, marginTop: "6px", lineHeight: 1.3 }}>
+                {STAT_CARDS[1].label}
+              </div>
+              <div style={{ fontSize: "12px", color: "#8a9a9a", marginTop: "2px" }}>
+                {STAT_CARDS[1].sublabel}
+              </div>
+            </div>
+
+            <AgentEcosystemDiagram />
+          </div>
         </div>
       </section>
     </main>
