@@ -9,15 +9,15 @@ const RED  = "#da2028";
 const SAND = "#ab9c6d";
 
 const AP_CASE_STUDIES = [
-  { name: "Briggs Equipment", href: "https://www.medius.com/resources/case-studies/briggs-equipment-ap-automation/", type: "video" as const },
-  { name: "WD-40", href: "https://www.medius.com/resources/case-studies/wd-40-video/", type: "video" as const },
-  { name: "Chadwell Supply", href: "https://www.medius.com/resources/case-studies/chadwell-supply-video/", type: "video" as const },
+  { name: "Puma", href: "https://www.medius.com/resources/case-studies/puma-video/", type: "video" as const, domain: "puma.com" },
+  { name: "Mowi", href: "https://www.medius.com/resources/case-studies/mowi-ap-automation/", type: "video" as const, domain: "mowi.com" },
+  { name: "Lush", href: "https://www.medius.com/resources/case-studies/lush-ap-automation/", type: "video" as const, domain: "lush.com" },
 ];
 
 const SPEND_CASE_STUDIES = [
-  { name: "WWF", href: "https://www.medius.com/resources/case-studies/wwf-automates-procurement-processes-and-enhances-reporting/", type: "video" as const },
-  { name: "Procure4", href: "https://www.medius.com/lps/procure4-on-making-cost-reductions-driving-efficiencies-and-getting-better-control1/", type: "video" as const },
-  { name: "Nissan", href: "https://www.medius.com/resources/case-studies/nissan-source-to-pay/", type: "article" as const },
+  { name: "WWF", href: "https://www.medius.com/resources/case-studies/wwf-automates-procurement-processes-and-enhances-reporting/", type: "video" as const, domain: "wwf.org" },
+  { name: "Procure4", href: "https://www.medius.com/lps/procure4-on-making-cost-reductions-driving-efficiencies-and-getting-better-control1/", type: "video" as const, domain: "procure4.com" },
+  { name: "Nissan", href: "https://www.medius.com/resources/case-studies/nissan-source-to-pay/", type: "article" as const, domain: "nissan.com" },
 ];
 
 const CARD_WIDTH = 185;
@@ -92,16 +92,24 @@ export default function ScratchPage() {
               }}
             >
               <div style={{ fontSize: "15px", fontWeight: 700, color: DARK, lineHeight: 1.2, marginBottom: "4px" }}>
-                Achieve AP excellence
+                AP Excellence
               </div>
               <div style={{ fontSize: "11px", color: "#8a9a9a", marginBottom: "14px", lineHeight: 1.4 }}>
                 See how teams transform AP
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "16px" }}>
                 {AP_CASE_STUDIES.map((cs) => (
                   <a key={cs.name} href={cs.href} target="_blank" rel="noopener noreferrer" style={linkStyle}>
-                    <VideoCamera size={16} weight="fill" color={RED} style={{ flexShrink: 0 }} />
-                    {cs.name}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`https://www.google.com/s2/favicons?domain=${cs.domain}&sz=32`}
+                      alt=""
+                      width={18}
+                      height={18}
+                      style={{ borderRadius: "4px", flexShrink: 0 }}
+                    />
+                    <span style={{ flex: 1 }}>{cs.name}</span>
+                    <VideoCamera size={14} weight="fill" color={RED} style={{ flexShrink: 0, opacity: 0.7 }} />
                   </a>
                 ))}
               </div>
@@ -132,15 +140,23 @@ export default function ScratchPage() {
               <div style={{ fontSize: "11px", color: "#8a9a9a", marginBottom: "14px", lineHeight: 1.4 }}>
                 From Sourcing to Expenses
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "16px" }}>
                 {SPEND_CASE_STUDIES.map((cs) => (
                   <a key={cs.name} href={cs.href} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`https://www.google.com/s2/favicons?domain=${cs.domain}&sz=32`}
+                      alt=""
+                      width={18}
+                      height={18}
+                      style={{ borderRadius: "4px", flexShrink: 0 }}
+                    />
+                    <span style={{ flex: 1 }}>{cs.name}</span>
                     {cs.type === "video" ? (
-                      <VideoCamera size={16} weight="fill" color={RED} style={{ flexShrink: 0 }} />
+                      <VideoCamera size={14} weight="fill" color={RED} style={{ flexShrink: 0, opacity: 0.7 }} />
                     ) : (
-                      <FileText size={16} weight="fill" color={RED} style={{ flexShrink: 0 }} />
+                      <FileText size={14} weight="fill" color={RED} style={{ flexShrink: 0, opacity: 0.7 }} />
                     )}
-                    {cs.name}
                   </a>
                 ))}
               </div>
